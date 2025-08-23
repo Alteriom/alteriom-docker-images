@@ -25,31 +25,31 @@ jobs:
       contents: read
       security-events: write
     timeout-minutes: 45
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      
+
       - name: Run Security Scanner
         env:
           DOCKER_REPOSITORY: ${{ env.DOCKER_REPOSITORY || 'ghcr.io/Alteriom/alteriom-docker-images' }}
         run: |
           echo "Running security analysis..."
-          
+
           # Make script executable
           chmod +x scripts/comprehensive-security-scanner.sh
-          
+
           # Run security scanning in basic mode for cleaner output
           ADVANCED_MODE=false ./scripts/comprehensive-security-scanner.sh || {
             echo "Security scan completed with warnings - check results for details"
             exit 0  # Don't fail the build, just warn
           }
-      
+
       - name: Upload Comprehensive Security Results
         uses: actions/upload-artifact@v4
         if: always()
@@ -57,15 +57,15 @@ jobs:
           name: comprehensive-security-results-${{ github.run_number }}
           path: comprehensive-security-results/
           retention-days: 30
-      
+
       - name: Generate Security SARIF Reports
         if: always()
         run: |
           echo "📄 Converting security results to SARIF format..."
-          
+
           # Create SARIF directory
           mkdir -p sarif-results
-          
+
           # Check if Trivy results exist and convert to SARIF
           if [ -f "comprehensive-security-results/basic/trivy-filesystem.json" ]; then
             # Convert Trivy JSON to SARIF for GitHub Security tab
@@ -83,7 +83,7 @@ jobs:
                       }
                     },
                     results: [
-                      .Results[]? | 
+                      .Results[]? |
                       select(.Vulnerabilities) |
                       .Vulnerabilities[] |
                       select(.Severity == "HIGH" or .Severity == "CRITICAL") |
@@ -109,7 +109,7 @@ jobs:
               }
             ' comprehensive-security-results/basic/trivy-filesystem.json > sarif-results/trivy-comprehensive.sarif || echo "No Trivy SARIF conversion"
           fi
-          
+
           # Check for other tool results and create minimal SARIF if needed
           if [ ! -f "sarif-results/trivy-comprehensive.sarif" ]; then
             echo '{
@@ -128,14 +128,14 @@ jobs:
               ]
             }' > sarif-results/comprehensive-security.sarif
           fi
-      
+
       - name: Upload Trivy Comprehensive SARIF
         uses: github/codeql-action/upload-sarif@v3
         if: always() && hashFiles('sarif-results/trivy-comprehensive.sarif') != ''
         with:
           sarif_file: 'sarif-results/trivy-comprehensive.sarif'
           category: 'trivy-comprehensive'
-      
+
       - name: Upload Comprehensive Security SARIF
         uses: github/codeql-action/upload-sarif@v3
         if: always() && hashFiles('sarif-results/comprehensive-security.sarif') != ''
@@ -150,11 +150,11 @@ jobs:
     permissions:
       contents: read
       security-events: write
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Run Trivy filesystem vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
@@ -164,14 +164,14 @@ jobs:
           output: 'trivy-fs-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM'
           ignore-unfixed: true
-      
+
       - name: Upload Trivy filesystem scan results to GitHub Security
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: 'trivy-fs-results.sarif'
           category: 'trivy-filesystem'
-      
+
       - name: Run Trivy configuration scan
         uses: aquasecurity/trivy-action@master
         with:
@@ -180,14 +180,14 @@ jobs:
           format: 'sarif'
           output: 'trivy-config-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM'
-      
+
       - name: Upload Trivy configuration scan results
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: 'trivy-config-results.sarif'
           category: 'trivy-configuration'
-      
+
       - name: Run production Dockerfile security scan
         uses: hadolint/hadolint-action@v3.1.0
         with:
@@ -195,7 +195,7 @@ jobs:
           format: sarif
           output-file: hadolint-production.sarif
           no-fail: true
-      
+
       - name: Run development Dockerfile security scan
         uses: hadolint/hadolint-action@v3.1.0
         with:
@@ -203,50 +203,50 @@ jobs:
           format: sarif
           output-file: hadolint-development.sarif
           no-fail: true
-      
+
       - name: Upload production Dockerfile scan results
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: hadolint-production.sarif
           category: 'hadolint-production'
-      
+
       - name: Upload development Dockerfile scan results
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: hadolint-development.sarif
           category: 'hadolint-development'
-      
+
       - name: Python dependency security scan
         run: |
           echo "🔍 Scanning Python dependencies for security vulnerabilities..."
           python -m pip install --upgrade pip safety
-          
+
           # Create requirements files from Dockerfiles with security fixes
           echo "platformio==6.1.13" > requirements-prod.txt
           echo "setuptools>=70.0.0" >> requirements-prod.txt
           echo "starlette>=0.40.0" >> requirements-prod.txt
-          
+
           echo "platformio==6.1.13" > requirements-dev.txt
           echo "setuptools>=70.0.0" >> requirements-dev.txt
           echo "starlette>=0.40.0" >> requirements-dev.txt
           echo "twine" >> requirements-dev.txt
-          
+
           # Scan dependencies for known vulnerabilities using corrected Safety CLI syntax
           echo "📋 Production dependencies scan:"
           safety scan --file requirements-prod.txt --output json --save-as safety-prod.json || true
-          
+
           echo "📋 Development dependencies scan:"
           safety scan --file requirements-dev.txt --output json --save-as safety-dev.json || true
-          
+
           # Display results with corrected syntax
           echo "Production security scan results:"
           safety scan --file requirements-prod.txt || echo "Security issues found in production dependencies"
-          
+
           echo "Development security scan results:"
           safety scan --file requirements-dev.txt || echo "Security issues found in development dependencies"
-      
+
       - name: Upload dependency scan results
         uses: actions/upload-artifact@v4
         if: always()
@@ -263,16 +263,16 @@ jobs:
     permissions:
       contents: write
       packages: write
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           platforms: ${{ env.PLATFORMS }}
-      
+
       - name: Log in to Container Registry
         uses: docker/login-action@v3
         with:
@@ -280,7 +280,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Set Docker Repository
         id: repo
         run: |
@@ -292,7 +292,7 @@ jobs:
             echo "DOCKER_REPOSITORY=ghcr.io/${{ github.repository_owner }}/alteriom-docker-images" >> $GITHUB_ENV
           fi
           echo "Using DOCKER_REPOSITORY: $DOCKER_REPOSITORY"
-      
+
       - name: Bump Version
         id: bump_version
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -303,10 +303,10 @@ jobs:
           else
             CURRENT_VERSION="1.0.0"
           fi
-          
+
           # Parse version components
           IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
-          
+
           # Check commit messages for version bump indicators
           COMMIT_MSG="${{ github.event.head_commit.message }}"
           if echo "$COMMIT_MSG" | grep -qE "^(BREAKING CHANGE|feat!|fix!|perf!):"; then
@@ -331,32 +331,32 @@ jobs:
           else
             echo "ℹ️ No version bump - using current version"
           fi
-          
+
           NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
-          
+
           # Only update if version changed
           if [ "$NEW_VERSION" != "$CURRENT_VERSION" ]; then
             echo "$NEW_VERSION" > VERSION
             echo "📈 Version bumped from $CURRENT_VERSION to $NEW_VERSION"
-            
+
             # Configure git for the bot
             git config --global user.name "github-actions[bot]"
             git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            
+
             # Commit version bump
             git add VERSION
             git commit -m "chore: bump version to $NEW_VERSION [skip ci]"
             git push
-            
+
             echo "VERSION_CHANGED=true" >> $GITHUB_OUTPUT
           else
             echo "VERSION_CHANGED=false" >> $GITHUB_OUTPUT
           fi
-          
+
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "PREVIOUS_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
-      - name: Read Version  
+      - name: Read Version
         id: version
         if: github.ref != 'refs/heads/main' || github.event_name != 'push'
         run: |
@@ -367,14 +367,14 @@ jobs:
           fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Using VERSION: $VERSION"
-      
+
       - name: Detect Changed Files
         id: changes
         if: github.event_name == 'push'
         run: |
           # Get list of changed files in the push
           echo "Detecting changed files..."
-          
+
           # For pushes, compare with previous commit
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only HEAD^ HEAD 2>/dev/null || echo "")
@@ -382,13 +382,13 @@ jobs:
             # For PR builds, get all changed files
             CHANGED_FILES=$(git diff --name-only origin/main...HEAD 2>/dev/null || echo "")
           fi
-          
+
           echo "Changed files: $CHANGED_FILES"
-          
+
           # Check if only documentation or non-critical files were changed
           DOCS_ONLY="true"
           BUILD_RELATED="false"
-          
+
           if [ -z "$CHANGED_FILES" ]; then
             echo "No changed files detected, proceeding with build"
             DOCS_ONLY="false"
@@ -411,10 +411,10 @@ jobs:
               esac
             done
           fi
-          
+
           echo "docs_only=$DOCS_ONLY" >> $GITHUB_OUTPUT
           echo "build_related=$BUILD_RELATED" >> $GITHUB_OUTPUT
-          
+
           if [ "$DOCS_ONLY" = "true" ]; then
             echo "🚀 Only documentation files changed - build can be skipped"
           elif [ "$BUILD_RELATED" = "true" ]; then
@@ -431,7 +431,7 @@ jobs:
         run: |
           chmod +x scripts/audit-packages.sh
           echo "🔍 Running daily package audit..."
-          
+
           # Run audit and capture result
           if ./scripts/audit-packages.sh; then
             echo "audit_result=build_recommended" >> $GITHUB_OUTPUT
@@ -440,13 +440,13 @@ jobs:
             echo "audit_result=build_skipped" >> $GITHUB_OUTPUT
             echo "build_needed=false" >> $GITHUB_OUTPUT
           fi
-          
+
           # Extract audit information for later steps
           if [ -f "audit-report.md" ]; then
             # Extract change summary from audit report
             CHANGE_SUMMARY=$(grep "^**Change Summary:**" audit-report.md | cut -d' ' -f3- || echo "No changes detected")
             echo "change_summary=$CHANGE_SUMMARY" >> $GITHUB_OUTPUT
-            
+
             # Save audit report as artifact
             echo "📋 Audit report generated - will be saved as artifact"
           fi
@@ -493,10 +493,10 @@ jobs:
           echo "⏭️ Daily build skipped - no changes detected"
           echo "📋 Audit result: ${{ steps.audit.outputs.audit_result }}"
           echo "📋 Reason: ${{ steps.audit.outputs.change_summary }}"
-      
+
       - name: Update Development Badge
         if: |
-          github.ref == 'refs/heads/main' && 
+          github.ref == 'refs/heads/main' &&
           ((github.event_name == 'push' && steps.changes.outputs.docs_only != 'true') ||
            (github.event_name == 'schedule' && steps.audit.outputs.build_needed == 'true'))
         run: |
@@ -506,11 +506,11 @@ jobs:
           else
             BUILD_NUMBER=1
           fi
-          
+
           # Increment build number for any development build
           NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
           echo "$NEW_BUILD_NUMBER" > BUILD_NUMBER
-          
+
           if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ steps.audit.outputs.build_needed }}" = "true" ]; then
             # Daily build executed - update with dev version and build number
             DEV_VERSION="${{ env.VERSION }}-dev-build.${NEW_BUILD_NUMBER}"
@@ -525,20 +525,20 @@ jobs:
             echo "No development badge update needed"
             exit 0
           fi
-          
+
           # Update README.md with new badge
           sed -i "s|Development-.*-orange|${BADGE_TEXT}|g" README.md
-          
+
           # Check if changes were made
           if git diff --quiet README.md BUILD_NUMBER; then
             echo "No changes to README badge or build number needed"
           else
             echo "README badge and build number updated successfully"
-            
+
             # Configure git for the bot
             git config --global user.name "github-actions[bot]"
             git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            
+
             # Commit and push changes
             git add README.md BUILD_NUMBER
             git commit -m "chore: update development badge to build ${NEW_BUILD_NUMBER} [skip ci]"
@@ -554,13 +554,13 @@ jobs:
           DOCKER_REPOSITORY: ${{ env.DOCKER_REPOSITORY }}
         run: |
           echo "Running service health validation..."
-          
+
           chmod +x scripts/service-monitoring-simple.sh
-          
+
           # Run simplified service monitoring
           if ./scripts/service-monitoring-simple.sh; then
             echo "✓ All service health checks passed"
-            
+
             # Add summary to GitHub Actions
             if [ -f "service-monitoring-results/service-monitoring-summary.md" ]; then
               echo "" >> $GITHUB_STEP_SUMMARY
@@ -572,7 +572,7 @@ jobs:
             echo "⚠ Some service checks failed - review detailed results"
             # Don't fail the build, just warn
           fi
-      
+
       - name: Upload Service Monitoring Results
         if: |
           always() &&
@@ -605,7 +605,7 @@ jobs:
             # On PR branches, images are built locally with :local tag
             ./scripts/test-esp-builds.sh "${DOCKER_REPOSITORY}/builder:local" "${DOCKER_REPOSITORY}/dev:local"
           fi
-      
+
       - name: Container Image Security Scan
         if: |
           (github.event_name == 'schedule' && steps.audit.outputs.build_needed == 'true') ||
@@ -615,7 +615,7 @@ jobs:
           DOCKER_REPOSITORY: ${{ env.DOCKER_REPOSITORY }}
         run: |
           echo "🔍 Running container image security scans..."
-          
+
           # Determine which images to scan based on build event
           if [ "${{ github.event_name }}" = "schedule" ]; then
             # Daily builds: only scan development image
@@ -627,41 +627,41 @@ jobs:
             # PR builds: scan local images
             IMAGES=("${DOCKER_REPOSITORY}/builder:local" "${DOCKER_REPOSITORY}/dev:local")
           fi
-          
+
           # Install Trivy for container scanning
           sudo apt-get update && sudo apt-get install -y wget apt-transport-https gnupg lsb-release
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
-          
+
           mkdir -p security-scan-results
-          
+
           # Scan each image
           for image in "${IMAGES[@]}"; do
             echo "🔍 Scanning image: $image"
-            
+
             # Extract image name for file naming
             image_name=$(echo "$image" | sed 's|.*/||' | sed 's|:|_|g')
-            
+
             # Pull image before scanning (for published images)
             if [[ "$image" == *":latest" ]]; then
               echo "📥 Pulling image: $image"
               docker pull "$image" || echo "Warning: Could not pull $image, scanning anyway"
             fi
-            
+
             # Vulnerability scan
             echo "🛡️ Running vulnerability scan on $image..."
             trivy image --format json --output "security-scan-results/trivy-${image_name}-vuln.json" "$image" || true
             trivy image --format table "$image" > "security-scan-results/trivy-${image_name}-report.txt" || true
-            
-            # Configuration scan  
+
+            # Configuration scan
             echo "⚙️ Running configuration scan on $image..."
             trivy image --scanners config --format json --output "security-scan-results/trivy-${image_name}-config.json" "$image" || true
-            
+
             # Count HIGH and CRITICAL vulnerabilities
             high_count=$(jq '[.Results[]? | select(.Vulnerabilities) | .Vulnerabilities[] | select(.Severity == "HIGH")]' "security-scan-results/trivy-${image_name}-vuln.json" | jq length 2>/dev/null || echo "0")
             critical_count=$(jq '[.Results[]? | select(.Vulnerabilities) | .Vulnerabilities[] | select(.Severity == "CRITICAL")]' "security-scan-results/trivy-${image_name}-vuln.json" | jq length 2>/dev/null || echo "0")
-            
+
             echo "📊 $image: Found $critical_count CRITICAL and $high_count HIGH vulnerabilities"
-            
+
             # Check if vulnerabilities were reduced compared to baseline
             if [ "$high_count" -gt 0 ] || [ "$critical_count" -gt 0 ]; then
               echo "⚠️ Security vulnerabilities detected in $image"
@@ -670,7 +670,7 @@ jobs:
               echo "✅ No HIGH or CRITICAL vulnerabilities found in $image"
             fi
           done
-          
+
           # Generate security summary
           echo "📋 Security Scan Summary" > security-scan-results/scan-summary.md
           echo "=========================" >> security-scan-results/scan-summary.md
@@ -678,7 +678,7 @@ jobs:
           echo "Event: ${{ github.event_name }}" >> security-scan-results/scan-summary.md
           echo "Images scanned: ${#IMAGES[@]}" >> security-scan-results/scan-summary.md
           echo "" >> security-scan-results/scan-summary.md
-          
+
           for image in "${IMAGES[@]}"; do
             image_name=$(echo "$image" | sed 's|.*/||' | sed 's|:|_|g')
             if [ -f "security-scan-results/trivy-${image_name}-vuln.json" ]; then
@@ -687,15 +687,15 @@ jobs:
               echo "- $image: $critical_count CRITICAL, $high_count HIGH" >> security-scan-results/scan-summary.md
             fi
           done
-          
+
           echo "" >> security-scan-results/scan-summary.md
           echo "🛡️ Security fixes implemented:" >> security-scan-results/scan-summary.md
           echo "- HEALTHCHECK instructions added" >> security-scan-results/scan-summary.md
           echo "- setuptools updated to >=70.0.0" >> security-scan-results/scan-summary.md
           echo "- starlette updated to >=0.40.0" >> security-scan-results/scan-summary.md
-          
+
           echo "✅ Container image security scanning completed"
-      
+
       - name: Upload Container Security Scan Results
         if: |
           always() &&
@@ -707,27 +707,27 @@ jobs:
           name: container-security-scan-${{ github.run_number }}
           path: security-scan-results/
           retention-days: 30
-      
+
       - name: Run Comprehensive Security Analysis for Release Notes
         if: |
-          github.ref == 'refs/heads/main' && 
+          github.ref == 'refs/heads/main' &&
           github.event_name != 'schedule' &&
           (github.event_name != 'push' || steps.changes.outputs.docs_only != 'true')
         run: |
           echo "🛡️ Running comprehensive security analysis for release notes..."
-          
+
           # Make security scripts executable
           chmod +x scripts/comprehensive-security-scanner.sh
           chmod +x scripts/vulnerability-correlation-engine.sh
-          
+
           # Run comprehensive security scanner
           echo "🔍 Running comprehensive security scanner..."
           ./scripts/comprehensive-security-scanner.sh || echo "⚠️ Security scanner completed with warnings"
-          
+
           # Run vulnerability correlation engine (Phase 2B)
           echo "🔗 Running vulnerability correlation engine..."
           ./scripts/vulnerability-correlation-engine.sh || echo "⚠️ Correlation engine completed with warnings"
-          
+
           # Create summary of security results for release notes
           echo "📊 Creating security scan summary..."
           if [ -d "comprehensive-security-results" ]; then
@@ -736,34 +736,34 @@ jobs:
           else
             echo "⚠️ No comprehensive security results found"
           fi
-          
+
           # Ensure security scan artifacts are preserved
           echo "📁 Security scan artifacts prepared for release documentation"
-      
+
       - name: Generate Enhanced Release Notes
         id: release_notes
         if: |
-          github.ref == 'refs/heads/main' && 
+          github.ref == 'refs/heads/main' &&
           github.event_name != 'schedule' &&
           (github.event_name != 'push' || steps.changes.outputs.docs_only != 'true')
         run: |
           # Make the enhanced release notes generator executable
           chmod +x scripts/generate-enhanced-release-notes.sh
-          
+
           # Generate enhanced release notes with detailed analysis and security results
           echo "🚀 Generating enhanced release notes with security analysis..."
           ./scripts/generate-enhanced-release-notes.sh "${{ env.VERSION }}" "${{ env.DOCKER_REPOSITORY }}" "release_notes.md"
-          
+
           # Verify the release notes were generated
           if [ ! -f "release_notes.md" ]; then
             echo "❌ Failed to generate release notes, falling back to basic format"
             cat > release_notes.md << EOF
           ## Docker Images v${{ env.VERSION }}
-          
+
           This release contains Docker images for ESP32/ESP8266 development:
           - Production Builder: \`${{ env.DOCKER_REPOSITORY }}/builder:${{ env.VERSION }}\`
           - Development Builder: \`${{ env.DOCKER_REPOSITORY }}/dev:${{ env.VERSION }}\`
-          
+
           Built on: $(date -u +%Y-%m-%d)
           EOF
           else
@@ -772,7 +772,7 @@ jobs:
             echo "📋 Release notes preview:"
             head -20 release_notes.md
           fi
-          
+
           # Set the release notes content as output for the GitHub release
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
           cat release_notes.md >> $GITHUB_OUTPUT
@@ -780,7 +780,7 @@ jobs:
 
       - name: Create GitHub Release with Enhanced Notes
         if: |
-          github.ref == 'refs/heads/main' && 
+          github.ref == 'refs/heads/main' &&
           github.event_name != 'schedule' &&
           (github.event_name != 'push' || steps.changes.outputs.docs_only != 'true')
         uses: softprops/action-gh-release@v1
@@ -792,7 +792,7 @@ jobs:
           body: ${{ steps.release_notes.outputs.RELEASE_NOTES }}
           draft: false
           prerelease: false
-      
+
       - name: Upload Audit Report
         if: github.event_name == 'schedule'
         uses: actions/upload-artifact@v4
@@ -803,7 +803,7 @@ jobs:
 
       - name: Upload Security Analysis Results
         if: |
-          github.ref == 'refs/heads/main' && 
+          github.ref == 'refs/heads/main' &&
           github.event_name != 'schedule' &&
           (github.event_name != 'push' || steps.changes.outputs.docs_only != 'true')
         uses: actions/upload-artifact@v4
@@ -822,21 +822,21 @@ jobs:
           echo "## Published Images 🐋" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           DATE_TAG=$(date -u +%Y%m%d)
-          
+
           # Read build number for summary display
           if [ -f "BUILD_NUMBER" ]; then
             CURRENT_BUILD_NUMBER=$(cat BUILD_NUMBER | tr -d '\n\r')
           else
             CURRENT_BUILD_NUMBER=1
           fi
-          
+
           # Add comprehensive security validation summary
           echo "## Security Validation Summary 🛡️" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 🔍 Security Validation Pipeline" >> $GITHUB_STEP_SUMMARY
           echo "**Comprehensive multi-tool security scanning performed across the entire pipeline:**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Security Validation Job (comprehensive-security-scanner.sh)
           echo "#### 🛡️ Enhanced Security Validation Job" >> $GITHUB_STEP_SUMMARY
           echo "**Basic Vulnerability Scanning (8+ tools):**" >> $GITHUB_STEP_SUMMARY
@@ -849,7 +849,7 @@ jobs:
           echo "- **Docker Scout Scan** - Docker's official security vulnerability scanner" >> $GITHUB_STEP_SUMMARY
           echo "- **Node.js Dependency Scan** - JavaScript/NPM package vulnerability detection" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ "${ADVANCED_MODE:-false}" = "true" ]; then
             echo "**Advanced Security Scanning (12+ additional tools):**" >> $GITHUB_STEP_SUMMARY
             echo "- **Gitleaks** - Git repository secrets and credential scanning" >> $GITHUB_STEP_SUMMARY
@@ -869,7 +869,7 @@ jobs:
             echo "**Advanced Security Scanning:** Disabled (set ADVANCED_MODE=true to enable 12+ additional tools)" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           # Code Analysis Job
           echo "#### 🔬 Code Analysis & SARIF Integration Job" >> $GITHUB_STEP_SUMMARY
           echo "**Static Analysis Security Scanning:**" >> $GITHUB_STEP_SUMMARY
@@ -880,7 +880,7 @@ jobs:
           echo "- **Python Dependency Security** - Safety-based dependency vulnerability scanning" >> $GITHUB_STEP_SUMMARY
           echo "- **SARIF Upload Integration** - All results integrated with GitHub Security tab" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Container Security Scanning (in build job)
           echo "#### 🐋 Container Image Security Scanning" >> $GITHUB_STEP_SUMMARY
           echo "**Runtime Container Security Validation:**" >> $GITHUB_STEP_SUMMARY
@@ -890,7 +890,7 @@ jobs:
           echo "- **Critical/High Vulnerability Tracking** - Focused on HIGH and CRITICAL severity issues" >> $GITHUB_STEP_SUMMARY
           echo "- **Security Baseline Comparison** - Vulnerability reduction tracking over time" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Security Artifacts and Reporting
           echo "#### 📊 Security Reporting & Artifacts" >> $GITHUB_STEP_SUMMARY
           echo "**Comprehensive Security Documentation:**" >> $GITHUB_STEP_SUMMARY
@@ -900,7 +900,7 @@ jobs:
           echo "- **Vulnerability Trends** - Historical tracking and improvement metrics" >> $GITHUB_STEP_SUMMARY
           echo "- **Compliance Reports** - Security compliance and policy validation results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Security Pipeline Status
           echo "#### ✅ Security Pipeline Status" >> $GITHUB_STEP_SUMMARY
           if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event_name }}" = "pull_request" ]; then
@@ -914,7 +914,7 @@ jobs:
             echo "- **Container Security** - ✅ Built image security validation completed" >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Security Improvements Implemented
           echo "#### 🔧 Security Enhancements Implemented" >> $GITHUB_STEP_SUMMARY
           echo "**Recent Security Pipeline Improvements:**" >> $GITHUB_STEP_SUMMARY
@@ -925,7 +925,7 @@ jobs:
           echo "- **Security Success Rate** - Improved from ~70% to ~95%+ pipeline reliability" >> $GITHUB_STEP_SUMMARY
           echo "- **Container Security Fixes** - Updated setuptools≥70.0.0, starlette≥0.40.0, added HEALTHCHECK" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ "${{ github.event_name }}" = "schedule" ]; then
             # Daily build summary
             if [ "${{ steps.audit.outputs.build_needed }}" = "true" ]; then
