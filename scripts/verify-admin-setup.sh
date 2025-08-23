@@ -43,7 +43,7 @@ fi
 
 echo ""
 echo "2. Checking repository access..."
-REPO="sparck75/alteriom-docker-images"
+REPO="Alteriom/alteriom-docker-images"
 
 if command -v gh &> /dev/null && gh auth status &> /dev/null; then
     if gh repo view "$REPO" &> /dev/null; then

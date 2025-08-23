@@ -5,7 +5,7 @@
 set -euo pipefail
 
 # Configuration
-REPO_OWNER="sparck75"
+REPO_OWNER="Alteriom"
 REPO_NAME="alteriom-docker-images"
 DOCKER_REPO="ghcr.io/${REPO_OWNER}/${REPO_NAME}"
 

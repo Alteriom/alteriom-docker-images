@@ -36,14 +36,14 @@ Copy the complete security implementation from alteriom-docker-images:
 # 1. Add security workflow
 mkdir -p .github/workflows
 curl -o .github/workflows/security-validation.yml \
-  https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/.github/workflows/build-and-publish.yml
+  https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/.github/workflows/build-and-publish.yml
 
 # 2. Add security scripts
 mkdir -p scripts
 curl -o scripts/comprehensive-security-scanner.sh \
-  https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/scripts/comprehensive-security-scanner.sh
+  https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/scripts/comprehensive-security-scanner.sh
 curl -o scripts/sarif-aggregator.sh \
-  https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/scripts/sarif-aggregator.sh
+  https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/scripts/sarif-aggregator.sh
 
 # 3. Make scripts executable
 chmod +x scripts/*.sh
@@ -495,7 +495,7 @@ jobs:
    # Copy minimal security workflow
    mkdir -p .github/workflows
    curl -o .github/workflows/security-basic.yml \
-     https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/.github/workflows/build-and-publish.yml
+     https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/.github/workflows/build-and-publish.yml
    
    # Customize for your repository
    sed -i 's/alteriom-docker-images/your-repo-name/g' .github/workflows/security-basic.yml
@@ -526,7 +526,7 @@ jobs:
    ```bash
    # Copy security templates
    curl -o SECURITY.md \
-     https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/SECURITY.md
+     https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/SECURITY.md
    
    # Customize for your project
    # Update contact information
@@ -542,11 +542,11 @@ jobs:
    
    # Copy comprehensive scanner
    curl -o scripts/comprehensive-security-scanner.sh \
-     https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/scripts/comprehensive-security-scanner.sh
+     https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/scripts/comprehensive-security-scanner.sh
    
    # Copy SARIF aggregator
    curl -o scripts/sarif-aggregator.sh \
-     https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/scripts/sarif-aggregator.sh
+     https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/scripts/sarif-aggregator.sh
    
    # Make executable
    chmod +x scripts/*.sh

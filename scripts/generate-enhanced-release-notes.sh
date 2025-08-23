@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 # Configuration
 VERSION="${1:-}"
-DOCKER_REPOSITORY="${2:-ghcr.io/sparck75/alteriom-docker-images}"
+DOCKER_REPOSITORY="${2:-ghcr.io/Alteriom/alteriom-docker-images}"
 OUTPUT_FILE="${3:-release_notes.md}"
 
 print_status() {
@@ -420,7 +420,7 @@ generate_release_notes() {
                 local pr_body=$(echo "$pr_data" | jq -r '.body // ""' 2>/dev/null || echo "")
                 
                 if [ -n "$pr_title" ] && [ "$pr_title" != "null" ]; then
-                    detailed_info="**${pr_title}** ([#${pr_number}](https://github.com/sparck75/alteriom-docker-images/pull/${pr_number}))"
+                    detailed_info="**${pr_title}** ([#${pr_number}](https://github.com/Alteriom/alteriom-docker-images/pull/${pr_number}))"
                     
                     # Extract key sections from PR body
                     if [ -n "$pr_body" ] && [ "$pr_body" != "null" ]; then
@@ -442,7 +442,7 @@ generate_release_notes() {
         # Fallback to commit message if no PR info
         if [ -z "$detailed_info" ]; then
             local short_hash="${commit_hash:0:7}"
-            detailed_info="$commit_msg ([${short_hash}](https://github.com/sparck75/alteriom-docker-images/commit/${commit_hash}))"
+            detailed_info="$commit_msg ([${short_hash}](https://github.com/Alteriom/alteriom-docker-images/commit/${commit_hash}))"
         fi
         
         # Add impact indicators
@@ -598,10 +598,10 @@ docker run --rm -v \${PWD}:/workspace ${docker_repo}/dev:${version} pio run -e e
 
 ### 🔗 Resources
 
-- **Repository**: [sparck75/alteriom-docker-images](https://github.com/sparck75/alteriom-docker-images)
-- **Registry**: [GitHub Container Registry](https://github.com/sparck75/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fbuilder)
-- **Documentation**: [README.md](https://github.com/sparck75/alteriom-docker-images#readme)
-- **Issues**: [Report Issues](https://github.com/sparck75/alteriom-docker-images/issues)
+- **Repository**: [Alteriom/alteriom-docker-images](https://github.com/Alteriom/alteriom-docker-images)
+- **Registry**: [GitHub Container Registry](https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fbuilder)
+- **Documentation**: [README.md](https://github.com/Alteriom/alteriom-docker-images#readme)
+- **Issues**: [Report Issues](https://github.com/Alteriom/alteriom-docker-images/issues)
 
 ---
 

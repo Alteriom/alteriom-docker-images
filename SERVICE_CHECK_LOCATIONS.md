@@ -89,7 +89,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 **Retention**: 30 days
 
 **To Access:**
-1. Go to [GitHub Actions](https://github.com/sparck75/alteriom-docker-images/actions)
+1. Go to [GitHub Actions](https://github.com/Alteriom/alteriom-docker-images/actions)
 2. Click on any workflow run
 3. Scroll to "Artifacts" section
 4. Download `service-monitoring-results-{number}`
@@ -120,7 +120,7 @@ Service checks automatically run in GitHub Actions when:
 - ✅ **Manual workflow dispatch** (after image builds)
 
 ### Manual Trigger
-1. Go to [GitHub Actions](https://github.com/sparck75/alteriom-docker-images/actions)
+1. Go to [GitHub Actions](https://github.com/Alteriom/alteriom-docker-images/actions)
 2. Click "🚀 ESP32/ESP8266 Enterprise Docker Pipeline"
 3. Click "Run workflow"
 4. Wait for completion (15-30 minutes)
@@ -173,11 +173,11 @@ chmod +x scripts/service-monitoring.sh
 #### Docker Images Not Available
 ```bash
 # Check if images exist in registry
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest
-docker pull ghcr.io/sparck75/alteriom-docker-images/dev:latest
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest
+docker pull ghcr.io/Alteriom/alteriom-docker-images/dev:latest
 
 # Check GitHub Actions for build status
-# https://github.com/sparck75/alteriom-docker-images/actions
+# https://github.com/Alteriom/alteriom-docker-images/actions
 ```
 
 #### Network-Related Failures
@@ -189,7 +189,7 @@ docker pull ghcr.io/sparck75/alteriom-docker-images/dev:latest
 #### Health Check Failures
 ```bash
 # Test health check command manually
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest --version
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --version
 
 # Expected output: "PlatformIO Core, version 6.1.13"
 ```

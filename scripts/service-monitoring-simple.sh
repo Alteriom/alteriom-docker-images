@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Configuration
-DOCKER_REPOSITORY="${DOCKER_REPOSITORY:-ghcr.io/sparck75/alteriom-docker-images}"
+DOCKER_REPOSITORY="${DOCKER_REPOSITORY:-ghcr.io/Alteriom/alteriom-docker-images}"
 RESULTS_DIR="${RESULTS_DIR:-service-monitoring-results}"
 
 # Create results directory

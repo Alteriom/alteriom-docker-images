@@ -16,7 +16,7 @@ BOLD='\033[1m'
 NC='\033[0m' # No Color
 
 # Configuration
-DOCKER_REPOSITORY="${DOCKER_REPOSITORY:-ghcr.io/sparck75/alteriom-docker-images}"
+DOCKER_REPOSITORY="${DOCKER_REPOSITORY:-ghcr.io/Alteriom/alteriom-docker-images}"
 TIMEOUT="${TIMEOUT:-30}"
 REPORT_DIR="${REPORT_DIR:-service-monitoring-results}"
 ADVANCED_MODE="${ADVANCED_MODE:-true}"

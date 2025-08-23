@@ -69,8 +69,8 @@ Generated release notes include:
 
 # Examples
 ./scripts/generate-enhanced-release-notes.sh 1.7.2
-./scripts/generate-enhanced-release-notes.sh 1.7.2 ghcr.io/sparck75/alteriom-docker-images
-./scripts/generate-enhanced-release-notes.sh 1.7.2 ghcr.io/sparck75/alteriom-docker-images custom_notes.md
+./scripts/generate-enhanced-release-notes.sh 1.7.2 ghcr.io/Alteriom/alteriom-docker-images
+./scripts/generate-enhanced-release-notes.sh 1.7.2 ghcr.io/Alteriom/alteriom-docker-images custom_notes.md
 ```
 
 ### GitHub Actions Integration
@@ -118,7 +118,7 @@ For simple commits, the system generates clean, categorized release notes:
 ## 🚀 Docker Images v1.7.2
 
 ### 🔄 Other Changes
-- Initial plan ([6395c37](https://github.com/sparck75/alteriom-docker-images/commit/6395c37))
+- Initial plan ([6395c37](https://github.com/Alteriom/alteriom-docker-images/commit/6395c37))
 
 ### 🎯 Image Impact Analysis
 **Production Builder (`builder`)**:
@@ -133,13 +133,13 @@ For PR-based releases with detailed commit messages:
 ## 🚀 Docker Images v1.7.2
 
 ### 🚀 Features
-- **Comprehensive ESP32-C3 support implementation** ([#42](https://github.com/sparck75/alteriom-docker-images/pull/42)) 🏗️🔧
+- **Comprehensive ESP32-C3 support implementation** ([#42](https://github.com/Alteriom/alteriom-docker-images/pull/42)) 🏗️🔧
   - Added ESP32-C3 platform support
   - Enhanced testing suite with C3-specific tests
   - Updated documentation with C3 examples
 
 ### 🐛 Bug Fixes  
-- **Resolve Docker layer optimization in production build** ([#43](https://github.com/sparck75/alteriom-docker-images/pull/43)) 🏗️
+- **Resolve Docker layer optimization in production build** ([#43](https://github.com/Alteriom/alteriom-docker-images/pull/43)) 🏗️
   - Fixed production Dockerfile layer caching
   - Reduced image size by 15MB
   - Optimized build time by 30%

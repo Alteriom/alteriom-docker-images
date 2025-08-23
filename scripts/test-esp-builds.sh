@@ -7,7 +7,7 @@ set -euo pipefail
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-DOCKER_REPO="${DOCKER_REPOSITORY:-ghcr.io/sparck75/alteriom-docker-images}"
+DOCKER_REPO="${DOCKER_REPOSITORY:-ghcr.io/Alteriom/alteriom-docker-images}"
 
 # Colors for output
 RED='\033[0;31m'
@@ -206,7 +206,7 @@ if [[ "${1:-}" == "--help" ]] || [[ "${1:-}" == "-h" ]]; then
     echo "  $0 builder:latest dev:latest          # Test with multiple images"
     echo ""
     echo "Environment Variables:"
-    echo "  DOCKER_REPOSITORY   Docker repository prefix (default: ghcr.io/sparck75/alteriom-docker-images)"
+    echo "  DOCKER_REPOSITORY   Docker repository prefix (default: ghcr.io/Alteriom/alteriom-docker-images)"
     echo ""
     echo "Test Platforms:"
     echo "  - ESP32 (esp32dev environment)"

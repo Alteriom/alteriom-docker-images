@@ -46,7 +46,7 @@ Use the test script to run all tests:
 ./scripts/test-esp-builds.sh
 
 # Test with specific image
-./scripts/test-esp-builds.sh ghcr.io/sparck75/alteriom-docker-images/builder:latest
+./scripts/test-esp-builds.sh ghcr.io/Alteriom/alteriom-docker-images/builder:latest
 
 # Test with multiple images
 ./scripts/test-esp-builds.sh builder:latest dev:latest
@@ -58,19 +58,19 @@ You can also test individual projects manually:
 ```bash
 # ESP32 build
 cd tests/esp32-test
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32dev
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 
 # ESP32-S3 build
 cd tests/esp32s3-test
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32-s3-devkitc-1
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32-s3-devkitc-1
 
 # ESP32-C3 build
 cd tests/esp32c3-test
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32-c3-devkitm-1
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32-c3-devkitm-1
 
 # ESP8266 build
 cd tests/esp8266-test
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e nodemcuv2
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e nodemcuv2
 ```
 
 ## Test Validation
@@ -91,7 +91,7 @@ Successful tests will show:
 
 Example successful output:
 ```
-[INFO] Testing esp32 build with ghcr.io/sparck75/alteriom-docker-images/builder:latest
+[INFO] Testing esp32 build with ghcr.io/Alteriom/alteriom-docker-images/builder:latest
 [INFO] Project: esp32-test, Environment: esp32dev
 ...
 RAM:   [=         ]  12.4% (used 40644 bytes from 327680 bytes)

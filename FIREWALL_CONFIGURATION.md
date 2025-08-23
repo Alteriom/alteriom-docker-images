@@ -9,11 +9,11 @@ The repository uses various scripts and GitHub Actions that require network acce
 ## Critical Network Access Requirements
 
 ### GitHub API Access
-- **URL**: `https://api.github.com/repos/sparck75/alteriom-docker-images/actions/runs`
+- **URL**: `https://api.github.com/repos/Alteriom/alteriom-docker-images/actions/runs`
 - **Purpose**: Check GitHub Actions workflow status via scripts/verify-images.sh
 - **Blocking Impact**: High - Prevents status verification and workflow monitoring
 - **Error Type**: HTTP block
-- **Command**: `curl -s -f "https://api.github.com/repos/sparck75/alteriom-docker-images/actions/runs"`
+- **Command**: `curl -s -f "https://api.github.com/repos/Alteriom/alteriom-docker-images/actions/runs"`
 
 ### Badge Services
 - **Domain**: `img.shields.io`
@@ -21,7 +21,7 @@ The repository uses various scripts and GitHub Actions that require network acce
 - **Blocking Impact**: Medium - Breaks badge display in README
 - **Error Type**: DNS block
 - **Commands**: 
-  - `curl -I -s https://img.shields.io/github/v/release/sparck75/alteriom-docker-images`
+  - `curl -I -s https://img.shields.io/github/v/release/Alteriom/alteriom-docker-images`
   - `wget --spider https://img.shields.io/github/actions/workflow/status/...`
 
 ### Container Registry Access
@@ -30,8 +30,8 @@ The repository uses various scripts and GitHub Actions that require network acce
 - **Blocking Impact**: Critical - Prevents image pulls/pushes and verification
 - **Error Type**: DNS/HTTP block
 - **Commands**: 
-  - `docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest`
-  - `docker push ghcr.io/sparck75/alteriom-docker-images/dev:latest`
+  - `docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest`
+  - `docker push ghcr.io/Alteriom/alteriom-docker-images/dev:latest`
 
 ## Extended Network Access Requirements
 
@@ -91,18 +91,18 @@ index.docker.io
 ### Required URLs for Copilot Agent
 ```
 # GitHub API (for workflow status checks)
-https://api.github.com/repos/sparck75/alteriom-docker-images/actions/runs
-https://api.github.com/repos/sparck75/alteriom-docker-images/releases/latest
+https://api.github.com/repos/Alteriom/alteriom-docker-images/actions/runs
+https://api.github.com/repos/Alteriom/alteriom-docker-images/releases/latest
 
 # Badge URLs (for README display)
-https://img.shields.io/github/v/release/sparck75/alteriom-docker-images
-https://img.shields.io/github/actions/workflow/status/sparck75/alteriom-docker-images/build-and-publish.yml
-https://img.shields.io/github/license/sparck75/alteriom-docker-images
-https://img.shields.io/github/last-commit/sparck75/alteriom-docker-images
+https://img.shields.io/github/v/release/Alteriom/alteriom-docker-images
+https://img.shields.io/github/actions/workflow/status/Alteriom/alteriom-docker-images/build-and-publish.yml
+https://img.shields.io/github/license/Alteriom/alteriom-docker-images
+https://img.shields.io/github/last-commit/Alteriom/alteriom-docker-images
 
 # Container Registry
-https://ghcr.io/v2/sparck75/alteriom-docker-images/builder/manifests/latest
-https://ghcr.io/v2/sparck75/alteriom-docker-images/dev/manifests/latest
+https://ghcr.io/v2/Alteriom/alteriom-docker-images/builder/manifests/latest
+https://ghcr.io/v2/Alteriom/alteriom-docker-images/dev/manifests/latest
 ```
 
 ## Firewall Configuration by Functionality
@@ -148,7 +148,7 @@ When the Copilot agent encounters blocked URLs, it will typically show warnings 
 > [!WARNING]
 > I tried to connect to the following addresses, but was blocked by firewall rules:
 > 
-> https://api.github.com/repos/sparck75/alteriom-docker-images/actions/runs
+> https://api.github.com/repos/Alteriom/alteriom-docker-images/actions/runs
 >   - Triggering command: curl -s -f REDACTED (http block)
 > 
 > img.shields.io
@@ -200,13 +200,13 @@ The Copilot coding agent encountered a new firewall block:
 Test network access with these commands:
 ```bash
 # Test GitHub API access
-curl -I -s https://api.github.com/repos/sparck75/alteriom-docker-images/actions/runs
+curl -I -s https://api.github.com/repos/Alteriom/alteriom-docker-images/actions/runs
 
 # Test badge services
-curl -I -s https://img.shields.io/github/v/release/sparck75/alteriom-docker-images
+curl -I -s https://img.shields.io/github/v/release/Alteriom/alteriom-docker-images
 
 # Test container registry
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest
 
 # Test Python package access
 curl -I -s https://pypi.org/simple/platformio/

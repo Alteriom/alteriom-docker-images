@@ -47,7 +47,7 @@ chmod +x scripts/comprehensive-security-scanner.sh
 
 # Set test environment
 export ADVANCED_MODE=false
-export DOCKER_REPOSITORY="ghcr.io/sparck75/alteriom-docker-images"
+export DOCKER_REPOSITORY="ghcr.io/Alteriom/alteriom-docker-images"
 export SCAN_RESULTS_DIR="test-security-results"
 
 # Test script initialization (first few functions only)

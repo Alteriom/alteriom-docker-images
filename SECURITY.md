@@ -105,19 +105,19 @@ If you discover a security vulnerability in our Docker images or build process:
 
 ```bash
 # Always use specific version tags for production
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:1.6.1
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:1.6.1
 
 # Run with read-only filesystem when possible
 docker run --rm --read-only -v ${PWD}:/workspace \
-  ghcr.io/sparck75/alteriom-docker-images/builder:latest pio run
+  ghcr.io/Alteriom/alteriom-docker-images/builder:latest pio run
 
 # Use non-root user (already configured in images)
 docker run --rm --user 1000:1000 -v ${PWD}:/workspace \
-  ghcr.io/sparck75/alteriom-docker-images/builder:latest pio --version
+  ghcr.io/Alteriom/alteriom-docker-images/builder:latest pio --version
 
 # Limit container capabilities
 docker run --rm --cap-drop=ALL -v ${PWD}:/workspace \
-  ghcr.io/sparck75/alteriom-docker-images/builder:latest pio run -e esp32dev
+  ghcr.io/Alteriom/alteriom-docker-images/builder:latest pio run -e esp32dev
 ```
 
 ### Keeping Images Updated
@@ -164,10 +164,10 @@ docker run --rm --cap-drop=ALL -v ${PWD}:/workspace \
 
 ## Security Resources
 
-- [GitHub Security Advisory](https://github.com/sparck75/alteriom-docker-images/security/advisories)
-- [Vulnerability Reports](https://github.com/sparck75/alteriom-docker-images/security/advisories)
-- [Security Scan Results](https://github.com/sparck75/alteriom-docker-images/security/code-scanning)
-- [Dependency Graph](https://github.com/sparck75/alteriom-docker-images/network/dependencies)
+- [GitHub Security Advisory](https://github.com/Alteriom/alteriom-docker-images/security/advisories)
+- [Vulnerability Reports](https://github.com/Alteriom/alteriom-docker-images/security/advisories)
+- [Security Scan Results](https://github.com/Alteriom/alteriom-docker-images/security/code-scanning)
+- [Dependency Graph](https://github.com/Alteriom/alteriom-docker-images/network/dependencies)
 
 ---
 

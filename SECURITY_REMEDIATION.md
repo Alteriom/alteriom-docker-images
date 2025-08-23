@@ -164,10 +164,10 @@ safety scan --output json --save-as json results.json --target requirements.txt
 ./scripts/security-remediation.sh
 
 # 3. Test container health checks
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest --version
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --version
 
 # 4. Verify updated dependencies
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest \
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest \
   python -c "import setuptools; print(f'setuptools: {setuptools.__version__}')"
 ```
 

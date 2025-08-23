@@ -121,8 +121,8 @@ Describe what users need to do to migrate:
 ./scripts/status-check.sh
 
 # Test specific functionality
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest --version
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --version
 ```
 
 ## Pre-merge Checklist

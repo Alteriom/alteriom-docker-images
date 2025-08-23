@@ -397,7 +397,7 @@ jobs:
       - name: Run Security Scan
         run: |
           # Copy security scripts from alteriom-docker-images
-          wget https://raw.githubusercontent.com/sparck75/alteriom-docker-images/main/scripts/comprehensive-security-scanner.sh
+          wget https://raw.githubusercontent.com/Alteriom/alteriom-docker-images/main/scripts/comprehensive-security-scanner.sh
           chmod +x comprehensive-security-scanner.sh
           ./comprehensive-security-scanner.sh
 ```
@@ -478,7 +478,7 @@ The complete implementation can be found in the alteriom-docker-images repositor
 
 For questions about implementing these security practices:
 
-- **Reference Repository**: [alteriom-docker-images](https://github.com/sparck75/alteriom-docker-images)
+- **Reference Repository**: [alteriom-docker-images](https://github.com/Alteriom/alteriom-docker-images)
 - **Security Practices**: See `SECURITY.md` in the reference repository
 - **Example Workflows**: Check `.github/workflows/build-and-publish.yml`
 
