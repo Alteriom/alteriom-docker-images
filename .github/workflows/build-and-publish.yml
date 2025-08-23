@@ -37,7 +37,7 @@ jobs:
 
       - name: Run Security Scanner
         env:
-          DOCKER_REPOSITORY: ${{ env.DOCKER_REPOSITORY || 'ghcr.io/Alteriom/alteriom-docker-images' }}
+          DOCKER_REPOSITORY: ${{ env.DOCKER_REPOSITORY || 'ghcr.io/alteriom/alteriom-docker-images' }}
         run: |
           echo "Running security analysis..."
 
@@ -289,7 +289,9 @@ jobs:
           elif [ -n "${{ secrets.DOCKER_REPOSITORY }}" ]; then
             echo "DOCKER_REPOSITORY=${{ secrets.DOCKER_REPOSITORY }}" >> $GITHUB_ENV
           else
-            echo "DOCKER_REPOSITORY=ghcr.io/${{ github.repository_owner }}/alteriom-docker-images" >> $GITHUB_ENV
+            # Convert repository owner to lowercase for Docker compatibility
+            REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+            echo "DOCKER_REPOSITORY=ghcr.io/${REPO_OWNER}/alteriom-docker-images" >> $GITHUB_ENV
           fi
           echo "Using DOCKER_REPOSITORY: $DOCKER_REPOSITORY"
 
