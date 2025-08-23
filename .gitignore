@@ -1,0 +1,42 @@
+# Ignore common temporary files and Docker build artifacts
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Python
+__pycache__/
+*.pyc
+
+# Docker
+*.tar
+docker-compose.override.yml
+
+# PlatformIO / build
+.pio/
+.pioenvs/
+.build/
+
+# Node
+node_modules/
+
+# Secrets
+.env
+.secret
+
+# Security scan results (temporary)
+security-scan-results/
+malware-scan-results/
+comprehensive-security-results/
+demo-security-results/
+sarif-results/
+*.sarif
+safety-*.json
+
+# Service monitoring results
+service-monitoring-results/
