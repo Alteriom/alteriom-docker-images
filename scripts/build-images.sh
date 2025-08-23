@@ -144,7 +144,7 @@ build_and_push(){
       --tag "${REPO}/${image}:build.${BUILD_NUMBER}" \
       --label "org.opencontainers.image.version=${version}" \
       --label "org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-      --label "org.opencontainers.image.source=https://github.com/sparck75/alteriom-docker-images" \
+      --label "org.opencontainers.image.source=https://github.com/Alteriom/alteriom-docker-images" \
       --label "org.opencontainers.image.title=Alteriom PlatformIO Builder (Development)" \
       --label "org.opencontainers.image.description=ESP32/ESP8266 firmware build environment with dev tools" \
       --label "build.number=${BUILD_NUMBER}" \
@@ -161,7 +161,7 @@ build_and_push(){
       --tag "${REPO}/${image}:${DATE_TAG}" \
       --label "org.opencontainers.image.version=${version}" \
       --label "org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-      --label "org.opencontainers.image.source=https://github.com/sparck75/alteriom-docker-images" \
+      --label "org.opencontainers.image.source=https://github.com/Alteriom/alteriom-docker-images" \
       --label "org.opencontainers.image.title=Alteriom PlatformIO Builder" \
       --label "org.opencontainers.image.description=ESP32/ESP8266 firmware build environment" \
       --label "build.audit.changes=${AUDIT_CHANGES:-No audit performed}" \
@@ -191,7 +191,7 @@ build_local(){
     -t "${REPO}/${image_name}:${version}" \
     --label "org.opencontainers.image.version=${version}" \
     --label "org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-    --label "org.opencontainers.image.source=https://github.com/sparck75/alteriom-docker-images" \
+    --label "org.opencontainers.image.source=https://github.com/Alteriom/alteriom-docker-images" \
     --label "org.opencontainers.image.title=Alteriom PlatformIO Builder (Local)" \
     --label "org.opencontainers.image.description=ESP32/ESP8266 firmware build environment" \
     --label "build.type=local" \

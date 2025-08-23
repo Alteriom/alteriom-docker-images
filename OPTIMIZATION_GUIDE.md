@@ -49,10 +49,10 @@ No changes needed to usage - the images work identically:
 
 ```bash
 # Production builder (unchanged usage)
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32dev
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 
 # Development image (unchanged usage)
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/dev:latest --version
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/dev:latest --version
 ```
 
 ### For Local Development
@@ -61,10 +61,10 @@ The first build with a new image may take slightly longer as ESP platforms are d
 
 ```bash
 # First run downloads platforms (one-time setup)
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32dev
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 
 # Subsequent runs are fast
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32dev
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 ```
 
 ## Alternative Optimization Approaches

@@ -19,7 +19,7 @@ error_handler() {
 trap 'error_handler ${LINENO} $?' ERR
 
 # Configuration
-DOCKER_REPOSITORY="${DOCKER_REPOSITORY:-ghcr.io/sparck75/alteriom-docker-images}"
+DOCKER_REPOSITORY="${DOCKER_REPOSITORY:-ghcr.io/Alteriom/alteriom-docker-images}"
 SCAN_RESULTS_DIR="${SCAN_RESULTS_DIR:-comprehensive-security-results}"
 SEVERITY_THRESHOLD="${SEVERITY_THRESHOLD:-MEDIUM,HIGH,CRITICAL}"
 ADVANCED_MODE="${ADVANCED_MODE:-false}"

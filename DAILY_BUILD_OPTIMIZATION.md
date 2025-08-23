@@ -69,7 +69,7 @@ unset GITHUB_EVENT_NAME
 
 ### 2. Monitor Next Daily Build
 After merging this PR, monitor the next daily build (02:00 UTC) at:
-https://github.com/sparck75/alteriom-docker-images/actions
+https://github.com/Alteriom/alteriom-docker-images/actions
 
 Expected behavior:
 - Build summary shows "Daily Build: Development image only"
@@ -82,13 +82,13 @@ Expected behavior:
 After daily build completion:
 ```bash
 # Check that dev image was updated
-docker pull ghcr.io/sparck75/alteriom-docker-images/dev:latest
+docker pull ghcr.io/Alteriom/alteriom-docker-images/dev:latest
 
 # Check new dev-specific tag exists
-docker pull ghcr.io/sparck75/alteriom-docker-images/dev:1.6.0-dev-20250818
+docker pull ghcr.io/Alteriom/alteriom-docker-images/dev:1.6.0-dev-20250818
 
 # Verify production image unchanged (should still be older tag)
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest
 ```
 
 ## Rollback Plan

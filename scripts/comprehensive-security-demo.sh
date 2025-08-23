@@ -96,7 +96,7 @@ demo_basic_scanning() {
         echo "Scanner: Trivy v0.65.0"
         echo ""
         echo "## Container Security Analysis"
-        echo "Target: ghcr.io/sparck75/alteriom-docker-images/builder:latest"
+        echo "Target: ghcr.io/Alteriom/alteriom-docker-images/builder:latest"
         echo "Vulnerabilities detected: 3 HIGH, 7 MEDIUM, 12 LOW"
         echo ""
         echo "## Filesystem Security Analysis"  

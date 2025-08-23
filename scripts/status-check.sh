@@ -13,7 +13,7 @@ RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-DOCKER_REPO="ghcr.io/sparck75/alteriom-docker-images"
+DOCKER_REPO="ghcr.io/Alteriom/alteriom-docker-images"
 
 echo -e "${BLUE}🔍 ESP32/ESP8266 Docker Images - Quick Status Check${NC}"
 echo "=================================================="
@@ -109,7 +109,7 @@ elif [ "$BUILDER_AVAILABLE" = true ] || [ "$DEV_AVAILABLE" = true ]; then
     fi
     echo ""
     echo "Check GitHub Actions for build status:"
-    echo "  https://github.com/sparck75/alteriom-docker-images/actions"
+    echo "  https://github.com/Alteriom/alteriom-docker-images/actions"
     exit 1
     
 else
@@ -121,7 +121,7 @@ else
     echo "  ❌ Development image: Not available"
     echo ""
     echo "Check build progress at:"
-    echo "  https://github.com/sparck75/alteriom-docker-images/actions"
+    echo "  https://github.com/Alteriom/alteriom-docker-images/actions"
     echo ""
     echo "Wait a few more minutes and try again!"
     echo "Expected build time: 15-30 minutes for full deployment"

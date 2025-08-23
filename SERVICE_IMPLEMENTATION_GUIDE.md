@@ -137,13 +137,13 @@ Service monitoring runs automatically in GitHub Actions and provides:
 ### Debug Commands
 ```bash
 # Test specific image manually
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest --version
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --version
 
 # Check network connectivity
 curl -I https://api.registry.platformio.org/v3/libraries
 
 # Validate container health
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest --help
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --help
 ```
 
 ## Implementation Benefits

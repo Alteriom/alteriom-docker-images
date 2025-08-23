@@ -31,8 +31,8 @@ security:
     filesystems:
       - "."
     containers:
-      - "ghcr.io/sparck75/alteriom-docker-images/builder:latest"
-      - "ghcr.io/sparck75/alteriom-docker-images/dev:latest"
+      - "ghcr.io/Alteriom/alteriom-docker-images/builder:latest"
+      - "ghcr.io/Alteriom/alteriom-docker-images/dev:latest"
     dockerfiles:
       - "production/Dockerfile"
       - "development/Dockerfile"

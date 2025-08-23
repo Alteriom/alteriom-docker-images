@@ -43,7 +43,7 @@ DOCKER_REPOSITORY=<custom-repo-url>  # Can be variable instead of secret
 ### Required Variables (Repository Settings > Secrets and variables > Actions > Variables)
 ```bash
 # Optional: Override default repository
-DOCKER_REPOSITORY=ghcr.io/sparck75/alteriom-docker-images
+DOCKER_REPOSITORY=ghcr.io/Alteriom/alteriom-docker-images
 ```
 
 ### Built-in Tokens (No setup required)
@@ -64,7 +64,7 @@ Ensure the following permissions are set:
 ```bash
 # Test GHCR access
 docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest
 ```
 
 ## 4. GitHub Copilot Specific Access
@@ -113,7 +113,7 @@ For local testing and validation:
 
 # Environment variables for testing
 export GITHUB_TOKEN="<your-personal-access-token>"
-export DOCKER_REPOSITORY="ghcr.io/sparck75/alteriom-docker-images"
+export DOCKER_REPOSITORY="ghcr.io/Alteriom/alteriom-docker-images"
 ```
 
 ### CI/CD Environment Variables
@@ -163,7 +163,7 @@ docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
 echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
 
 # Test workflow permissions
-gh workflow run "Build and Publish Docker Images" --repo sparck75/alteriom-docker-images
+gh workflow run "Build and Publish Docker Images" --repo Alteriom/alteriom-docker-images
 ```
 
 ## 9. Security Considerations

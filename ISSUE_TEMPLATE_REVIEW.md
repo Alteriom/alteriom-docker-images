@@ -127,7 +127,7 @@ The repository currently has **6 issue templates** in `.github/ISSUE_TEMPLATE/`:
    blank_issues_enabled: false
    contact_links:
      - name: Documentation
-       url: https://github.com/sparck75/alteriom-docker-images#readme
+       url: https://github.com/Alteriom/alteriom-docker-images#readme
        about: Check the documentation first
      - name: Security Issues
        url: mailto:security@example.com

@@ -32,7 +32,7 @@ if command -v gh >/dev/null 2>&1; then
     echo "🌐 Checking GitHub repository workflows..."
     
     # Get workflows from GitHub API
-    GITHUB_WORKFLOWS=$(gh api repos/sparck75/alteriom-docker-images/actions/workflows --jq '.workflows[] | select(.state == "active") | .name' 2>/dev/null || echo "")
+    GITHUB_WORKFLOWS=$(gh api repos/Alteriom/alteriom-docker-images/actions/workflows --jq '.workflows[] | select(.state == "active") | .name' 2>/dev/null || echo "")
     
     if [ -n "$GITHUB_WORKFLOWS" ]; then
         echo "📋 Active GitHub workflows:"

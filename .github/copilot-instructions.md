@@ -42,7 +42,7 @@ alteriom-docker-images/
 - **ESP32/ESP8266**: Embedded development platforms (espressif32, espressif8266)
 - **GitHub Actions**: Automated CI/CD with scheduled builds
 - **Python**: 3.11-slim base image, non-root user 'builder' (UID 1000)
-- **Registry**: GitHub Container Registry (ghcr.io/sparck75/alteriom-docker-images)
+- **Registry**: GitHub Container Registry (ghcr.io/Alteriom/alteriom-docker-images)
 
 ## Working Effectively
 
@@ -71,20 +71,20 @@ alteriom-docker-images/
 
 ```bash
 # Pull and test production builder (VALIDATED: Works correctly)
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest --version
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --version
 # Expected output: "PlatformIO Core, version 6.1.13"
 
 # Pull and test development image (VALIDATED: Works correctly)
-docker pull ghcr.io/sparck75/alteriom-docker-images/dev:latest
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/dev:latest --version
+docker pull ghcr.io/Alteriom/alteriom-docker-images/dev:latest
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/dev:latest --version
 # Expected output: "PlatformIO Core, version 6.1.13"
 
 # Build ESP32 firmware (VALIDATED: ESP platforms install and build successfully)
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32dev
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 
 # Build ESP32-C3 firmware (VALIDATED: Works with current images)
-docker run --rm -v ${PWD}:/workspace ghcr.io/sparck75/alteriom-docker-images/dev:latest run -e esp32-c3-devkitm-1
+docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/dev:latest run -e esp32-c3-devkitm-1
 ```
 
 ### Local Building (Admin/Development Only)
@@ -118,7 +118,7 @@ export DOCKER_REPOSITORY="ghcr.io/your_user/alteriom-docker-images"
 # Timing: ~2.5 minutes (first run may take longer for platform downloads)
 
 # Test specific image only
-./scripts/test-esp-builds.sh ghcr.io/sparck75/alteriom-docker-images/dev:latest
+./scripts/test-esp-builds.sh ghcr.io/Alteriom/alteriom-docker-images/dev:latest
 
 # Show test help and options
 ./scripts/test-esp-builds.sh --help
@@ -162,17 +162,17 @@ EOF
 
 # Test ESP32 build (VALIDATED: Works in unrestricted networks)
 docker run --rm -v ${PWD}:/workspace \
-  ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp32dev
+  ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 
 # Test ESP8266 build (VALIDATED: Works in unrestricted networks)
 docker run --rm -v ${PWD}:/workspace \
-  ghcr.io/sparck75/alteriom-docker-images/builder:latest run -e esp8266
+  ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp8266
 ```
 
 ### CI/CD Operations (VALIDATED: Workflow works correctly)
 
 **Manual Build Trigger:**
-1. Navigate to: https://github.com/sparck75/alteriom-docker-images/actions
+1. Navigate to: https://github.com/Alteriom/alteriom-docker-images/actions
 2. Click "Build and Publish Docker Images" workflow
 3. Click "Run workflow" button (top right)
 4. Select branch (usually 'main') and click "Run workflow"
@@ -409,12 +409,12 @@ ls -la scripts/
 ### External References
 - **PlatformIO Documentation**: https://docs.platformio.org/
 - **Docker Best Practices**: https://docs.docker.com/develop/best-practices/
-- **GitHub Actions**: https://github.com/sparck75/alteriom-docker-images/actions
+- **GitHub Actions**: https://github.com/Alteriom/alteriom-docker-images/actions
 
 ### Community and Support
-- **Issues**: https://github.com/sparck75/alteriom-docker-images/issues
-- **Actions**: https://github.com/sparck75/alteriom-docker-images/actions
-- **Packages**: https://github.com/sparck75/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fbuilder
+- **Issues**: https://github.com/Alteriom/alteriom-docker-images/issues
+- **Actions**: https://github.com/Alteriom/alteriom-docker-images/actions
+- **Packages**: https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fbuilder
 
 ---
 

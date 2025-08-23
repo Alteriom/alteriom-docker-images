@@ -37,7 +37,7 @@ jobs:
       
       - name: Run Security Scanner
         env:
-          DOCKER_REPOSITORY: ${{ env.DOCKER_REPOSITORY || 'ghcr.io/sparck75/alteriom-docker-images' }}
+          DOCKER_REPOSITORY: ${{ env.DOCKER_REPOSITORY || 'ghcr.io/Alteriom/alteriom-docker-images' }}
         run: |
           echo "Running security analysis..."
           

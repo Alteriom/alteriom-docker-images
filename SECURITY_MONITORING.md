@@ -32,7 +32,7 @@ This document provides a comprehensive guide to monitoring and understanding the
 ## Security Dashboard Locations 🖥️
 
 ### GitHub Security Tab
-- **URL**: [Repository Security](https://github.com/sparck75/alteriom-docker-images/security)
+- **URL**: [Repository Security](https://github.com/Alteriom/alteriom-docker-images/security)
 - **Contains**: 
   - Code scanning alerts (Trivy, Hadolint)
   - Dependency vulnerability alerts
@@ -96,13 +96,13 @@ When running manual scans, results are stored in:
 ### Daily Security Checks
 ```bash
 # 1. Check GitHub Security tab
-# Visit: https://github.com/sparck75/alteriom-docker-images/security
+# Visit: https://github.com/Alteriom/alteriom-docker-images/security
 
 # 2. Run quick status check
 ./scripts/verify-images.sh
 
 # 3. Check latest workflow run
-# Visit: https://github.com/sparck75/alteriom-docker-images/actions
+# Visit: https://github.com/Alteriom/alteriom-docker-images/actions
 ```
 
 ### Weekly Security Review
@@ -155,7 +155,7 @@ grep -r "CRITICAL\|HIGH" security-scan-results/
 ## Alert Configuration 🚨
 
 ### GitHub Notifications
-Configure in [Repository Settings → Notifications](https://github.com/sparck75/alteriom-docker-images/settings/notifications):
+Configure in [Repository Settings → Notifications](https://github.com/Alteriom/alteriom-docker-images/settings/notifications):
 - ✅ Security alerts
 - ✅ Vulnerability alerts
 - ✅ Dependabot alerts

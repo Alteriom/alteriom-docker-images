@@ -12,7 +12,7 @@ The repository is **fully configured** for automated deployment with the followi
 - ✅ **Manual Dispatch**: Can be triggered manually from GitHub Actions tab (both images)
 
 ### Registry & Authentication
-- ✅ **GitHub Container Registry (GHCR)**: Pre-configured to use `ghcr.io/sparck75/alteriom-docker-images`
+- ✅ **GitHub Container Registry (GHCR)**: Pre-configured to use `ghcr.io/Alteriom/alteriom-docker-images`
 - ✅ **Authentication**: Uses built-in `GITHUB_TOKEN` - no secrets setup required
 - ✅ **Multi-platform**: Builds for linux/amd64 and linux/arm64
 
@@ -23,7 +23,7 @@ The system is ready to use with no additional admin configuration needed.
 ## How to Force a New Build Now
 
 ### Option 1: Manual Dispatch (Recommended)
-1. Go to the [Actions tab](https://github.com/sparck75/alteriom-docker-images/actions)
+1. Go to the [Actions tab](https://github.com/Alteriom/alteriom-docker-images/actions)
 2. Click on "Build and Publish Docker Images" workflow
 3. Click "Run workflow" button
 4. Select branch (usually `main`) and click "Run workflow"
@@ -34,8 +34,8 @@ Merging this PR will automatically trigger a new build and test the fixed Docker
 ## Published Images Location
 
 Once builds succeed, images will be available at:
-- **Production**: `ghcr.io/sparck75/alteriom-docker-images/builder:latest`
-- **Development**: `ghcr.io/sparck75/alteriom-docker-images/dev:latest`
+- **Production**: `ghcr.io/Alteriom/alteriom-docker-images/builder:latest`
+- **Development**: `ghcr.io/Alteriom/alteriom-docker-images/dev:latest`
 - **Dated tags**: Images also get tagged with YYYYMMDD format
 
 ## Verification Commands
@@ -50,12 +50,12 @@ Once builds succeed, images will be available at:
 Test the published images:
 ```bash
 # Pull and test production image
-docker pull ghcr.io/sparck75/alteriom-docker-images/builder:latest
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/builder:latest --version
+docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:latest
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --version
 
 # Pull and test development image  
-docker pull ghcr.io/sparck75/alteriom-docker-images/dev:latest
-docker run --rm ghcr.io/sparck75/alteriom-docker-images/dev:latest --version
+docker pull ghcr.io/Alteriom/alteriom-docker-images/dev:latest
+docker run --rm ghcr.io/Alteriom/alteriom-docker-images/dev:latest --version
 ```
 
 ## Repository Permissions
@@ -73,6 +73,6 @@ The workflow has the correct permissions:
 ## Support
 
 If you encounter issues:
-1. Check the [Actions tab](https://github.com/sparck75/alteriom-docker-images/actions) for build logs
+1. Check the [Actions tab](https://github.com/Alteriom/alteriom-docker-images/actions) for build logs
 2. Verify the workflow is enabled in repository settings
 3. Ensure the main branch is not protected in a way that blocks automation

@@ -61,7 +61,7 @@ If the automated versioning doesn't work as expected:
 
 1. **Check GitHub Actions logs**:
    ```bash
-   # Go to: https://github.com/sparck75/alteriom-docker-images/actions
+   # Go to: https://github.com/Alteriom/alteriom-docker-images/actions
    # Look for "Build and Publish Docker Images" workflow
    # Check the "Bump Version" step for errors
    ```

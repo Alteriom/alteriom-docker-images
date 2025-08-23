@@ -8,7 +8,7 @@ set -euo pipefail
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-DOCKER_REPO="${DOCKER_REPOSITORY:-ghcr.io/sparck75/alteriom-docker-images}"
+DOCKER_REPO="${DOCKER_REPOSITORY:-ghcr.io/Alteriom/alteriom-docker-images}"
 
 # Colors for output
 RED='\033[0;31m'

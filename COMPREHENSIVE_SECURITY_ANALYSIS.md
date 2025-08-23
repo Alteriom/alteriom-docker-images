@@ -349,7 +349,7 @@ SCAN_RESULTS_DIR="my-security-results" ./scripts/comprehensive-security-scanner.
 ### Configuration Options
 ```bash
 # Environment Variables
-export DOCKER_REPOSITORY="ghcr.io/sparck75/alteriom-docker-images"
+export DOCKER_REPOSITORY="ghcr.io/Alteriom/alteriom-docker-images"
 export SCAN_RESULTS_DIR="comprehensive-security-results"
 export SEVERITY_THRESHOLD="MEDIUM,HIGH,CRITICAL"
 export ADVANCED_MODE="true"

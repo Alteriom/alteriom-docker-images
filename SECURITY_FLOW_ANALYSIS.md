@@ -289,20 +289,20 @@ generate_slsa_provenance() {
   "predicateType": "https://slsa.dev/provenance/v0.2",
   "subject": [
     {
-      "name": "ghcr.io/sparck75/alteriom-docker-images/builder",
+      "name": "ghcr.io/Alteriom/alteriom-docker-images/builder",
       "digest": {
-        "sha256": "$(docker images --digests ghcr.io/sparck75/alteriom-docker-images/builder:latest --format '{{.Digest}}' | cut -d: -f2)"
+        "sha256": "$(docker images --digests ghcr.io/Alteriom/alteriom-docker-images/builder:latest --format '{{.Digest}}' | cut -d: -f2)"
       }
     }
   ],
   "predicate": {
     "builder": {
-      "id": "https://github.com/sparck75/alteriom-docker-images/.github/workflows/build-and-publish.yml@refs/heads/main"
+      "id": "https://github.com/Alteriom/alteriom-docker-images/.github/workflows/build-and-publish.yml@refs/heads/main"
     },
     "buildType": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
     "invocation": {
       "configSource": {
-        "uri": "git+https://github.com/sparck75/alteriom-docker-images@$GITHUB_SHA",
+        "uri": "git+https://github.com/Alteriom/alteriom-docker-images@$GITHUB_SHA",
         "digest": {
           "sha1": "$GITHUB_SHA"
         },
