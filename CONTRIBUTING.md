@@ -257,7 +257,7 @@ Use the security_vulnerability.md template and include:
 ## Getting Help
 
 ### Resources
-- [Alteriom Docker Images Documentation](./docs/)
+- [Alteriom Docker Images Documentation](docs/)
 - [PlatformIO Documentation](https://docs.platformio.org/)
 - [Docker Best Practices](https://docs.docker.com/develop/best-practices/)
 - [ESP Platform Documentation](https://docs.espressif.com/)
