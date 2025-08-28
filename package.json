@@ -1,0 +1,45 @@
+{
+  "name": "alteriom-docker-images",
+  "version": "1.8.4",
+  "description": "Pre-built PlatformIO builder images for the Alteriom project (ESP32/ESP32-C3/ESP8266). This repository contains optimized Dockerfiles and helper scripts to build and publish minimal PlatformIO images for ESP32/ESP32-C3/ESP8266 firmware builds. The images are optimized for size while maintaining full functionality.",
+  "keywords": [
+    "docker",
+    "platformio",
+    "esp32",
+    "esp32-c3",
+    "esp8266",
+    "embedded",
+    "iot",
+    "firmware",
+    "alteriom",
+    "build-tools",
+    "ci-cd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alteriom/alteriom-docker-images.git"
+  },
+  "author": "Alteriom",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Alteriom/alteriom-docker-images/issues"
+  },
+  "homepage": "https://github.com/Alteriom/alteriom-docker-images#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "metadata:report": "alteriom-metadata report --org-tag alteriom",
+    "metadata:validate": "alteriom-metadata validate --org-tag alteriom",
+    "metadata:apply": "alteriom-metadata apply --org-tag alteriom",
+    "metadata:dry-run": "alteriom-metadata dry-run --org-tag alteriom"
+  },
+  "devDependencies": {
+    "@alteriom/repository-metadata-manager": "^1.2.4"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.2.1"
+  }
+}
