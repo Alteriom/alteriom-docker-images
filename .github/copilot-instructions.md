@@ -14,6 +14,13 @@ alteriom-docker-images/
 │   ├── workflows/build-and-publish.yml    # Single CI/CD pipeline
 │   ├── copilot-instructions.md            # This file - AI assistant guidelines
 │   └── ISSUE_TEMPLATE/                    # Issue templates
+├── docs/                                  # All documentation (organized)
+│   ├── README.md                          # Documentation index
+│   ├── admin/                             # Administrative documentation
+│   ├── security/                          # Security-related documentation
+│   ├── guides/                            # User guides and tutorials
+│   ├── development/                       # Development documentation
+│   └── migration/                         # Migration and implementation docs
 ├── production/Dockerfile                  # Minimal PlatformIO builder
 ├── development/Dockerfile                 # Development tools + PlatformIO
 ├── scripts/
@@ -21,7 +28,8 @@ alteriom-docker-images/
 │   ├── verify-images.sh                  # Comprehensive verification (2 seconds)
 │   ├── status-check.sh                   # Quick status check (10 seconds)
 │   ├── test-esp-builds.sh                # ESP platform testing (2.5 minutes)
-│   └── validate-workflows.sh             # Workflow duplication prevention
+│   ├── validate-workflows.sh             # Workflow duplication prevention
+│   └── test/                             # Test scripts (moved from root)
 ├── tests/                                # ESP platform test projects
 │   ├── esp32-test/                       # ESP32 test project
 │   ├── esp32s3-test/                     # ESP32-S3 test project
@@ -29,9 +37,9 @@ alteriom-docker-images/
 │   └── esp8266-test/                     # ESP8266 test project
 ├── VERSION                               # Version file (current: 1.8.0)
 ├── BUILD_NUMBER                          # Build counter (current: 10)
-├── ADMIN_SETUP.md                        # Admin configuration guide
-├── OPTIMIZATION_GUIDE.md                 # Image optimization documentation
-├── FIREWALL_CONFIGURATION.md             # Network access requirements
+├── CHANGELOG.md                          # Change history
+├── CONTRIBUTING.md                       # Contribution guidelines
+├── LICENSE                               # License file
 └── README.md                             # Public documentation
 ```
 
@@ -223,7 +231,7 @@ VERSION=1.8.0          # From VERSION file
 BUILD_NUMBER=10        # From BUILD_NUMBER file
 ```
 
-### Network Requirements (CRITICAL - See FIREWALL_CONFIGURATION.md)
+### Network Requirements (CRITICAL - See docs/guides/FIREWALL_CONFIGURATION.md)
 **Required domains for successful operations:**
 - `ghcr.io` - Docker registry operations (CRITICAL)
 - `api.github.com` - GitHub API access (CRITICAL)
@@ -309,7 +317,7 @@ Status: WORKING (verified via verify-images.sh)
 #### Network/Firewall Issues  
 - **Symptom**: SSL certificate errors, blocked URLs
 - **Cause**: Corporate firewall blocking external services
-- **Solution**: See [FIREWALL_CONFIGURATION.md](FIREWALL_CONFIGURATION.md) for allowlist
+- **Solution**: See [docs/guides/FIREWALL_CONFIGURATION.md](docs/guides/FIREWALL_CONFIGURATION.md) for allowlist
 - **Critical domains**: `ghcr.io`, `api.github.com`, `pypi.org`
 
 #### Build Failures
@@ -401,9 +409,9 @@ ls -la scripts/
 
 ### Documentation Links (VALIDATED: Files exist)
 - **README.md**: Public usage documentation
-- **ADMIN_SETUP.md**: Administrator configuration guide  
-- **OPTIMIZATION_GUIDE.md**: Image size optimization strategies
-- **FIREWALL_CONFIGURATION.md**: Network access requirements
+- **docs/admin/ADMIN_SETUP.md**: Administrator configuration guide  
+- **docs/guides/OPTIMIZATION_GUIDE.md**: Image size optimization strategies
+- **docs/guides/FIREWALL_CONFIGURATION.md**: Network access requirements
 - **tests/README.md**: Testing documentation
 
 ### External References

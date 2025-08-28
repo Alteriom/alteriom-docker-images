@@ -33,8 +33,8 @@ Development images are tagged with both `:latest` and versioned tags (e.g., `:1.
 - development/Dockerfile — development image with extra tools and debugging utilities  
 - scripts/build-images.sh — build and push helper script
 - scripts/verify-images.sh — verify published images are available and working
-- OPTIMIZATION_GUIDE.md — detailed guide on image size optimizations
-- FIREWALL_CONFIGURATION.md — network access requirements and firewall allowlist
+- docs/guides/OPTIMIZATION_GUIDE.md — detailed guide on image size optimizations
+- docs/guides/FIREWALL_CONFIGURATION.md — network access requirements and firewall allowlist
 
 Quick start
 
@@ -85,7 +85,7 @@ The Docker images have been optimized for minimal size while maintaining full Pl
 - Better Docker layer caching
 - Same functionality and usage
 
-See [OPTIMIZATION_GUIDE.md](OPTIMIZATION_GUIDE.md) for detailed information.
+See [docs/guides/OPTIMIZATION_GUIDE.md](docs/guides/OPTIMIZATION_GUIDE.md) for detailed information.
 
 ## Testing and Validation
 
