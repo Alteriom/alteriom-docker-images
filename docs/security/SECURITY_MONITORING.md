@@ -197,7 +197,7 @@ curl -I https://api.github.com
 curl -I https://ghcr.io
 
 # Check firewall configuration
-# See FIREWALL_CONFIGURATION.md
+# See ../guides/FIREWALL_CONFIGURATION.md
 ```
 
 ## Security Compliance Checklist ✅
@@ -277,8 +277,8 @@ curl -I https://ghcr.io
 
 ### Internal Documentation
 - [Security Policy](SECURITY.md)
-- [Firewall Configuration](FIREWALL_CONFIGURATION.md)
-- [Admin Setup](ADMIN_SETUP.md)
+- [Firewall Configuration](../guides/FIREWALL_CONFIGURATION.md)
+- [Admin Setup](../admin/ADMIN_SETUP.md)
 
 ### External Resources
 - [GitHub Security Documentation](https://docs.github.com/en/code-security)

@@ -205,7 +205,9 @@ demo_status "TOOL" "Running compliance checking demo..."
     if [ -f "SECURITY.md" ]; then
         echo "✅ Security documentation present"
     else
-        echo "⚠️ Consider adding SECURITY.md file"
+            echo "✅ Security policy found at docs/security/SECURITY.md"
+    else
+        echo "⚠️ Consider adding docs/security/SECURITY.md file"
     fi
     
     # Check for GitHub security features
