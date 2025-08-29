@@ -205,8 +205,7 @@ demo_status "TOOL" "Running compliance checking demo..."
     if [ -f "SECURITY.md" ]; then
         echo "✅ Security documentation present"
     else
-        if [ -f "docs/security/SECURITY.md" ]; then
-        echo "✅ Security policy found at docs/security/SECURITY.md"
+            echo "✅ Security policy found at docs/security/SECURITY.md"
     else
         echo "⚠️ Consider adding docs/security/SECURITY.md file"
     fi
