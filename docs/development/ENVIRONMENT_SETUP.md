@@ -87,4 +87,4 @@ This will check that all required environment variables are set and tokens are v
 
 ---
 
-For more information, see the [main README](../README.md) or [admin setup guide](admin/ADMIN_SETUP.md).
+For more information, see the [main README](../README.md) or [admin setup guide](../admin/ADMIN_SETUP.md).
