@@ -231,6 +231,6 @@ Brief description of changes
 ---
 
 **Quick Start**: Enable Copilot → Add Repository Topics → Install VS Code Extensions → Test Suggestions  
-**For Detailed Instructions**: See [copilot-instructions.md](.github/copilot-instructions.md)
+**For Detailed Instructions**: See [copilot-instructions.md](../../.github/copilot-instructions.md)
 
-**Version**: 1.0 | **Last Updated**: August 2025 | **Maintainer**: @sparck75
+**Version**: 1.0 | **Last Updated**: August 2024 | **Maintainer**: @sparck75

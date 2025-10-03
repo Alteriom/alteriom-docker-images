@@ -226,8 +226,8 @@ jobs:
         run: |
           # Copy the comprehensive-security-scanner.sh script from alteriom-docker-images
           # Or implement similar scanning logic
-          chmod +x scripts/security-scanner.sh
-          ADVANCED_MODE=false ./scripts/security-scanner.sh
+          chmod +x scripts/comprehensive-security-scanner.sh
+          ADVANCED_MODE=false ./scripts/comprehensive-security-scanner.sh
       
       - name: Upload Security Results
         uses: actions/upload-artifact@v4

@@ -604,7 +604,7 @@ ls -la comprehensive-security-results/sarif/
 yamllint .github/workflows/security-*.yml
 
 # 4. Test container security (if applicable)
-./scripts/container-security-scan.sh your-image:latest
+./scripts/comprehensive-security-scanner.sh
 ```
 
 ### Expected Results
@@ -753,7 +753,7 @@ grep -r "Upload.*SARIF" .github/workflows/ | wc -l
 ./scripts/comprehensive-security-scanner.sh
 
 # Container security check
-./scripts/container-security-scan.sh IMAGE_NAME
+./scripts/comprehensive-security-scanner.sh
 
 # Validate workflows
 yamllint .github/workflows/
