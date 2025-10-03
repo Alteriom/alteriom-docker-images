@@ -35,6 +35,7 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 
 ### 🛠️ Development
 
+- [Scripts Guide](development/SCRIPTS_GUIDE.md) - Comprehensive guide to all 26 scripts
 - [Environment Setup](development/ENVIRONMENT_SETUP.md) - Local development configuration
 - [Automated Versioning](development/AUTOMATED_VERSIONING.md) - Version management system
 - [Version Control](development/VERSION_CONTROL.md) - Git workflow and branching

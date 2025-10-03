@@ -104,6 +104,14 @@ grep -A10 "tests/" README.md
   - [x] Add purpose comments for development tools ✅
   - [x] Explain why each tool is included ✅
 
+### Script Documentation Guide
+
+- [x] **Create comprehensive SCRIPTS_GUIDE.md** ✅
+  - [x] Document all 26 scripts with purpose, usage, and examples ✅
+  - [x] Add troubleshooting section ✅
+  - [x] Include common workflows ✅
+  - [x] Add quick reference table ✅
+
 ### Script Documentation Headers (26 scripts)
 
 Template to add to each script:
