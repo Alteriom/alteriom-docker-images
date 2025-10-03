@@ -26,6 +26,7 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 - [Advanced Security Updates](security/ADVANCED_SECURITY_UPDATE.md) - Latest security enhancements
 
 ### 📖 Guides
+
 - [Optimization Guide](guides/OPTIMIZATION_GUIDE.md) - Performance and size optimization
 - [Firewall Configuration](guides/FIREWALL_CONFIGURATION.md) - Network access requirements
 - [Service Implementation Guide](guides/SERVICE_IMPLEMENTATION_GUIDE.md) - Service setup
@@ -33,6 +34,8 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 - [Service Check Locations](guides/SERVICE_CHECK_LOCATIONS.md) - Health check endpoints
 
 ### 🛠️ Development
+
+- [Environment Setup](development/ENVIRONMENT_SETUP.md) - Local development configuration
 - [Automated Versioning](development/AUTOMATED_VERSIONING.md) - Version management system
 - [Version Control](development/VERSION_CONTROL.md) - Git workflow and branching
 - [Daily Build Optimization](development/DAILY_BUILD_OPTIMIZATION.md) - CI/CD improvements
@@ -42,6 +45,7 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 - [Issue Template Review](development/ISSUE_TEMPLATE_REVIEW.md) - GitHub issue templates
 
 ### 🔄 Migration
+
 - [Alteriom Migration Guide](migration/ALTERIOM_MIGRATION_GUIDE.md) - Complete migration process
 - [Migration Complete](migration/MIGRATION_COMPLETE.md) - Post-migration status
 - [Implementation Summary](migration/IMPLEMENTATION_SUMMARY.md) - Overall implementation status
@@ -52,14 +56,17 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 ## Additional Resources
 
 ### Project Files
+
 - [CHANGELOG](../CHANGELOG.md) - Project change history
 - [LICENSE](../LICENSE) - Project license information
 
 ### Build Information
+
 - [VERSION](../VERSION) - Current version number
 - [BUILD_NUMBER](../BUILD_NUMBER) - Current build number
 
 ### Configuration Files
+
 - [package.json](../package.json) - Node.js project configuration
 - [.github/workflows](../.github/workflows/) - GitHub Actions workflows
 - [scripts/](../scripts/) - Build and utility scripts
@@ -68,6 +75,7 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 ## Getting Help
 
 If you need assistance:
+
 1. Check the relevant documentation section above
 2. Review the [GitHub Issues](https://github.com/Alteriom/alteriom-docker-images/issues)
 3. Create a new issue using the appropriate template

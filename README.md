@@ -170,7 +170,7 @@ The repository includes comprehensive security scanning to ensure safe and secur
 - ✅ Automated vulnerability alerts
 - ✅ Security policy enforcement
 
-See [SECURITY.md](SECURITY.md) for detailed security policy and vulnerability reporting.
+See [docs/security/SECURITY.md](docs/security/SECURITY.md) for detailed security policy and vulnerability reporting.
 
 See [tests/README.md](tests/README.md) for detailed testing information.
 
@@ -201,10 +201,10 @@ This repository includes a GitHub Actions workflow (`.github/workflows/build-and
 
 **Setup required:** The workflow is pre-configured to use GitHub Container Registry (GHCR) and requires no additional secrets setup. The workflow uses the built-in `GITHUB_TOKEN` for authentication.
 
-**Versioning Guide:** See [AUTOMATED_VERSIONING.md](AUTOMATED_VERSIONING.md) for complete instructions on using the automated version management system.
+**Versioning Guide:** See [docs/development/AUTOMATED_VERSIONING.md](docs/development/AUTOMATED_VERSIONING.md) for complete instructions on using the automated version management system.
 
 **Admin Notes:** 
-- Repository has been tested and builds are working as of August 2025
+- Repository has been tested and builds are working as of August 2024
 - Docker builds use Python 3.11-slim base image (compatible with current package repositories)
 - Both production and development images build successfully with multi-platform support
 
@@ -242,8 +242,15 @@ alteriom-docker-images/
 │   ├── README.md                   # Testing documentation
 │   ├── esp32-test/                 # ESP32 test project
 │   ├── esp32s3-test/               # ESP32-S3 test project
+│   ├── esp32c3-test/               # ESP32-C3 test project
 │   └── esp8266-test/               # ESP8266 test project
-├── OPTIMIZATION_GUIDE.md           # Detailed optimization guide
+├── docs/                           # All documentation (organized)
+│   ├── README.md                   # Documentation index
+│   ├── admin/                      # Administrative documentation
+│   ├── security/                   # Security-related documentation
+│   ├── guides/                     # User guides and tutorials
+│   ├── development/                # Development documentation
+│   └── migration/                  # Migration and implementation docs
 └── README.md
 ```
 
