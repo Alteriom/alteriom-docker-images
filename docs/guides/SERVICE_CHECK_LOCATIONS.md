@@ -197,9 +197,9 @@ docker run --rm ghcr.io/Alteriom/alteriom-docker-images/builder:latest --version
 ## 📚 Related Documentation
 
 - **[SERVICE_MONITORING.md](SERVICE_MONITORING.md)** - Complete service monitoring guide
-- **[README.md](README.md)** - Main usage documentation
+- **[README.md](../../README.md)** - Main usage documentation
 - **[ADMIN_SETUP.md](../admin/ADMIN_SETUP.md)** - Administrator configuration
-- **[.github/copilot-instructions.md](.github/copilot-instructions.md)** - Development guidelines
+- **[.github/copilot-instructions.md](../../.github/copilot-instructions.md)** - Development guidelines
 
 ---
 

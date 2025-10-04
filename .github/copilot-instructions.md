@@ -35,8 +35,8 @@ alteriom-docker-images/
 │   ├── esp32s3-test/                     # ESP32-S3 test project
 │   ├── esp32c3-test/                     # ESP32-C3 test project
 │   └── esp8266-test/                     # ESP8266 test project
-├── VERSION                               # Version file (current: 1.8.0)
-├── BUILD_NUMBER                          # Build counter (current: 10)
+├── VERSION                               # Version file (current: 1.8.6)
+├── BUILD_NUMBER                          # Build counter (current: 17)
 ├── CHANGELOG.md                          # Change history
 ├── CONTRIBUTING.md                       # Contribution guidelines
 ├── LICENSE                               # License file
@@ -227,8 +227,8 @@ All timing based on actual measurements:
 export DOCKER_REPOSITORY=ghcr.io/your_user/alteriom-docker-images
 
 # Current repository values (VALIDATED)
-VERSION=1.8.0          # From VERSION file
-BUILD_NUMBER=10        # From BUILD_NUMBER file
+VERSION=1.8.6          # From VERSION file
+BUILD_NUMBER=17        # From BUILD_NUMBER file
 ```
 
 ### Network Requirements (CRITICAL - See docs/guides/FIREWALL_CONFIGURATION.md)
@@ -269,13 +269,13 @@ BUILD_NUMBER=10        # From BUILD_NUMBER file
 3. **Version management**:
    ```bash
    # Check current version and build number
-   cat VERSION      # Current: 1.8.0
-   cat BUILD_NUMBER # Current: 10
+   cat VERSION      # Current: 1.8.6
+   cat BUILD_NUMBER # Current: 17
    ```
 
 ### Configuration Files (CRITICAL)
-- **VERSION**: Controls image versioning and tags (CURRENT: 1.8.0)
-- **BUILD_NUMBER**: Incremental build counter (CURRENT: 10)
+- **VERSION**: Controls image versioning and tags (CURRENT: 1.8.6)
+- **BUILD_NUMBER**: Incremental build counter (CURRENT: 17)
 - **.github/workflows/build-and-publish.yml**: **ONLY** CI/CD configuration
 - **production/Dockerfile**: Optimized minimal PlatformIO builder
 - **development/Dockerfile**: Development image with debugging tools

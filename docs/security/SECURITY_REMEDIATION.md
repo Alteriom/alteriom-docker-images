@@ -199,6 +199,6 @@ For security-related questions or to report vulnerabilities:
 
 ---
 
-**Last Updated**: August 22, 2025  
+**Last Updated**: August 22, 2024  
 **Review Schedule**: Monthly  
-**Next Review**: September 22, 2025
+**Next Review**: September 22, 2024
