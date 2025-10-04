@@ -21,21 +21,30 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install essential dependencies only, removing build tools after PlatformIO install
 # This multi-stage approach significantly reduces final image size (~20-30% reduction)
+# Package list:
+#   git: Required for PlatformIO package management and cloning
+#   ca-certificates: Required for SSL/TLS support for secure package downloads
+#   gcc, g++, make: Build-only tools for compilation (removed after install)
+#   libffi-dev, libssl-dev: Build-only libraries (removed after install)
+# Python packages:
+#   setuptools>=70.0.0: Pinned for security patch CVE-2024-6345
+#   platformio==6.1.13: Pinned for stability and reproducibility
+#   starlette>=0.40.0: Security patch for CVE-2024-47874
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \                           # Required: PlatformIO package management and cloning
-    ca-certificates \               # Required: SSL/TLS support for secure package downloads
-    gcc \                          # Build-only: C compiler for PlatformIO installation
-    g++ \                          # Build-only: C++ compiler for native extensions
-    make \                         # Build-only: Build automation for compiled dependencies
-    libffi-dev \                   # Build-only: Foreign function interface (Python crypto)
-    libssl-dev \                   # Build-only: OpenSSL development headers
+    git \
+    ca-certificates \
+    gcc \
+    g++ \
+    make \
+    libffi-dev \
+    libssl-dev \
     && pip3 install --no-cache-dir -U pip \
-    && pip3 install --no-cache-dir -U "setuptools>=70.0.0" \  # Pinned: Security patch CVE-2024-6345
-    && pip3 install --no-cache-dir "platformio==6.1.13" \     # Pinned: Stability and reproducibility
-    && pip3 install --no-cache-dir -U "starlette>=0.40.0" \   # Security: Patch for CVE-2024-47874
-    && apt-get remove -y gcc g++ make libffi-dev libssl-dev \  # Remove: Build tools no longer needed
-    && apt-get autoremove -y \      # Cleanup: Remove unused dependencies (~50MB saved)
-    && rm -rf /var/lib/apt/lists/*  # Cleanup: Remove package lists (~20MB saved)
+    && pip3 install --no-cache-dir -U "setuptools>=70.0.0" \
+    && pip3 install --no-cache-dir "platformio==6.1.13" \
+    && pip3 install --no-cache-dir -U "starlette>=0.40.0" \
+    && apt-get remove -y gcc g++ make libffi-dev libssl-dev \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user and workspace directory for safer builds
 # Security: Running as non-root (UID 1000) prevents privilege escalation

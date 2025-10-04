@@ -20,24 +20,34 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install all dependencies including dev tools, removing build-only packages after
 # Development image includes debugging and troubleshooting tools
+# Package list:
+#   git, ca-certificates: Required for PlatformIO and secure connections
+#   gcc, g++, make: Build-only tools (removed after install)
+#   libffi-dev, libssl-dev: Build-only libraries (removed after install)
+#   vim, less, htop: Development tools for debugging and monitoring
+# Python packages:
+#   setuptools>=70.0.0: Security patch CVE-2024-6345
+#   platformio==6.1.13: Pinned for stability
+#   twine: Package publishing tool
+#   starlette>=0.40.0: Security patch CVE-2024-47874
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \                           # Required: PlatformIO package management
-    ca-certificates \               # Required: SSL/TLS for secure connections
-    gcc \                          # Build-only: C compiler for installation
-    g++ \                          # Build-only: C++ compiler for extensions
-    make \                         # Build-only: Build automation
-    libffi-dev \                   # Build-only: FFI library headers
-    libssl-dev \                   # Build-only: OpenSSL headers
-    vim \                          # Dev tool: Text editor for quick file edits
-    less \                         # Dev tool: Pager for log viewing
-    htop \                         # Dev tool: System monitoring and diagnostics
+    git \
+    ca-certificates \
+    gcc \
+    g++ \
+    make \
+    libffi-dev \
+    libssl-dev \
+    vim \
+    less \
+    htop \
     && pip3 install --no-cache-dir -U pip \
-    && pip3 install --no-cache-dir -U "setuptools>=70.0.0" \  # Security: CVE-2024-6345
-    && pip3 install --no-cache-dir "platformio==6.1.13" twine \  # twine: Package publishing
-    && pip3 install --no-cache-dir -U "starlette>=0.40.0" \   # Security: CVE-2024-47874
-    && apt-get remove -y gcc g++ make libffi-dev libssl-dev \  # Remove: Build-only tools
-    && apt-get autoremove -y \      # Cleanup: Unused dependencies
-    && rm -rf /var/lib/apt/lists/*  # Cleanup: Package lists
+    && pip3 install --no-cache-dir -U "setuptools>=70.0.0" \
+    && pip3 install --no-cache-dir "platformio==6.1.13" twine \
+    && pip3 install --no-cache-dir -U "starlette>=0.40.0" \
+    && apt-get remove -y gcc g++ make libffi-dev libssl-dev \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user and workspace directory for safer builds
 # Security: Non-root execution (UID 1000) for development workflows
