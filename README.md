@@ -13,7 +13,11 @@ Pre-built PlatformIO builder images for the Alteriom project (ESP32 / ESP32-C3 /
 
 This repository contains optimized Dockerfiles and helper scripts to build and publish minimal PlatformIO images for ESP32/ESP32-C3/ESP8266 firmware builds. The images are optimized for size while maintaining full functionality.
 
-**Status**: Docker tag generation issue has been fixed ✅
+> **📦 Image Availability Status**
+> 
+> **For Users:** Images are publicly available at `ghcr.io/alteriom/alteriom-docker-images/builder:latest`
+> 
+> **For Administrators:** If images are not yet available, see the [Publishing Images](#-for-administrators-publishing-images) section below for initial setup instructions.
 
 ## Version Tracking
 
@@ -28,46 +32,79 @@ The repository uses an automated badge system to show current version informatio
 
 Development images are tagged with both `:latest` and versioned tags (e.g., `:1.6.1-dev-build.N`) to provide flexibility in CI/CD pipelines.
 
-## Contents
+## 🚀 Quick Start for Users
+
+### Install Docker and Pull the Image
+
+1. **Install Docker** on your PC ([Installation guide](docs/guides/USER_INSTALLATION_GUIDE.md#step-1-install-docker))
+2. **Pull the production builder image:**
+
+```bash
+docker pull ghcr.io/alteriom/alteriom-docker-images/builder:latest
+```
+
+3. **Build your ESP firmware:**
+
+```bash
+# Navigate to your PlatformIO project directory
+cd /path/to/your/project
+
+# Build for ESP32
+docker run --rm -v ${PWD}:/workspace ghcr.io/alteriom/alteriom-docker-images/builder:latest pio run -e esp32dev
+
+# Or for ESP8266
+docker run --rm -v ${PWD}:/workspace ghcr.io/alteriom/alteriom-docker-images/builder:latest pio run -e nodemcuv2
+```
+
+**📖 Complete Installation Guide:** See [docs/guides/USER_INSTALLATION_GUIDE.md](docs/guides/USER_INSTALLATION_GUIDE.md) for detailed instructions, troubleshooting, and platform-specific guidance.
+
+**Note:** Replace `${PWD}` with `%cd%` on Windows Command Prompt, or use `${PWD}` in PowerShell.
+
+## 📦 Contents
+
 - production/Dockerfile  — optimized minimal builder image with PlatformIO (ESP platforms installed at runtime)
 - development/Dockerfile — development image with extra tools and debugging utilities  
 - scripts/build-images.sh — build and push helper script
 - scripts/verify-images.sh — verify published images are available and working
+- **docs/guides/USER_INSTALLATION_GUIDE.md** — **complete user installation and usage guide**
 - docs/guides/OPTIMIZATION_GUIDE.md — detailed guide on image size optimizations
 - docs/guides/FIREWALL_CONFIGURATION.md — network access requirements and firewall allowlist
 
-Quick start
+## 🔧 For Administrators: Publishing Images
 
-Pull the recommended builder image (replace `<your_user>` with the image owner):
+### Initial Setup Required
 
-```powershell
-docker pull ghcr.io/<your_user>/alteriom-docker-images/builder:latest
-```
+Before users can access the images, you need to:
 
-Build firmware using the image:
+1. **Trigger the first build** (one-time setup):
+   - Go to: https://github.com/Alteriom/alteriom-docker-images/actions
+   - Click "Build and Publish Docker Images" workflow
+   - Click "Run workflow" → Select `main` branch → Click "Run workflow"
+   - Wait 15-30 minutes for build completion
 
-```powershell
-# mount your repository into /workspace and run PlatformIO inside the image
-docker run --rm -v ${PWD}:/workspace ghcr.io/<your_user>/alteriom-docker-images/builder:latest pio run -e diag-esp32-c3
-```
+2. **Make packages public** (one-time setup):
+   - Visit: https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fbuilder
+   - Click "Package settings" → Scroll to "Danger Zone"
+   - Click "Change visibility" → Select "Public" → Confirm
+   - Repeat for the `dev` package
 
-**Verify images are ready:**
+3. **Verify images are accessible:**
+   ```bash
+   # Check if images are published and working
+   ./scripts/verify-images.sh
+   
+   # Test ESP platform builds
+   ./scripts/test-esp-builds.sh
+   ```
 
-```bash
-# Check if images are published and working
-./scripts/verify-images.sh
+### Automated Builds
 
-# Test ESP platform builds with Docker images
-./scripts/test-esp-builds.sh
-```
+After setup, builds run automatically:
+- **Daily** at 02:00 UTC (development image)
+- **On PR merge** to main (both images)
+- **Manual** via workflow dispatch
 
-Build & publish (admin, one-time - run in an unrestricted network environment)
-
-```powershell
-# from the cloned Alteriom repo
-# set GITHUB_TOKEN and DOCKER_REPOSITORY environment variables
-./scripts/build-images.sh push
-```
+See [docs/guides/USER_INSTALLATION_GUIDE.md](docs/guides/USER_INSTALLATION_GUIDE.md#-for-administrators-publishing-requirements) for complete admin documentation.
 
 ## Image Optimizations
 
