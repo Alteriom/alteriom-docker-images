@@ -56,7 +56,10 @@ docker run --rm -v ${PWD}:/workspace ghcr.io/alteriom/alteriom-docker-images/bui
 docker run --rm -v ${PWD}:/workspace ghcr.io/alteriom/alteriom-docker-images/builder:latest pio run -e nodemcuv2
 ```
 
-**📖 Complete Installation Guide:** See [docs/guides/USER_INSTALLATION_GUIDE.md](docs/guides/USER_INSTALLATION_GUIDE.md) for detailed instructions, troubleshooting, and platform-specific guidance.
+**📖 Documentation:**
+- **[Quick Reference Card](docs/QUICK_REFERENCE.md)** - Essential commands, print and keep handy! 📄
+- **[User Installation Guide](docs/guides/USER_INSTALLATION_GUIDE.md)** - Complete instructions and troubleshooting
+- **[FAQ](docs/FAQ.md)** - Common questions and answers
 
 **Note:** Replace `${PWD}` with `%cd%` on Windows Command Prompt, or use `${PWD}` in PowerShell.
 
