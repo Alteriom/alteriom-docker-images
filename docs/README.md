@@ -5,6 +5,9 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 ## Quick Start
 
 - [Main README](../README.md) - Getting started and basic usage
+- **[Quick Reference Card](QUICK_REFERENCE.md) - Essential commands at a glance** 📄
+- **[User Installation Guide](guides/USER_INSTALLATION_GUIDE.md) - How to install and use the Docker images** ⭐
+- **[FAQ](FAQ.md) - Frequently Asked Questions** ⭐
 - [Contributing Guidelines](../CONTRIBUTING.md) - How to contribute to the project
 
 ## Documentation Sections
@@ -27,6 +30,7 @@ Welcome to the comprehensive documentation for the Alteriom Docker Images projec
 
 ### 📖 Guides
 
+- **[User Installation Guide](guides/USER_INSTALLATION_GUIDE.md) - Complete guide for installing and using Docker images** ⭐
 - [Optimization Guide](guides/OPTIMIZATION_GUIDE.md) - Performance and size optimization
 - [Firewall Configuration](guides/FIREWALL_CONFIGURATION.md) - Network access requirements
 - [Service Implementation Guide](guides/SERVICE_IMPLEMENTATION_GUIDE.md) - Service setup
