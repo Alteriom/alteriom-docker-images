@@ -117,6 +117,12 @@ pio-dev
 
 ## ⚠️ Common Issues
 
+### "denied: denied" or "access denied" when pulling
+**Error:** `Error response from daemon: denied: denied`  
+**Cause:** Images exist but package visibility is not set to "Public"  
+**Solution:** Administrator needs to change package visibility to Public in GitHub settings  
+**Details:** [User Installation Guide - Publishing](guides/USER_INSTALLATION_GUIDE.md#-for-administrators-publishing-requirements) or [FAQ - Access Denied](FAQ.md#q-i-get-denied-denied-or-access-denied-error-when-pulling-whats-wrong)
+
 ### "manifest unknown" or "not found"
 **Cause:** Images not published yet  
 **Solution:** Administrator needs to trigger build and make packages public  
