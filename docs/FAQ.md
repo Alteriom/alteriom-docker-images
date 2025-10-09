@@ -92,6 +92,12 @@ Total: Plan for about 3-4 GB of free disk space.
    ```
    This should now work without authentication.
 
+3. **Use the verification script (recommended):**
+   ```bash
+   ./scripts/check-package-visibility.sh
+   ```
+   This script automatically checks if both packages are public and working correctly.
+
 **For users:** If you encounter this error, contact your repository administrator to make the packages public. See the [Publishing Requirements](guides/USER_INSTALLATION_GUIDE.md#-for-administrators-publishing-requirements) section for complete details.
 
 ### Q: How do I know if the images are available?

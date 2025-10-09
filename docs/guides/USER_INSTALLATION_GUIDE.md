@@ -241,6 +241,12 @@ Exit the container by typing `exit`.
    ```
    This should now work without requiring authentication.
 
+4. **Use the verification script (administrators):**
+   ```bash
+   ./scripts/check-package-visibility.sh
+   ```
+   This script provides comprehensive checks and confirms both packages are public and functional.
+
 **For users:** If you encounter this error, contact your repository administrator to make the packages public. See the [Publishing Requirements](#-for-administrators-publishing-requirements) section below for complete details.
 
 ### Image Not Found
