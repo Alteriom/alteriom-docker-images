@@ -67,6 +67,39 @@ Total: Plan for about 3-4 GB of free disk space.
 **Solution for administrators:**
 - Follow the [Publishing Requirements](guides/USER_INSTALLATION_GUIDE.md#-for-administrators-publishing-requirements) section
 
+### Q: I get "denied: denied" or "access denied" error when pulling. What's wrong?
+
+**Error message:** `Error response from daemon: Head "https://ghcr.io/v2/alteriom/alteriom-docker-images/builder/manifests/latest": denied: denied`
+
+**A:** This specific error means the Docker image package **exists** but is **not public**. The package visibility needs to be changed to "Public" in GitHub Container Registry settings.
+
+**This is different from "manifest unknown"** - if you get "denied: denied", the images have been built but aren't accessible to the public yet.
+
+**Solution for administrators:**
+
+1. **Make the package public:**
+   - Visit: https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fbuilder
+   - Click "Package settings" (right side)
+   - Scroll to "Danger Zone"
+   - Click "Change visibility" → Select "Public"
+   - Type the package name to confirm
+   - Click "I understand, change package visibility"
+   - **Repeat for the `dev` package:** https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fdev
+
+2. **Verify public access:**
+   ```bash
+   docker pull ghcr.io/alteriom/alteriom-docker-images/builder:latest
+   ```
+   This should now work without authentication.
+
+3. **Use the verification script (recommended):**
+   ```bash
+   ./scripts/check-package-visibility.sh
+   ```
+   This script automatically checks if both packages are public and working correctly.
+
+**For users:** If you encounter this error, contact your repository administrator to make the packages public. See the [Publishing Requirements](guides/USER_INSTALLATION_GUIDE.md#-for-administrators-publishing-requirements) section for complete details.
+
 ### Q: How do I know if the images are available?
 
 **A:** Check the package registry:

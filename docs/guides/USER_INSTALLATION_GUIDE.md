@@ -214,9 +214,46 @@ Exit the container by typing `exit`.
 
 ## 🔧 Troubleshooting
 
+### Access Denied When Pulling Image
+
+**Error:** `Error response from daemon: Head "https://ghcr.io/v2/alteriom/alteriom-docker-images/builder/manifests/latest": denied: denied`
+
+**What this means:** The Docker image package exists but is **not publicly accessible**. This is different from "manifest unknown" - the images have been built but the package visibility is set to "Private" instead of "Public".
+
+**Solution (for administrators):**
+
+1. **Change package visibility to Public:**
+   - Visit the builder package: https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fbuilder
+   - Click "Package settings" on the right side
+   - Scroll down to "Danger Zone"
+   - Click "Change visibility"
+   - Select "Public"
+   - Type the package name to confirm: `alteriom-docker-images/builder`
+   - Click "I understand, change package visibility"
+
+2. **Repeat for development image:**
+   - Visit: https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fdev
+   - Follow the same steps to change visibility to "Public"
+
+3. **Verify public access:**
+   ```bash
+   docker pull ghcr.io/alteriom/alteriom-docker-images/builder:latest
+   ```
+   This should now work without requiring authentication.
+
+4. **Use the verification script (administrators):**
+   ```bash
+   ./scripts/check-package-visibility.sh
+   ```
+   This script provides comprehensive checks and confirms both packages are public and functional.
+
+**For users:** If you encounter this error, contact your repository administrator to make the packages public. See the [Publishing Requirements](#-for-administrators-publishing-requirements) section below for complete details.
+
 ### Image Not Found
 
 **Error:** `Error response from daemon: manifest unknown`
+
+**What this means:** The Docker images haven't been published yet, or the build is still in progress.
 
 **Solutions:**
 

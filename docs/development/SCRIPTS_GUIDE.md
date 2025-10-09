@@ -8,6 +8,7 @@ Comprehensive guide to all scripts in the alteriom-docker-images repository.
 |--------|---------|------|-----------|
 | [status-check.sh](#status-checksh) | Quick health check | 10s | As needed |
 | [verify-images.sh](#verify-imagessh) | Verify published images | 2s | After builds |
+| [check-package-visibility.sh](#check-package-visibilitysh) | Check package public access | 30s | Troubleshooting |
 | [test-esp-builds.sh](#test-esp-buildssh) | Test ESP platform builds | 2.5min | Before release |
 | [build-images.sh](#build-imagessh) | Build and push images | 15-45min | Admin only |
 | [validate-workflows.sh](#validate-workflowssh) | Validate CI/CD config | 5s | Before commits |
@@ -123,6 +124,56 @@ export DOCKER_REPOSITORY=ghcr.io/Alteriom/alteriom-docker-images
 - Latest build status
 
 **Output**: Detailed status report with "ALL SYSTEMS GO!" or warnings
+
+### check-package-visibility.sh
+
+**Purpose**: Verify Docker packages are publicly accessible without authentication
+
+**Usage**:
+```bash
+./scripts/check-package-visibility.sh
+```
+
+**Time**: ~30 seconds (includes pulling images)
+
+**Validates**:
+- Package metadata accessibility
+- Image pull without authentication (critical for public access)
+- Image functionality (PlatformIO version check)
+- Both builder and dev packages
+
+**Use Cases**:
+- **Troubleshooting "denied: denied" errors** - Primary use case
+- Verify packages are public after changing visibility settings
+- Confirm public access before announcing releases
+- Automated testing of package accessibility
+
+**Output**: 
+- Color-coded status for each check
+- Clear success/failure indicators
+- Troubleshooting steps if access is denied
+- Direct links to package settings pages
+
+**Exit Codes**:
+- 0 - All checks passed (packages are public and working)
+- 1 - Some checks failed (access denied or images not functional)
+
+**Example Output**:
+```
+✅ ALL CHECKS PASSED!
+
+Both images are:
+  • Publicly accessible (no authentication required)
+  • Downloadable via docker pull
+  • Functional and working correctly
+
+The packages are properly configured as PUBLIC! 🎉
+```
+
+**Troubleshooting**: If checks fail, the script provides:
+- Direct links to package settings pages
+- Step-by-step instructions to change visibility
+- Specific error indicators (pull failure vs functionality issue)
 
 ### test-esp-builds.sh
 
