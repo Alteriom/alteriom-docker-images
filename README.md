@@ -1,7 +1,7 @@
 # alteriom-docker-images
 
 [![Latest Release](https://img.shields.io/github/v/release/Alteriom/alteriom-docker-images?label=Production)](https://github.com/Alteriom/alteriom-docker-images/releases/latest)
-[![Development Version](https://img.shields.io/badge/Development-1.8.9%2B%20(build%2021)-orange?logo=docker)](https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fdev)
+[![Development Version](https://img.shields.io/badge/Development-1.8.9%2B%20(build%2022)-orange?logo=docker)](https://github.com/Alteriom/alteriom-docker-images/pkgs/container/alteriom-docker-images%2Fdev)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/Alteriom/alteriom-docker-images/build-and-publish.yml?branch=main&label=Build%20Status)](https://github.com/Alteriom/alteriom-docker-images/actions/workflows/build-and-publish.yml)
 [![License](https://img.shields.io/github/license/Alteriom/alteriom-docker-images)](LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Alteriom/alteriom-docker-images)](https://github.com/Alteriom/alteriom-docker-images/commits/main)
