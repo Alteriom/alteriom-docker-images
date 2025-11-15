@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **CRITICAL: SCons UnboundLocalError with Python 3.11** (Issue #[number])
+  - Upgraded PlatformIO from 6.1.13 to 6.1.16
+  - Resolves: `UnboundLocalError: cannot access local variable 'node' where it is not associated with a value`
+  - Root cause: SCons 4.5.2 (bundled with PlatformIO 6.1.13) has variable scoping bug with Python 3.11
+  - Solution: PlatformIO 6.1.16 includes SCons 4.8.1 with Python 3.11/3.13 compatibility fixes
+  - Affects: ESP32/ESP8266 firmware compilation, specifically Arduino framework builds
+  - Impact: Builds that previously failed at `esp32-hal-tinyusb.c.o` now complete successfully
+
 ### Added
 - **Persistent volume support** with automatic permission fixing for PlatformIO cache
 - `docker-entrypoint.sh` script that handles volume ownership and toolchain permissions
@@ -24,8 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Builder user shell changed from `/bin/false` to `/bin/bash` for better interactive use
 - Healthcheck updated to use `gosu` for proper user context
 - Enhanced compliance with Alteriom organization standards
+- **PlatformIO upgraded from 6.1.13 to 6.1.16** for improved stability and Python 3.11 support
 
-### Fixed
+### Fixed (Previous)
 - **Permission denied errors** when using persistent volumes for PlatformIO cache
 - **Toolchain binary permission issues** (`xtensa-esp32-elf-g++: Permission denied`)
 - **SCons build state corruption** when using mounted volumes
