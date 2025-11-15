@@ -26,6 +26,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #   ca-certificates: Required for SSL/TLS support for secure package downloads
 #   gcc, g++, make: Build-only tools for compilation (removed after install)
 #   libffi-dev, libssl-dev: Build-only libraries (removed after install)
+#   gosu: Lightweight tool for dropping privileges (kept for entrypoint)
 # Python packages:
 #   setuptools>=70.0.0: Pinned for security patch CVE-2024-6345
 #   platformio==6.1.13: Pinned for stability and reproducibility
@@ -38,6 +39,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     make \
     libffi-dev \
     libssl-dev \
+    gosu \
     && pip3 install --no-cache-dir -U pip \
     && pip3 install --no-cache-dir -U "setuptools>=70.0.0" \
     && pip3 install --no-cache-dir "platformio==6.1.13" \
@@ -48,22 +50,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create non-root user and workspace directory for safer builds
 # Security: Running as non-root (UID 1000) prevents privilege escalation
-RUN useradd --create-home --shell /bin/false builder \
+# Note: Container starts as root but entrypoint drops to builder user after fixing permissions
+RUN useradd --create-home --shell /bin/bash builder \
     && mkdir -p /workspace \
     && chown -R builder:builder /workspace
 
-# Switch to non-root user for all subsequent operations
-USER builder
+# Copy entrypoint script that handles permission fixes for persistent volumes
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Set working directory for build operations
 WORKDIR /workspace
 
 # Add healthcheck to ensure PlatformIO is responding
 # Enables container orchestration to detect unhealthy containers
+# Note: Healthcheck runs as root, so we use gosu to run as builder
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD /usr/local/bin/platformio --version || exit 1
+    CMD gosu builder /usr/local/bin/platformio --version || exit 1
 
-# Default entrypoint: run platformio if arguments provided
+# Custom entrypoint handles permission fixes, then runs platformio
+# Container starts as root, entrypoint fixes permissions, then drops to builder user
 # Usage: docker run <image> run -e esp32dev
-ENTRYPOINT ["/usr/local/bin/platformio"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh", "/usr/local/bin/platformio"]
 CMD ["--help"]

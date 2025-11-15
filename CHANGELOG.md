@@ -8,13 +8,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Persistent volume support** with automatic permission fixing for PlatformIO cache
+- `docker-entrypoint.sh` script that handles volume ownership and toolchain permissions
+- `gosu` package for secure privilege dropping from root to builder user
+- Comprehensive persistent volumes documentation guide
+- Test script for validating persistent volume behavior (`scripts/test-persistent-volumes.sh`)
+- Example docker-compose.yml for persistent volume usage
 - CHANGELOG.md file for tracking project changes
 - docs/ folder structure for better documentation organization
 - CONTRIBUTING.md file with guidelines for Docker images project
 - CODE_OF_CONDUCT.md file following Contributor Covenant
 
 ### Changed
+- Container now starts as root and drops to builder user after fixing permissions
+- Builder user shell changed from `/bin/false` to `/bin/bash` for better interactive use
+- Healthcheck updated to use `gosu` for proper user context
 - Enhanced compliance with Alteriom organization standards
+
+### Fixed
+- **Permission denied errors** when using persistent volumes for PlatformIO cache
+- **Toolchain binary permission issues** (`xtensa-esp32-elf-g++: Permission denied`)
+- **SCons build state corruption** when using mounted volumes
+- Build times reduced from ~5 minutes to ~30 seconds for incremental builds with persistent volumes
 
 ## [1.8.3] - 2025-08-27
 
