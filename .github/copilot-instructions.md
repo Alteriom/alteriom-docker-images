@@ -21,13 +21,18 @@ alteriom-docker-images/
 │   ├── guides/                            # User guides and tutorials
 │   ├── development/                       # Development documentation
 │   └── migration/                         # Migration and implementation docs
-├── production/Dockerfile                  # Minimal PlatformIO builder
-├── development/Dockerfile                 # Development tools + PlatformIO
+├── production/
+│   ├── Dockerfile                        # Minimal PlatformIO builder
+│   └── docker-entrypoint.sh              # Entrypoint with permission fixes
+├── development/
+│   ├── Dockerfile                        # Development tools + PlatformIO
+│   └── docker-entrypoint.sh              # Entrypoint with permission fixes
 ├── scripts/
 │   ├── build-images.sh                   # Build and push helper (15-45 minutes)
 │   ├── verify-images.sh                  # Comprehensive verification (2 seconds)
 │   ├── status-check.sh                   # Quick status check (10 seconds)
 │   ├── test-esp-builds.sh                # ESP platform testing (2.5 minutes)
+│   ├── test-persistent-volumes.sh        # Persistent volume testing (NEW)
 │   ├── validate-workflows.sh             # Workflow duplication prevention
 │   └── test/                             # Test scripts (moved from root)
 ├── tests/                                # ESP platform test projects
@@ -51,6 +56,8 @@ alteriom-docker-images/
 - **GitHub Actions**: Automated CI/CD with scheduled builds
 - **Python**: 3.11-slim base image, non-root user 'builder' (UID 1000)
 - **Registry**: GitHub Container Registry (ghcr.io/Alteriom/alteriom-docker-images)
+- **Persistent Volumes**: Automatic permission fixing for caching (v1.8.10+)
+- **gosu**: Secure privilege dropping tool for entrypoint script
 
 ## Working Effectively
 
@@ -93,6 +100,12 @@ docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/bui
 
 # Build ESP32-C3 firmware (VALIDATED: Works with current images)
 docker run --rm -v ${PWD}:/workspace ghcr.io/Alteriom/alteriom-docker-images/dev:latest run -e esp32-c3-devkitm-1
+
+# Build with persistent volumes for faster incremental builds (NEW: v1.8.10+)
+docker volume create platformio_cache
+docker run --rm -v ${PWD}:/workspace -v platformio_cache:/home/builder/.platformio \
+  ghcr.io/Alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+# First build: ~5 minutes, subsequent builds: ~30 seconds
 ```
 
 ### Local Building (Admin/Development Only)
@@ -412,6 +425,8 @@ ls -la scripts/
 - **docs/admin/ADMIN_SETUP.md**: Administrator configuration guide  
 - **docs/guides/OPTIMIZATION_GUIDE.md**: Image size optimization strategies
 - **docs/guides/FIREWALL_CONFIGURATION.md**: Network access requirements
+- **docs/guides/PERSISTENT_VOLUMES.md**: Persistent volume usage and troubleshooting (NEW)
+- **docs/examples/docker-compose-persistent.yml**: Example docker-compose configuration (NEW)
 - **tests/README.md**: Testing documentation
 
 ### External References
@@ -430,7 +445,9 @@ ls -la scripts/
 - Status check completes in ~10 seconds and shows "YES, IT WORKED!"
 - Verify images shows "ALL SYSTEMS GO!" or acceptable partial success
 - ESP tests complete in ~2.5 minutes with "All tests passed! ✅"
+- Persistent volume tests pass without permission errors (NEW)
 - Only ONE workflow file exists (critical for cost control)
 - Docker images respond with "PlatformIO Core, version 6.1.13"
+- Containers run as 'builder' user after entrypoint drops privileges
 
 *This comprehensive guide is based on validated testing of all commands and processes. Always refer to this document first before seeking additional information.*

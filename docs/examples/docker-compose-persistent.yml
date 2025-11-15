@@ -1,0 +1,74 @@
+# Example docker-compose.yml for using Alteriom Docker images with persistent volumes
+# This configuration demonstrates how to use persistent volumes to speed up builds
+# by caching PlatformIO packages and build artifacts
+
+version: '3.8'
+
+services:
+  # Production builder with persistent cache
+  alteriom-builder:
+    image: ghcr.io/alteriom/alteriom-docker-images/builder:latest
+    container_name: alteriom-builder
+    volumes:
+      # Mount your project directory
+      - .:/workspace
+      # Persistent volume for PlatformIO cache (packages, platforms, etc.)
+      - platformio_cache:/home/builder/.platformio
+    working_dir: /workspace
+    # Optional: Override build number
+    environment:
+      - BUILD_NUMBER_OVERRIDE=1
+    # Run a specific build command
+    command: run -e esp32dev
+
+  # Development builder with persistent cache and interactive shell
+  alteriom-dev:
+    image: ghcr.io/alteriom/alteriom-docker-images/dev:latest
+    container_name: alteriom-dev
+    volumes:
+      # Mount your project directory
+      - .:/workspace
+      # Persistent volume for PlatformIO cache
+      - platformio_cache:/home/builder/.platformio
+    working_dir: /workspace
+    # Keep container running for interactive use
+    entrypoint: ["/usr/local/bin/docker-entrypoint.sh", "/bin/bash"]
+    stdin_open: true
+    tty: true
+
+# Named volumes for persistent storage
+volumes:
+  platformio_cache:
+    driver: local
+    # Optional: specify custom driver options
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /path/to/cache
+
+# Usage examples:
+#
+# 1. Build firmware using production image:
+#    docker-compose up alteriom-builder
+#
+# 2. Start development container in background:
+#    docker-compose up -d alteriom-dev
+#
+# 3. Run commands in development container:
+#    docker-compose exec alteriom-dev platformio run -e esp32dev
+#
+# 4. Open interactive shell in development container:
+#    docker-compose exec alteriom-dev bash
+#
+# 5. Build specific environment:
+#    docker-compose run --rm alteriom-builder run -e esp32-c3-devkitm-1
+#
+# 6. Clean build (but keep cache):
+#    docker-compose run --rm alteriom-builder run -e esp32dev --target clean
+#
+# Benefits of persistent volumes:
+# - First build: ~5 minutes (downloads packages)
+# - Subsequent builds: ~30 seconds (uses cached packages)
+# - No need to re-download PlatformIO platforms on each build
+# - Build artifacts persist between runs
+# - Faster iteration during development

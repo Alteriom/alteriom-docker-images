@@ -52,6 +52,24 @@ Use the test script to run all tests:
 ./scripts/test-esp-builds.sh builder:latest dev:latest
 ```
 
+### Persistent Volumes Testing (NEW)
+Test persistent volume functionality and permission handling:
+
+```bash
+# Test persistent volumes with default image
+./scripts/test-persistent-volumes.sh
+
+# Test with specific image
+./scripts/test-persistent-volumes.sh ghcr.io/Alteriom/alteriom-docker-images/builder:latest
+```
+
+This test validates:
+- Volume creation and mounting
+- Permission fixing on startup
+- Multiple runs with same volume
+- User context (runs as builder)
+- Write access to workspace and cache
+
 ### Manual Testing
 You can also test individual projects manually:
 

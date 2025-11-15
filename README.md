@@ -56,8 +56,26 @@ docker run --rm -v ${PWD}:/workspace ghcr.io/alteriom/alteriom-docker-images/bui
 docker run --rm -v ${PWD}:/workspace ghcr.io/alteriom/alteriom-docker-images/builder:latest pio run -e nodemcuv2
 ```
 
+### ⚡ Speed Up Builds with Persistent Volumes
+
+Use persistent volumes to cache PlatformIO packages and reduce build times from ~5 minutes to ~30 seconds:
+
+```bash
+# Create a volume for caching
+docker volume create platformio_cache
+
+# Build with cache (much faster on subsequent builds!)
+docker run --rm \
+  -v ${PWD}:/workspace \
+  -v platformio_cache:/home/builder/.platformio \
+  ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+```
+
+See [Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md) for complete documentation.
+
 **📖 Documentation:**
 - **[Quick Reference Card](docs/QUICK_REFERENCE.md)** - Essential commands, print and keep handy! 📄
+- **[Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md)** - Speed up builds with caching! ⚡
 - **[User Installation Guide](docs/guides/USER_INSTALLATION_GUIDE.md)** - Complete instructions and troubleshooting
 - **[FAQ](docs/FAQ.md)** - Common questions and answers
 
