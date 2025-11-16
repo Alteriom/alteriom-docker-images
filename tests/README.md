@@ -52,7 +52,7 @@ Use the test script to run all tests:
 ./scripts/test-esp-builds.sh builder:latest dev:latest
 ```
 
-### Persistent Volumes Testing (NEW)
+### Persistent Volumes Testing
 Test persistent volume functionality and permission handling:
 
 ```bash
@@ -69,6 +69,26 @@ This test validates:
 - Multiple runs with same volume
 - User context (runs as builder)
 - Write access to workspace and cache
+
+### Auto-Clean Regression Testing
+Test that builds work correctly with SCons auto-clean functionality:
+
+```bash
+# Test auto-clean with default image
+./scripts/test-auto-clean.sh
+
+# Test with specific image
+./scripts/test-auto-clean.sh ghcr.io/Alteriom/alteriom-docker-images/builder:latest
+```
+
+This regression test validates:
+- First build completes with auto-clean enabled (default behavior)
+- Explicit clean operation works correctly
+- Second build succeeds after cleaning
+- No UnboundLocalError occurs during any phase
+- `--disable-auto-clean` workaround is not needed
+
+**Background:** This test was created to prevent regression of the SCons UnboundLocalError issue that affected PlatformIO 6.1.13 with Python 3.11. The fix (upgrade to PlatformIO 6.1.16 with SCons 4.8.1) is verified by this test.
 
 ### Manual Testing
 You can also test individual projects manually:

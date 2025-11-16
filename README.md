@@ -78,6 +78,7 @@ See [Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md) for complete d
 - **[Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md)** - Speed up builds with caching! ⚡
 - **[User Installation Guide](docs/guides/USER_INSTALLATION_GUIDE.md)** - Complete instructions and troubleshooting
 - **[FAQ](docs/FAQ.md)** - Common questions and answers
+- **[SCons Fix Summary](docs/fixes/SCONS_FIX_SUMMARY.md)** - UnboundLocalError fix (v1.8.10+) ✅
 
 **Note:** Replace `${PWD}` with `%cd%` on Windows Command Prompt, or use `${PWD}` in PowerShell.
 

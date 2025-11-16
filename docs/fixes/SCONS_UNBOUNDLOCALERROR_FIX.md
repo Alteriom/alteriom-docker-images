@@ -87,6 +87,25 @@ docker run --rm -v "${PWD}:/workspace" \
 # Result: Build completes successfully
 ```
 
+### Regression Test
+
+A dedicated regression test has been added to prevent this issue from recurring:
+
+```bash
+# Run auto-clean regression test
+./scripts/test-auto-clean.sh
+
+# Test specific image
+./scripts/test-auto-clean.sh ghcr.io/alteriom/alteriom-docker-images/builder:latest
+```
+
+The test validates:
+1. **First build** with auto-clean enabled (default) - verifies no UnboundLocalError
+2. **Explicit clean** operation - tests `pio run --target clean` works correctly
+3. **Second build** after clean - verifies incremental builds work after cleaning
+
+This ensures that the `--disable-auto-clean` workaround is no longer needed.
+
 ## Impact
 
 ### User Impact
@@ -108,12 +127,43 @@ docker run --rm -v "${PWD}:/workspace" \
 
 ## Prevention
 
+### Regression Testing
+
+To prevent this issue from recurring, a dedicated test script has been created:
+
+**Script:** `scripts/test-auto-clean.sh`
+
+**Purpose:**
+- Validates that auto-clean functionality works correctly
+- Tests the complete build cycle: build → clean → rebuild
+- Ensures no UnboundLocalError during any phase
+- Confirms `--disable-auto-clean` workaround is unnecessary
+
+**CI/CD Integration:**
+The regression test should be run:
+- Before any PlatformIO version upgrade
+- After any Python base image update
+- As part of release validation
+- On scheduled builds (weekly/monthly)
+
+**Usage:**
+```bash
+# Test with production builder image
+./scripts/test-auto-clean.sh
+
+# Test with specific image
+./scripts/test-auto-clean.sh ghcr.io/alteriom/alteriom-docker-images/builder:1.8.10
+
+# Test with multiple images
+./scripts/test-auto-clean.sh builder:latest dev:latest
+```
+
 ### Future Considerations
 
-1. **Testing Matrix:** Add Python 3.11+ to CI/CD testing
+1. **Testing Matrix:** Add Python 3.11+ to CI/CD testing ✓ (via regression test)
 2. **Version Pinning:** Continue pinning PlatformIO versions for stability
 3. **Upgrade Cycle:** Regular PlatformIO updates for bug fixes and compatibility
-4. **Pre-release Testing:** Test new PlatformIO versions before deploying
+4. **Pre-release Testing:** Test new PlatformIO versions before deploying using regression test
 
 ### Monitoring
 
