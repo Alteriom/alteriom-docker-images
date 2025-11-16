@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `gosu` package for secure privilege dropping from root to builder user
 - Comprehensive persistent volumes documentation guide
 - Test script for validating persistent volume behavior (`scripts/test-persistent-volumes.sh`)
+- **Regression test for SCons auto-clean functionality** (`scripts/test-auto-clean.sh`)
+  - Validates that builds complete successfully with auto-clean enabled (default behavior)
+  - Tests build → clean → rebuild cycle to prevent regression of UnboundLocalError
+  - Eliminates need for `--disable-auto-clean` workaround
 - Example docker-compose.yml for persistent volume usage
 - CHANGELOG.md file for tracking project changes
 - docs/ folder structure for better documentation organization
