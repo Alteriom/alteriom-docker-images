@@ -26,6 +26,7 @@ print_success() {
 }
 
 print_warning() {
+    # shellcheck disable=SC2317  # Function is called conditionally
     echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
@@ -53,7 +54,8 @@ test_auto_clean() {
     fi
     
     # Create temporary directory for PlatformIO cache
-    local temp_platformio_dir=$(mktemp -d)
+    local temp_platformio_dir
+    temp_platformio_dir=$(mktemp -d)
     
     print_status "Step 1: First build (with auto-clean enabled by default)"
     print_status "This tests that auto-clean doesn't trigger UnboundLocalError"
