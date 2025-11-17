@@ -183,6 +183,85 @@ extract_pr_sections() {
     echo -e "$sections"
 }
 
+# Function to extract changes from CHANGELOG.md
+extract_changelog_content() {
+    local version="$1"
+    local changelog_file="${2:-CHANGELOG.md}"
+    local changelog_content=""
+    
+    if [ ! -f "$changelog_file" ]; then
+        print_warning "CHANGELOG.md not found"
+        return 1
+    fi
+    
+    print_status "Extracting changes from CHANGELOG.md..."
+    
+    # Try to find the version-specific section or Unreleased section
+    local in_section=false
+    local section_content=""
+    
+    # First, try to find "Unreleased" section
+    while IFS= read -r line; do
+        # Check if we're entering the Unreleased section
+        if echo "$line" | grep -qE "^##\s+\[Unreleased\]"; then
+            in_section=true
+            continue
+        fi
+        
+        # Check if we've hit the next version section (stop extraction)
+        if [ "$in_section" = true ] && echo "$line" | grep -qE "^##\s+\["; then
+            break
+        fi
+        
+        # If we're in the section, capture the content
+        if [ "$in_section" = true ]; then
+            section_content="${section_content}${line}"$'\n'
+        fi
+    done < "$changelog_file"
+    
+    # Parse the extracted content into categories
+    local current_category=""
+    local category_content=""
+    declare -A changelog_categories
+    
+    while IFS= read -r line; do
+        # Skip empty lines at the start
+        if [ -z "$current_category" ] && [ -z "$line" ]; then
+            continue
+        fi
+        
+        # Detect category headers (### Added, ### Fixed, etc.)
+        if echo "$line" | grep -qE "^###\s+"; then
+            # Save previous category if exists
+            if [ -n "$current_category" ] && [ -n "$category_content" ]; then
+                changelog_categories[$current_category]="$category_content"
+            fi
+            
+            # Start new category
+            current_category=$(echo "$line" | sed 's/^###\s*//')
+            category_content=""
+            continue
+        fi
+        
+        # Collect content for current category
+        if [ -n "$current_category" ]; then
+            category_content="${category_content}${line}"$'\n'
+        fi
+    done <<< "$section_content"
+    
+    # Save last category
+    if [ -n "$current_category" ] && [ -n "$category_content" ]; then
+        changelog_categories[$current_category]="$category_content"
+    fi
+    
+    # Return the parsed categories as a special format
+    for category in "${!changelog_categories[@]}"; do
+        echo "CHANGELOG_CATEGORY:${category}"
+        echo "${changelog_categories[$category]}"
+        echo "END_CHANGELOG_CATEGORY"
+    done
+}
+
 # Function to extract and format security scan results
 extract_security_scan_results() {
     local scan_section=""
@@ -376,6 +455,99 @@ generate_release_notes() {
     categories[🧪 Testing]=""
     categories[💰 Cost Optimization]=""
     categories[🔄 Other Changes]=""
+    
+    # Extract and integrate CHANGELOG content
+    print_status "Integrating CHANGELOG.md content..."
+    local changelog_data=$(extract_changelog_content "$version" "CHANGELOG.md" 2>/dev/null)
+    
+    if [ -n "$changelog_data" ]; then
+        print_success "CHANGELOG.md content extracted successfully"
+        
+        # Parse changelog categories and map to our category system
+        local current_cl_category=""
+        local current_cl_content=""
+        
+        while IFS= read -r line; do
+            if [[ "$line" == "CHANGELOG_CATEGORY:"* ]]; then
+                # Save previous category content if exists
+                if [ -n "$current_cl_category" ] && [ -n "$current_cl_content" ]; then
+                    # Map CHANGELOG categories to release note categories
+                    local mapped_category=""
+                    case "$current_cl_category" in
+                        "Added")
+                            mapped_category="🚀 Features"
+                            ;;
+                        "Fixed"|"Fixed (Previous)")
+                            mapped_category="🐛 Bug Fixes"
+                            ;;
+                        "Security")
+                            mapped_category="🔒 Security"
+                            ;;
+                        "Changed"|"Enhanced"|"Improved")
+                            mapped_category="⚡ Performance"
+                            ;;
+                        "Documentation")
+                            mapped_category="📚 Documentation"
+                            ;;
+                        *)
+                            mapped_category="🔄 Other Changes"
+                            ;;
+                    esac
+                    
+                    # Add changelog content to the category
+                    if [ -n "${categories[$mapped_category]}" ]; then
+                        categories[$mapped_category]="${categories[$mapped_category]}\n${current_cl_content}"
+                    else
+                        categories[$mapped_category]="${current_cl_content}"
+                    fi
+                fi
+                
+                # Start new category
+                current_cl_category="${line#CHANGELOG_CATEGORY:}"
+                current_cl_content=""
+            elif [[ "$line" == "END_CHANGELOG_CATEGORY" ]]; then
+                # Save final category content
+                if [ -n "$current_cl_category" ] && [ -n "$current_cl_content" ]; then
+                    local mapped_category=""
+                    case "$current_cl_category" in
+                        "Added")
+                            mapped_category="🚀 Features"
+                            ;;
+                        "Fixed"|"Fixed (Previous)")
+                            mapped_category="🐛 Bug Fixes"
+                            ;;
+                        "Security")
+                            mapped_category="🔒 Security"
+                            ;;
+                        "Changed"|"Enhanced"|"Improved")
+                            mapped_category="⚡ Performance"
+                            ;;
+                        "Documentation")
+                            mapped_category="📚 Documentation"
+                            ;;
+                        *)
+                            mapped_category="🔄 Other Changes"
+                            ;;
+                    esac
+                    
+                    if [ -n "${categories[$mapped_category]}" ]; then
+                        categories[$mapped_category]="${categories[$mapped_category]}\n${current_cl_content}"
+                    else
+                        categories[$mapped_category]="${current_cl_content}"
+                    fi
+                fi
+                current_cl_category=""
+                current_cl_content=""
+            else
+                # Accumulate content for current category
+                if [ -n "$current_cl_category" ]; then
+                    current_cl_content="${current_cl_content}${line}"$'\n'
+                fi
+            fi
+        done <<< "$changelog_data"
+    else
+        print_warning "No CHANGELOG.md content found, using git commit analysis only"
+    fi
     
     # Analyze each commit
     local total_commits=0
