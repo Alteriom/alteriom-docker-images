@@ -173,6 +173,105 @@ git push
 ./scripts/test-esp-builds.sh
 ```
 
+## Automated Release Notes with CHANGELOG Integration
+
+### Overview
+
+Release notes are automatically generated for each version and now include detailed change information from both `CHANGELOG.md` and git commits.
+
+### How It Works
+
+The `scripts/generate-enhanced-release-notes.sh` script:
+
+1. **Extracts CHANGELOG content** - Reads the "Unreleased" section from CHANGELOG.md
+2. **Parses categories** - Identifies Added, Fixed, Changed, Security sections
+3. **Analyzes git commits** - Reviews commits since last release
+4. **Merges information** - Combines CHANGELOG details with commit analysis
+5. **Generates comprehensive notes** - Creates detailed release documentation
+
+### CHANGELOG.md Format
+
+Keep your CHANGELOG.md updated following [Keep a Changelog](https://keepachangelog.com/) format:
+
+```markdown
+## [Unreleased]
+
+### Added
+- New feature with detailed description
+- Another feature with implementation details
+
+### Fixed
+- Bug fix with root cause explanation
+- Another fix with detailed steps
+
+### Changed
+- Performance improvement details
+- Configuration changes with reasoning
+
+### Security
+- Security enhancements with context
+```
+
+### Release Notes Categories
+
+CHANGELOG sections are automatically mapped to release note categories:
+
+| CHANGELOG Section | Release Notes Category |
+|-------------------|----------------------|
+| `Added` | 🚀 Features |
+| `Fixed` | 🐛 Bug Fixes |
+| `Security` | 🔒 Security |
+| `Changed`, `Enhanced`, `Improved` | ⚡ Performance |
+| `Documentation` | 📚 Documentation |
+
+### Benefits
+
+- **Detailed Changes** - Release notes include implementation details from CHANGELOG
+- **Automatic Integration** - No manual copying between CHANGELOG and release notes
+- **Comprehensive Documentation** - Combines structured CHANGELOG with git history
+- **Professional Format** - Emoji categories, links, and formatting for readability
+
+### Example Output
+
+Release notes will include:
+- Detailed feature descriptions with implementation notes
+- Bug fix explanations with root causes and solutions
+- Security enhancement details with impact analysis
+- Performance improvement specifics with measurements
+- Links to commits and pull requests
+
+### For Contributors
+
+1. **Update CHANGELOG.md** when making changes:
+   ```bash
+   # Edit CHANGELOG.md to add your changes under [Unreleased]
+   vim CHANGELOG.md
+   
+   # Include detailed descriptions, not just one-liners
+   # Explain WHY changes were made, not just WHAT changed
+   ```
+
+2. **Use semantic commit messages** for proper categorization:
+   ```bash
+   git commit -m "feat: add persistent volume support with permission fixing"
+   git commit -m "fix: resolve SCons build error with Python 3.11"
+   ```
+
+3. **Review generated release notes** after merge to ensure quality
+
+### Testing Release Notes Locally
+
+```bash
+# Generate release notes for current version
+./scripts/generate-enhanced-release-notes.sh "$(cat VERSION)" "ghcr.io/alteriom/alteriom-docker-images" "test-notes.md"
+
+# Review the generated notes
+cat test-notes.md
+
+# Verify CHANGELOG integration
+grep "Persistent volume" test-notes.md  # Should find detailed descriptions
+```
+
 ## Benefits of Automation
 
 1. **Consistency** - No more manual version management mistakes
@@ -180,6 +279,7 @@ git push
 3. **Efficiency** - Automatic releases with generated release notes
 4. **Standards** - Enforces semantic versioning conventions
 5. **Reliability** - Reduces human error in release process
+6. **Detailed Documentation** - Release notes include comprehensive change details from CHANGELOG
 
 ## Migration Notes
 
