@@ -132,6 +132,35 @@ See complete documentation: [User Installation Guide - Admin Section](guides/USE
 
 ## Usage Questions
 
+### Q: Why do I need --user root for persistent volumes? (v1.8.10+)
+
+**A:** Starting with version 1.8.10, Docker images run as **non-root** (builder user, UID 1000) by default for improved security. This is a **breaking change**.
+
+**When using persistent volumes**, Docker creates volumes with root ownership, causing permission conflicts. The solution:
+
+```bash
+# Add --user root flag when using persistent volumes
+docker run --rm --user root \
+  -v ${PWD}:/workspace \
+  -v platformio_cache:/home/builder/.platformio \
+  ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+```
+
+**How it works:**
+1. Container starts as root (because of `--user root`)
+2. Entrypoint script fixes volume ownership
+3. Entrypoint automatically drops to builder user (UID 1000)
+4. PlatformIO runs as builder user (secure)
+
+**For basic builds without persistent volumes**, no changes needed:
+```bash
+# This works as-is - runs as builder user by default
+docker run --rm -v ${PWD}:/workspace \
+  ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+```
+
+See [Migration Guide](../CHANGELOG.md#migration-from-root-to-non-root-default) for complete details.
+
 ### Q: Which image should I use?
 
 **A:** 
