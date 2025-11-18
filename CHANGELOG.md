@@ -7,62 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_No unreleased changes yet._
+
+## [1.8.11] - 2025-11-18
+
 ### ⚠️ BREAKING CHANGES
 
-- **Containers now run as non-root user by default** (DS002 Security Fix #26)
-  - **What changed**: Added `USER builder` directive to Dockerfiles
-  - **Previous behavior**: Containers ran as root (UID 0) by default
-  - **New behavior**: Containers run as builder user (UID 1000) by default
-  - **Impact**: Users relying on root access must explicitly use `--user root` flag
-  - **Migration**: 
-    - For basic builds (no persistent volumes): No changes needed
-    - For persistent volumes: Add `--user root` flag to your docker run commands
-    - See [Migration Guide](#migration-from-root-to-non-root-default) below
-  - **Why**: Improves security by running containers as non-root, following Docker best practices
-
-### Fixed
-- **CRITICAL: SCons UnboundLocalError with Python 3.11** (Issue #[number])
-  - Upgraded PlatformIO from 6.1.13 to 6.1.16
-  - Resolves: `UnboundLocalError: cannot access local variable 'node' where it is not associated with a value`
-  - Root cause: SCons 4.5.2 (bundled with PlatformIO 6.1.13) has variable scoping bug with Python 3.11
-  - Solution: PlatformIO 6.1.16 includes SCons 4.8.1 with Python 3.11/3.13 compatibility fixes
-  - Affects: ESP32/ESP8266 firmware compilation, specifically Arduino framework builds
-  - Impact: Builds that previously failed at `esp32-hal-tinyusb.c.o` now complete successfully
+- **Containers now run as non-root user by default** (Security: Trivy DS002 compliance, PR #26)
+  - Added `USER builder` directive to both Dockerfiles
+  - Previous: images started as root (UID 0)
+  - New: images start as `builder` (UID 1000); least-privilege by default
+  - Impact: Workflows that rely on implicit root must add `--user root` (only needed when fixing permissions for persistent volumes)
+  - Migration: See dedicated section "Migration from Root to Non-Root Default" below
+  - Rationale: Eliminates HIGH severity DS002 finding; aligns with Docker security best practices
 
 ### Added
-- **Persistent volume support** with automatic permission fixing for PlatformIO cache
-- `docker-entrypoint.sh` script that handles volume ownership and toolchain permissions
-- `gosu` package for secure privilege dropping from root to builder user
-- Comprehensive persistent volumes documentation guide
-- Test script for validating persistent volume behavior (`scripts/test-persistent-volumes.sh`)
-- **Regression test for SCons auto-clean functionality** (`scripts/test-auto-clean.sh`)
-  - Validates that builds complete successfully with auto-clean enabled (default behavior)
-  - Tests build → clean → rebuild cycle to prevent regression of UnboundLocalError
-  - Eliminates need for `--disable-auto-clean` workaround
-- Example docker-compose.yml for persistent volume usage
-- CHANGELOG.md file for tracking project changes
-- docs/ folder structure for better documentation organization
-- CONTRIBUTING.md file with guidelines for Docker images project
-- CODE_OF_CONDUCT.md file following Contributor Covenant
+
+- Persistent volume support with automatic first-run permission fixing
+- Intelligent `docker-entrypoint.sh` handling dual-mode (default non-root, optional root for permission repair)
+- `gosu` for secure privilege dropping after root-based initialization
+- Comprehensive persistent volumes guide & example `docker-compose-persistent.yml`
+- Regression test script for SCons auto-clean (`scripts/test-auto-clean.sh`)
+- Validation script for persistent volumes (`scripts/test-persistent-volumes.sh`)
+- Documentation restructuring and governance artifacts (CONTRIBUTING.md, CODE_OF_CONDUCT.md)
+
 
 ### Changed
-- **Default user changed from root to builder** (UID 1000) for improved security
-  - Containers now start as builder user unless overridden with `--user root`
-  - When run with `--user root`, entrypoint automatically drops to builder after fixing permissions
-- Builder user shell changed from `/bin/false` to `/bin/bash` for better interactive use
-- Healthcheck updated to run as builder user for proper security context
-- Enhanced compliance with Alteriom organization standards and Docker security best practices
-- **PlatformIO upgraded from 6.1.13 to 6.1.16** for improved stability and Python 3.11 support
 
-### Fixed (Previous)
-- **Permission denied errors** when using persistent volumes for PlatformIO cache
-- **Toolchain binary permission issues** (`xtensa-esp32-elf-g++: Permission denied`)
-- **SCons build state corruption** when using mounted volumes
-- Build times reduced from ~5 minutes to ~30 seconds for incremental builds with persistent volumes
+- Default execution user: root → builder (UID 1000)
+- Healthchecks run directly as non-root (removed redundant gosu usage)
+- Builder shell set to `/bin/bash` for improved interactive troubleshooting
+- PlatformIO upgraded: 6.1.13 → 6.1.16 (includes SCons 4.8.1 for Python 3.11/3.13 compatibility)
+- Examples and guides updated to show `--user root` only when persistent volumes are mounted
+
+
+### Fixed
+
+- SCons `UnboundLocalError` with Python 3.11 during ESP builds (resolved via PlatformIO upgrade)
+- Permission denied/toolchain execution issues when using cached PlatformIO directories
+- Volume ownership inconsistencies causing slow or repeated dependency downloads
+- Incremental build performance: first build (~5 min) → subsequent (~30 sec) with persistent volume caching
+
+
+### Security
+
+- Trivy DS002 (missing USER directive) remediated
+- Principle of least privilege enforced by default start as non-root
+- Privilege dropping audited & consistent via `gosu`
+
+
+### Performance
+
+- Caching improvements drastically reduce incremental build time for ESP targets
+- No image size regression (USER directive and entrypoint logic have negligible impact)
+
+
+### Documentation
+
+- Expanded persistent volume usage and troubleshooting
+- Clear migration instructions for root → non-root change
+- Updated examples (Docker CLI, Docker Compose, CI workflow snippets) to reflect new security model
+
+
+### Notes
+
+- Use `--user root` ONLY when mounting persistent volumes requiring first-run ownership fixes; runtime still executes as builder after drop
+- Standard ephemeral builds (no cache volume) require no changes
+
+
 
 ## [1.8.3] - 2025-08-27
 
 ### Added
+
 - Comprehensive security scanning and monitoring infrastructure
 - Enhanced release notes generation system
 - Automated versioning with semantic commit message support
@@ -70,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Security practices implementation guide for reusable workflows
 
 ### Fixed
+
 - Docker tag generation issues
 - Workflow syntax errors and duplicate build prevention
 - Build optimization to reduce unnecessary CI/CD runs
@@ -77,6 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.8.0] - 2025-08-26
 
 ### Added
+
 - Multi-layer security architecture with 20+ enterprise security tools
 - Advanced vulnerability correlation engine
 - Comprehensive security demo and validation scripts
@@ -84,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automated security scanning in CI/CD pipeline
 
 ### Enhanced
+
 - Container security with Trivy and Hadolint integration
 - Parallel security scanning without build time impact
 - Documentation with security best practices guide
@@ -91,12 +111,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.7.0] - 2025-08-25
 
 ### Added
+
 - ESP32-C3 platform support and testing
 - Enhanced ESP platform build testing with CI/CD integration
 - Comprehensive Copilot instructions for AI-assisted development
 - Enhanced release notes generation system
 
 ### Improved
+
 - Testing infrastructure with automated ESP platform validation
 - Documentation with 736+ lines of improvements
 - Development workflow optimization
@@ -104,11 +126,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.6.0] - 2025-08-24
 
 ### Added
+
 - Automated versioning system with semantic commit analysis
 - Development badge system with incremental build numbers
 - Enhanced version tracking and release automation
 
 ### Changed
+
 - Automated VERSION file management
 - GitHub release creation with generated notes
 - Docker image building and publishing automation
@@ -116,33 +140,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.5.1] - 2025-08-23
 
 ### Added
+
 - ESP32-C3 support to test suite and documentation
 - Automated version bumping implementation
 
 ### Fixed
+
 - VERSION file format issues
 - Build automation reliability
 
 ## [1.5.0] - 2025-08-22
 
 ### Added
+
 - Comprehensive ESP platform build testing
 - CI/CD integration for automated testing
 - Enhanced documentation and testing infrastructure
 
 ### Improved
+
 - Docker image optimization and layer caching
 - Build performance and reliability
 
 ## [1.4.0] - 2025-08-21
 
 ### Added
+
 - Production and development Docker images for PlatformIO
 - Multi-platform support (linux/amd64, linux/arm64)
 - ESP32, ESP32-S3, ESP32-C3, and ESP8266 platform support
 - Comprehensive build and verification scripts
 
 ### Features
+
 - Optimized Docker images based on python:3.11-slim
 - Non-root user execution (UID 1000)
 - PlatformIO 6.1.13 (pinned for stability)
@@ -150,6 +180,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automated CI/CD with GitHub Actions
 
 ### Documentation
+
 - README with comprehensive usage instructions
 - ADMIN_SETUP.md for deployment configuration
 - OPTIMIZATION_GUIDE.md for image size optimization
@@ -159,6 +190,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-08-20
 
 ### Added
+
 - Initial project setup
 - Basic Docker image structure
 - PlatformIO integration
@@ -166,6 +198,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Core build scripts and documentation
 
 ### Security
+
 - Initial security policies
 - Container security best practices
 - Vulnerability scanning integration
