@@ -130,14 +130,14 @@ jobs:
           fi
 
       - name: Upload Trivy Comprehensive SARIF
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always() && hashFiles('sarif-results/trivy-comprehensive.sarif') != ''
         with:
           sarif_file: 'sarif-results/trivy-comprehensive.sarif'
           category: 'trivy-comprehensive'
 
       - name: Upload Comprehensive Security SARIF
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always() && hashFiles('sarif-results/comprehensive-security.sarif') != ''
         with:
           sarif_file: 'sarif-results/comprehensive-security.sarif'
@@ -166,7 +166,7 @@ jobs:
           ignore-unfixed: true
 
       - name: Upload Trivy filesystem scan results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-fs-results.sarif'
@@ -182,7 +182,7 @@ jobs:
           severity: 'CRITICAL,HIGH,MEDIUM'
 
       - name: Upload Trivy configuration scan results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-config-results.sarif'
@@ -205,14 +205,14 @@ jobs:
           no-fail: true
 
       - name: Upload production Dockerfile scan results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: hadolint-production.sarif
           category: 'hadolint-production'
 
       - name: Upload development Dockerfile scan results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: hadolint-development.sarif
