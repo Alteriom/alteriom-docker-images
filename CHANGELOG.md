@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### ⚠️ BREAKING CHANGES
+
+- **Containers now run as non-root user by default** (DS002 Security Fix #26)
+  - **What changed**: Added `USER builder` directive to Dockerfiles
+  - **Previous behavior**: Containers ran as root (UID 0) by default
+  - **New behavior**: Containers run as builder user (UID 1000) by default
+  - **Impact**: Users relying on root access must explicitly use `--user root` flag
+  - **Migration**: 
+    - For basic builds (no persistent volumes): No changes needed
+    - For persistent volumes: Add `--user root` flag to your docker run commands
+    - See [Migration Guide](#migration-from-root-to-non-root-default) below
+  - **Why**: Improves security by running containers as non-root, following Docker best practices
+
 ### Fixed
 - **CRITICAL: SCons UnboundLocalError with Python 3.11** (Issue #[number])
   - Upgraded PlatformIO from 6.1.13 to 6.1.16
@@ -33,10 +46,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CODE_OF_CONDUCT.md file following Contributor Covenant
 
 ### Changed
-- Container now starts as root and drops to builder user after fixing permissions
+- **Default user changed from root to builder** (UID 1000) for improved security
+  - Containers now start as builder user unless overridden with `--user root`
+  - When run with `--user root`, entrypoint automatically drops to builder after fixing permissions
 - Builder user shell changed from `/bin/false` to `/bin/bash` for better interactive use
-- Healthcheck updated to use `gosu` for proper user context
-- Enhanced compliance with Alteriom organization standards
+- Healthcheck updated to run as builder user for proper security context
+- Enhanced compliance with Alteriom organization standards and Docker security best practices
 - **PlatformIO upgraded from 6.1.13 to 6.1.16** for improved stability and Python 3.11 support
 
 ### Fixed (Previous)
@@ -154,3 +169,110 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial security policies
 - Container security best practices
 - Vulnerability scanning integration
+
+---
+
+## Migration from Root to Non-Root Default
+
+### Overview
+
+Starting with version 1.8.10+, Docker images run as non-root user (`builder`, UID 1000) by default. This is a **breaking change** that improves security.
+
+### Who Is Affected?
+
+You are affected if you:
+- Use persistent volumes for PlatformIO cache (`-v platformio_cache:/home/builder/.platformio`)
+- Rely on root access within containers
+- Have scripts or automation that assume root user
+
+### Migration Steps
+
+#### Scenario 1: Basic Builds (No Persistent Volumes)
+
+**No changes needed!** Your existing commands will continue to work:
+
+```bash
+# This still works - runs as builder user by default
+docker run --rm -v ${PWD}:/workspace \
+  ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+```
+
+#### Scenario 2: Builds with Persistent Volumes
+
+**Action required:** Add `--user root` flag to your docker run commands:
+
+```bash
+# OLD (before v1.8.10):
+docker run --rm \
+  -v ${PWD}:/workspace \
+  -v platformio_cache:/home/builder/.platformio \
+  ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+
+# NEW (v1.8.10+): Add --user root flag
+docker run --rm --user root \
+  -v ${PWD}:/workspace \
+  -v platformio_cache:/home/builder/.platformio \
+  ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+```
+
+**Why `--user root` is needed:**
+- Persistent volumes need permission fixes on first use
+- Entrypoint script runs as root to fix ownership
+- Then automatically drops to builder user before running PlatformIO
+- This maintains security while handling permissions correctly
+
+#### Scenario 3: Docker Compose
+
+Update your `docker-compose.yml` to add `user: root`:
+
+```yaml
+# OLD (before v1.8.10):
+services:
+  alteriom-builder:
+    image: ghcr.io/alteriom/alteriom-docker-images/builder:latest
+    volumes:
+      - .:/workspace
+      - platformio_cache:/home/builder/.platformio
+
+# NEW (v1.8.10+): Add user: root
+services:
+  alteriom-builder:
+    image: ghcr.io/alteriom/alteriom-docker-images/builder:latest
+    user: root  # Required for persistent volumes
+    volumes:
+      - .:/workspace
+      - platformio_cache:/home/builder/.platformio
+```
+
+#### Scenario 4: CI/CD Pipelines
+
+Update your workflow files:
+
+```yaml
+# OLD:
+- name: Build firmware
+  run: |
+    docker run --rm -v ${{ github.workspace }}:/workspace \
+      -v pio_cache:/home/builder/.platformio \
+      ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+
+# NEW: Add --user root
+- name: Build firmware
+  run: |
+    docker run --rm --user root -v ${{ github.workspace }}:/workspace \
+      -v pio_cache:/home/builder/.platformio \
+      ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+```
+
+### Benefits of This Change
+
+1. **Improved Security**: Running as non-root by default prevents privilege escalation
+2. **Docker Best Practice**: Follows industry-standard security guidelines
+3. **Flexibility**: Can still use root when needed (with `--user root`)
+4. **Automatic Privilege Dropping**: Entrypoint automatically drops to builder after permission fixes
+
+### Need Help?
+
+- See [Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md) for detailed information
+- Check [FAQ](docs/FAQ.md) for common questions
+- Open an issue if you encounter problems: https://github.com/Alteriom/alteriom-docker-images/issues

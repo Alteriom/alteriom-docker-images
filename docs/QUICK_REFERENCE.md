@@ -1,5 +1,7 @@
 # Quick Reference Card - Alteriom Docker Images
 
+> **⚠️ BREAKING CHANGE (v1.8.10+):** Containers now run as **non-root** by default. For persistent volumes, add `--user root`. See [Migration Guide](../CHANGELOG.md#migration-from-root-to-non-root-default).
+
 ## 📦 One-Time Setup
 
 ### 1. Install Docker
@@ -84,6 +86,26 @@ Use `$(pwd)` or `${PWD}`:
 ```bash
 docker run --rm -v $(pwd):/workspace ghcr.io/alteriom/alteriom-docker-images/builder:latest pio run -e esp32dev
 ```
+
+## ⚡ Persistent Volumes (Speed Up Builds)
+
+Cache PlatformIO packages to reduce build times from ~5 minutes to ~30 seconds:
+
+```bash
+# Create a volume (one-time)
+docker volume create platformio_cache
+
+# Build with cache (add --user root for persistent volumes)
+docker run --rm --user root \
+  -v ${PWD}:/workspace \
+  -v platformio_cache:/home/builder/.platformio \
+  ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
+```
+
+**Why `--user root`?**  
+The entrypoint fixes volume permissions as root, then drops to builder user (UID 1000) before running PlatformIO. This maintains security while handling permissions correctly.
+
+**Details:** [Persistent Volumes Guide](guides/PERSISTENT_VOLUMES.md)
 
 ## 📝 Common Aliases (Optional Time-Savers)
 

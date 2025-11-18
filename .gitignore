@@ -33,6 +33,7 @@ node_modules/
 security-scan-results/
 malware-scan-results/
 comprehensive-security-results/
+comprehensive-security-demo-results/
 demo-security-results/
 sarif-results/
 *.sarif

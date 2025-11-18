@@ -1,6 +1,10 @@
 # Example docker-compose.yml for using Alteriom Docker images with persistent volumes
 # This configuration demonstrates how to use persistent volumes to speed up builds
 # by caching PlatformIO packages and build artifacts
+#
+# IMPORTANT (v1.8.10+): Images now run as non-root by default for security.
+# When using persistent volumes, you MUST specify 'user: root' for permission fixing.
+# The entrypoint automatically drops to builder user (UID 1000) after fixing permissions.
 
 version: '3.8'
 
@@ -9,7 +13,8 @@ services:
   alteriom-builder:
     image: ghcr.io/alteriom/alteriom-docker-images/builder:latest
     container_name: alteriom-builder
-    # Run as root to fix persistent volume permissions
+    # REQUIRED: Run as root to fix persistent volume permissions (v1.8.10+)
+    # The entrypoint will automatically drop to builder user after fixing ownership
     user: root
     volumes:
       # Mount your project directory
@@ -27,7 +32,8 @@ services:
   alteriom-dev:
     image: ghcr.io/alteriom/alteriom-docker-images/dev:latest
     container_name: alteriom-dev
-    # Run as root to fix persistent volume permissions
+    # REQUIRED: Run as root to fix persistent volume permissions (v1.8.10+)
+    # The entrypoint will automatically drop to builder user after fixing ownership
     user: root
     volumes:
       # Mount your project directory

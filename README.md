@@ -34,6 +34,8 @@ Development images are tagged with both `:latest` and versioned tags (e.g., `:1.
 
 ## 🚀 Quick Start for Users
 
+> **⚠️ BREAKING CHANGE (v1.8.10+):** Containers now run as **non-root user** by default for improved security. If you use persistent volumes, you must add `--user root` to your docker run commands. See [Migration Guide](CHANGELOG.md#migration-from-root-to-non-root-default) for details.
+
 ### Install Docker and Pull the Image
 
 1. **Install Docker** on your PC ([Installation guide](docs/guides/USER_INSTALLATION_GUIDE.md#step-1-install-docker))
@@ -65,11 +67,14 @@ Use persistent volumes to cache PlatformIO packages and reduce build times from 
 docker volume create platformio_cache
 
 # Build with cache (much faster on subsequent builds!)
-docker run --rm \
+# IMPORTANT: Use --user root when using persistent volumes for automatic permission fixing
+docker run --rm --user root \
   -v ${PWD}:/workspace \
   -v platformio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 ```
+
+**Why `--user root`?** Persistent volumes need ownership fixes on first use. The entrypoint script runs as root to fix permissions, then automatically drops to the builder user (UID 1000) before running PlatformIO. This maintains security while handling permissions correctly.
 
 See [Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md) for complete documentation.
 

@@ -111,11 +111,12 @@ docker pull ghcr.io/Alteriom/alteriom-docker-images/builder:1.6.1
 docker run --rm --read-only -v ${PWD}:/workspace \
   ghcr.io/Alteriom/alteriom-docker-images/builder:latest pio run
 
-# Use non-root user (already configured in images)
-docker run --rm --user 1000:1000 -v ${PWD}:/workspace \
+# Images run as non-root by default (v1.8.10+)
+# No need to specify --user, container defaults to builder user (UID 1000)
+docker run --rm -v ${PWD}:/workspace \
   ghcr.io/Alteriom/alteriom-docker-images/builder:latest pio --version
 
-# Limit container capabilities
+# Limit container capabilities for additional security
 docker run --rm --cap-drop=ALL -v ${PWD}:/workspace \
   ghcr.io/Alteriom/alteriom-docker-images/builder:latest pio run -e esp32dev
 ```
