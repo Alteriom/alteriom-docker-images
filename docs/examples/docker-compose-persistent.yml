@@ -9,6 +9,8 @@ services:
   alteriom-builder:
     image: ghcr.io/alteriom/alteriom-docker-images/builder:latest
     container_name: alteriom-builder
+    # Run as root to fix persistent volume permissions
+    user: root
     volumes:
       # Mount your project directory
       - .:/workspace
@@ -25,6 +27,8 @@ services:
   alteriom-dev:
     image: ghcr.io/alteriom/alteriom-docker-images/dev:latest
     container_name: alteriom-dev
+    # Run as root to fix persistent volume permissions
+    user: root
     volumes:
       # Mount your project directory
       - .:/workspace

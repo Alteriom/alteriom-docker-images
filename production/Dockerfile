@@ -64,14 +64,20 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 # Set working directory for build operations
 WORKDIR /workspace
 
+# Set default user to non-root for security (satisfies DS002)
+# Note: If persistent volumes need permission fixes, run with --user root
+# The entrypoint script will detect root and drop privileges after fixing permissions
+USER builder
+
 # Add healthcheck to ensure PlatformIO is responding
 # Enables container orchestration to detect unhealthy containers
-# Note: Healthcheck runs as root, so we use gosu to run as builder
+# Runs as builder user (set above) for proper security
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD gosu builder /usr/local/bin/platformio --version || exit 1
+    CMD /usr/local/bin/platformio --version || exit 1
 
 # Custom entrypoint handles permission fixes, then runs platformio
-# Container starts as root, entrypoint fixes permissions, then drops to builder user
+# Default: Container runs as builder user (non-root)
+# If persistent volumes need permission fixes, run with: docker run --user root ...
 # Usage: docker run <image> run -e esp32dev
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh", "/usr/local/bin/platformio"]
 CMD ["--help"]

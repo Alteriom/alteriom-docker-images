@@ -44,7 +44,8 @@ This feature is available in:
 docker volume create platformio_cache
 
 # Run builds with persistent cache
-docker run --rm \
+# Note: Add --user root to fix permissions on first run with persistent volumes
+docker run --rm --user root \
   -v ${PWD}:/workspace \
   -v platformio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
@@ -92,18 +93,29 @@ When using Docker volumes mounted at `/home/builder/.platformio`, permission con
 
 ### The Solution
 
-The Docker images now include an intelligent entrypoint script (`docker-entrypoint.sh`) that:
+The Docker images now include an intelligent entrypoint script (`docker-entrypoint.sh`) that handles two scenarios:
 
-1. **Starts as root** (temporarily) to fix permissions
+**Default behavior (non-root):**
+1. **Starts as builder user** (UID 1000) - Secure by default
+2. **Runs PlatformIO directly** - No privilege changes needed
+3. **Works for most use cases** - No persistent volumes or fresh volumes
+
+**With `--user root` option (for persistent volumes):**
+1. **Starts as root** (when explicitly specified with `--user root`)
 2. **Fixes volume ownership** on `/home/builder/.platformio` if it exists
 3. **Ensures toolchain executables** have proper permissions
-4. **Drops to builder user** before running PlatformIO
+4. **Drops to builder user** using gosu before running PlatformIO
 
 ### How It Works
 
 ```bash
-# Entrypoint flow:
-1. Container starts as root
+# Default entrypoint flow (non-root):
+1. Container starts as builder user (USER directive in Dockerfile)
+2. Script detects non-root execution
+3. Executes PlatformIO command directly as builder user
+
+# With --user root for persistent volumes:
+1. Container starts as root (overridden with --user root)
 2. Script checks if PlatformIO directory exists
 3. If yes, fixes ownership: chown -R builder:builder /home/builder/.platformio
 4. Fixes toolchain binary permissions (chmod +x)
@@ -112,9 +124,9 @@ The Docker images now include an intelligent entrypoint script (`docker-entrypoi
 ```
 
 This approach:
-- ✅ Maintains security (runs as non-root after setup)
-- ✅ Fixes permission issues automatically
-- ✅ Is transparent to users
+- ✅ Secure by default (runs as non-root)
+- ✅ Fixes permission issues automatically when needed
+- ✅ Flexible for different use cases
 - ✅ Maintains backward compatibility
 
 ## Usage Examples
@@ -123,13 +135,15 @@ This approach:
 
 ```bash
 # First build (downloads packages, ~5 minutes)
-docker run --rm \
+# Use --user root to fix volume permissions
+docker run --rm --user root \
   -v ${PWD}:/workspace \
   -v platformio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 
 # Second build (uses cache, ~30 seconds)
-docker run --rm \
+# Still use --user root with persistent volumes
+docker run --rm --user root \
   -v ${PWD}:/workspace \
   -v platformio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
@@ -141,16 +155,16 @@ docker run --rm \
 # Create a volume
 docker volume create pio_cache
 
-# Build for ESP32
-docker run --rm -v ${PWD}:/workspace -v pio_cache:/home/builder/.platformio \
+# Build for ESP32 (use --user root with persistent volumes)
+docker run --rm --user root -v ${PWD}:/workspace -v pio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
 
 # Build for ESP32-C3 (reuses ESP32 packages where possible)
-docker run --rm -v ${PWD}:/workspace -v pio_cache:/home/builder/.platformio \
+docker run --rm --user root -v ${PWD}:/workspace -v pio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32-c3-devkitm-1
 
 # Build for ESP8266 (reuses shared dependencies)
-docker run --rm -v ${PWD}:/workspace -v pio_cache:/home/builder/.platformio \
+docker run --rm --user root -v ${PWD}:/workspace -v pio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e nodemcuv2
 ```
 
@@ -180,7 +194,7 @@ docker-compose down
 - name: Build firmware with cache
   run: |
     docker volume create pio_cache || true
-    docker run --rm \
+    docker run --rm --user root \
       -v ${{ github.workspace }}:/workspace \
       -v pio_cache:/home/builder/.platformio \
       ghcr.io/alteriom/alteriom-docker-images/builder:latest \
@@ -194,7 +208,8 @@ docker-compose down
 docker volume create platformio_cache
 
 # Build with cache (Windows PowerShell)
-docker run --rm `
+# Note: Use --user root with persistent volumes
+docker run --rm --user root `
   -v "${PWD}:/workspace" `
   -v platformio_cache:/home/builder/.platformio `
   ghcr.io/alteriom/alteriom-docker-images/builder:latest run -e esp32dev
@@ -223,9 +238,10 @@ The entrypoint script should fix this automatically. If you still see this error
    docker volume create platformio_cache
    ```
 
-3. Check that the container starts as root and drops to builder user:
+3. Check that the container runs with proper permissions:
    ```bash
-   docker run --rm -v platformio_cache:/home/builder/.platformio \
+   # With --user root, the entrypoint drops to builder
+   docker run --rm --user root -v platformio_cache:/home/builder/.platformio \
      ghcr.io/alteriom/alteriom-docker-images/builder:latest sh -c "whoami"
    # Should output: builder
    ```
@@ -244,7 +260,7 @@ This is fixed automatically by the entrypoint script. If you still see this:
 1. Ensure you're using the updated image
 2. Clear the PlatformIO cache:
    ```bash
-   docker run --rm -v platformio_cache:/home/builder/.platformio \
+   docker run --rm --user root -v platformio_cache:/home/builder/.platformio \
      ghcr.io/alteriom/alteriom-docker-images/builder:latest \
      system prune
    ```
@@ -265,7 +281,7 @@ This is fixed automatically by the entrypoint script. If you still see this:
 **Solution:**
 Clean the build artifacts:
 ```bash
-docker run --rm \
+docker run --rm --user root \
   -v ${PWD}:/workspace \
   -v platformio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:latest \
@@ -285,7 +301,7 @@ Packages are re-downloaded on every build.
 
 2. Verify volume is being mounted:
    ```bash
-   docker run --rm \
+   docker run --rm --user root \
      -v platformio_cache:/home/builder/.platformio \
      ghcr.io/alteriom/alteriom-docker-images/builder:latest \
      sh -c "ls -la /home/builder/.platformio"
@@ -327,10 +343,11 @@ fi
 
 ### Security Considerations
 
-1. **Container starts as root** - Required to fix permissions on mounted volumes
-2. **Drops to non-root (builder)** - All user operations run as UID 1000
-3. **Uses gosu** - Proper privilege dropping (better than `su`)
-4. **No persistent root access** - Root privileges only during initialization
+1. **Default non-root execution** - Container runs as builder user (UID 1000) by default
+2. **Optional root for permissions** - Use `--user root` only when persistent volumes need permission fixes
+3. **Automatic privilege dropping** - When started as root, entrypoint drops to builder user using gosu
+4. **Uses gosu** - Proper privilege dropping (better than `su`)
+5. **No persistent root access** - Root privileges only during initialization when explicitly requested
 
 ### Performance Impact
 
