@@ -1,5 +1,7 @@
 # Using Persistent Volumes with Alteriom Docker Images
 
+> **⚠️ IMPORTANT (v1.8.10+):** With the non-root default security update, persistent volumes **require** `--user root` flag. The entrypoint automatically drops to builder user after fixing permissions. See [Migration Guide](../../CHANGELOG.md#migration-from-root-to-non-root-default).
+
 This guide explains how to use persistent volumes with Alteriom Docker images to significantly speed up build times by caching PlatformIO packages and build artifacts.
 
 ## Table of Contents

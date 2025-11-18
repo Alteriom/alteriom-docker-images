@@ -1,5 +1,7 @@
 # User Installation Guide
 
+> **⚠️ BREAKING CHANGE (v1.8.10+):** Containers now run as **non-root user** by default for improved security. If you use persistent volumes, add `--user root` to your docker run commands. See [Migration Guide](../../CHANGELOG.md#migration-from-root-to-non-root-default) for details.
+
 ## 🎯 Overview
 
 This guide helps you install and use the Alteriom Docker images on your PC for building ESP32/ESP8266 firmware. No complicated setup required - just Docker and a few commands!
