@@ -28,11 +28,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 #   gosu: Lightweight tool for dropping privileges (kept for entrypoint)
 # Python packages:
 #   setuptools>=70.0.0: Security patch CVE-2024-6345
-#   scons==4.7.0: Pinned to 4.7.x to avoid SCons 4.8.x regression with Python 3.11
-#     - SCons 4.8.x has UnboundLocalError bugs in parallel compilation with Python 3.11+
-#     - Fixes: "cannot access local variable 'node'/'dir'/'norm_name' where it is not associated with a value"
-#     - Must be installed BEFORE platformio to ensure it uses the pinned version
-#   platformio==6.1.16: Latest stable PlatformIO version
+#   platformio==6.1.15: Downgraded from 6.1.16 to use SCons 4.7.0 instead of 4.8.1
+#     - PlatformIO 6.1.16 includes SCons 4.8.1 (tool-scons @ ~4.40801.0) which has bugs with Python 3.11+
+#     - PlatformIO 6.1.15 includes SCons 4.7.0 (tool-scons @ ~4.70700.0) which is stable with Python 3.11
+#     - Fixes: "UnboundLocalError: cannot access local variable 'node'/'dir'/'norm_name'"
 #   twine: Package publishing tool
 #   starlette>=0.40.0: Security patch CVE-2024-47874
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -49,8 +48,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gosu \
     && pip3 install --no-cache-dir -U pip \
     && pip3 install --no-cache-dir -U "setuptools>=70.0.0" \
-    && pip3 install --no-cache-dir "scons==4.7.0" \
-    && pip3 install --no-cache-dir "platformio==6.1.16" twine \
+    && pip3 install --no-cache-dir "platformio==6.1.15" twine \
     && pip3 install --no-cache-dir -U "starlette>=0.40.0" \
     && apt-get remove -y gcc g++ make libffi-dev libssl-dev \
     && apt-get autoremove -y \
