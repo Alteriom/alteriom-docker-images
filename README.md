@@ -318,5 +318,29 @@ alteriom-docker-images/
 └── README.md
 ```
 
-License
+## Known Issues and Solutions
+
+### SCons 4.8.x + Python 3.11 UnboundLocalError (Fixed in v1.8.12)
+
+**Issue**: Versions v1.8.11 and earlier with PlatformIO 6.1.16 experienced build failures with `UnboundLocalError` during library compilation.
+
+**Symptoms**:
+```
+*** [.pio/build/{env}/lib{XXX}/{file}.cpp.o] UnboundLocalError : 
+cannot access local variable 'node'/'dir'/'norm_name' where it is not associated with a value
+```
+
+**Root Cause**: SCons 4.8.x (included with PlatformIO 6.1.16) has variable scoping bugs with Python 3.11+ in parallel compilation.
+
+**Solution**: Use v1.8.12+ which includes PlatformIO 6.1.15 with SCons 4.7.0 (stable with Python 3.11).
+
+**Verification**: Run the verification script to check versions:
+```bash
+./scripts/verify-scons-version.sh
+```
+
+For more details, see [CHANGELOG.md](CHANGELOG.md#1812---2025-11-19).
+
+## License
+
 This repository is licensed under the MIT License. See `LICENSE` for details.

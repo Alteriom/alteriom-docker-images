@@ -9,6 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _No unreleased changes yet._
 
+## [1.8.12] - 2025-11-19
+
+### 🔧 Fixed
+
+- **CRITICAL: SCons 4.8.x + Python 3.11 UnboundLocalError Breaking All Builds**
+  - Root Cause: SCons 4.8.x (included with PlatformIO 6.1.16) has variable scoping bugs with Python 3.11+ in parallel compilation
+  - Error Pattern: `UnboundLocalError: cannot access local variable 'node'/'dir'/'norm_name' where it is not associated with a value`
+  - Impact: All firmware builds were failing during library compilation phase
+  - Solution: Downgrade PlatformIO from 6.1.16 → 6.1.15 which uses SCons 4.7.0
+  - Technical Details:
+    - PlatformIO 6.1.16 uses tool-scons @ ~4.40801.0 (SCons 4.8.1) - BROKEN with Python 3.11+
+    - PlatformIO 6.1.15 uses tool-scons @ ~4.70700.0 (SCons 4.7.0) - STABLE with Python 3.11
+  - Affected Environments: All ESP32/ESP8266 build environments (unified-oled, unified-gc9a01, universal-diagnostic, etc.)
+
+### Changed
+
+- PlatformIO version: 6.1.16 → 6.1.15 (to use SCons 4.7.0 instead of 4.8.1)
+- Python version: Remains at 3.11 (no downgrade needed with SCons 4.7.0)
+
+### Notes
+
+- This fix resolves the regression introduced in v1.8.11 where upgrade to PlatformIO 6.1.16 caused SCons 4.8.1 issues
+- PlatformIO packages SCons as "tool-scons" not as a pip package, so version is controlled by PlatformIO version
+- Future versions may upgrade to PlatformIO 6.1.17+ if SCons 4.9+ with Python 3.11 compatibility is confirmed
+
 ## [1.8.11] - 2025-11-18
 
 ### ⚠️ BREAKING CHANGES
