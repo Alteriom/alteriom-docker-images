@@ -28,9 +28,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 #   gosu: Lightweight tool for dropping privileges (kept for entrypoint)
 # Python packages:
 #   setuptools>=70.0.0: Security patch CVE-2024-6345
-#   platformio==6.1.16: Upgraded from 6.1.13 to fix SCons 4.5.2 bug with Python 3.11
-#     - SCons upgraded to 4.8.1 which fixes UnboundLocalError with Python 3.11
-#     - Resolves: "cannot access local variable 'node' where it is not associated with a value"
+#   scons==4.7.0: Pinned to 4.7.x to avoid SCons 4.8.x regression with Python 3.11
+#     - SCons 4.8.x has UnboundLocalError bugs in parallel compilation with Python 3.11+
+#     - Fixes: "cannot access local variable 'node'/'dir'/'norm_name' where it is not associated with a value"
+#     - Must be installed BEFORE platformio to ensure it uses the pinned version
+#   platformio==6.1.16: Latest stable PlatformIO version
 #   twine: Package publishing tool
 #   starlette>=0.40.0: Security patch CVE-2024-47874
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -47,6 +49,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gosu \
     && pip3 install --no-cache-dir -U pip \
     && pip3 install --no-cache-dir -U "setuptools>=70.0.0" \
+    && pip3 install --no-cache-dir "scons==4.7.0" \
     && pip3 install --no-cache-dir "platformio==6.1.16" twine \
     && pip3 install --no-cache-dir -U "starlette>=0.40.0" \
     && apt-get remove -y gcc g++ make libffi-dev libssl-dev \
