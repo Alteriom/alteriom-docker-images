@@ -127,8 +127,8 @@ When using our Docker images:
 
 ### Volume Management
 
-- **Persistent volume permissions**: When using persistent volumes for caching, run with `--user root`. Our secure entrypoint automatically fixes permissions then drops to non-root user (UID 1000) before executing PlatformIO. This provides both security and correct permissions.
-- **Workspace volumes**: Mount workspace as read-write to allow build outputs (`:rw` or no suffix)
+- **Persistent volume permissions**: When using persistent volumes for PlatformIO caching (`/home/builder/.platformio`), run with `--user root`. Our secure entrypoint automatically fixes volume permissions then drops to non-root user (UID 1000) before executing PlatformIO. This provides both security and correct permissions.
+- **Workspace volumes**: Regular workspace mounts (`/workspace`) don't require `--user root` and work with default non-root execution. Mount as read-write to allow build outputs.
 - **Restrict source volumes**: Use `:ro` (read-only) only for volumes that should not be modified
 - **Avoid sensitive data**: Don't mount directories containing secrets or sensitive files
 
@@ -136,7 +136,7 @@ When using our Docker images:
 
 ```bash
 # Secure container execution with persistent cache
-# Note: --user root is for initial permission fixing only
+# Note: --user root is only needed for persistent volume permission fixing
 # Entrypoint automatically drops to non-root (UID 1000) before running PlatformIO
 docker run --rm \
   --user root \
@@ -144,7 +144,7 @@ docker run --rm \
   --cap-drop=ALL \
   --read-only \
   --tmpfs /tmp \
-  -v ${PWD}:/workspace:rw \
+  -v ${PWD}:/workspace \
   -v platformio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:1.8.6 \
   run -e esp32dev
