@@ -189,7 +189,7 @@ jobs:
           category: 'trivy-configuration'
 
       - name: Run production Dockerfile security scan
-        uses: hadolint/hadolint-action@v3.1.0
+        uses: hadolint/hadolint-action@v3.3.0
         with:
           dockerfile: production/Dockerfile
           format: sarif
@@ -197,7 +197,7 @@ jobs:
           no-fail: true
 
       - name: Run development Dockerfile security scan
-        uses: hadolint/hadolint-action@v3.1.0
+        uses: hadolint/hadolint-action@v3.3.0
         with:
           dockerfile: development/Dockerfile
           format: sarif
