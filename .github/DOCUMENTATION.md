@@ -195,7 +195,7 @@ Quick reference for commonly used scripts:
 1. **Check Documentation**: Start with [FAQ](../docs/FAQ.md) and relevant guides
 2. **Review Issues**: Check [GitHub Issues](https://github.com/Alteriom/alteriom-docker-images/issues)
 3. **Check Actions**: Review [GitHub Actions](https://github.com/Alteriom/alteriom-docker-images/actions) for build status
-4. **Create Issue**: Use appropriate [issue template](.github/ISSUE_TEMPLATE/)
+4. **Create Issue**: Use appropriate [issue template](ISSUE_TEMPLATE/)
 5. **Security Issues**: Follow [SECURITY.md](../SECURITY.md) reporting process
 
 ## 📝 Documentation Standards
