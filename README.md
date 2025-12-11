@@ -78,7 +78,7 @@ docker run --rm --user root \
 
 See [Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md) for complete documentation.
 
-**📖 Documentation:**
+**📖 Quick Documentation:**
 - **[Quick Reference Card](docs/QUICK_REFERENCE.md)** - Essential commands, print and keep handy! 📄
 - **[Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md)** - Speed up builds with caching! ⚡
 - **[User Installation Guide](docs/guides/USER_INSTALLATION_GUIDE.md)** - Complete instructions and troubleshooting
@@ -86,6 +86,30 @@ See [Persistent Volumes Guide](docs/guides/PERSISTENT_VOLUMES.md) for complete d
 - **[SCons Fix Summary](docs/fixes/SCONS_FIX_SUMMARY.md)** - UnboundLocalError fix (v1.8.10+) ✅
 
 **Note:** Replace `${PWD}` with `%cd%` on Windows Command Prompt, or use `${PWD}` in PowerShell.
+
+## 📚 Documentation
+
+Comprehensive documentation is organized by audience and purpose:
+
+**📖 Core Documentation:**
+- **[Documentation Index](.github/DOCUMENTATION.md)** - Complete documentation catalog
+- **[Contributing Guidelines](CONTRIBUTING.md)** - Development workflow and standards
+- **[Security Policy](SECURITY.md)** - Security practices and vulnerability reporting
+- **[Changelog](CHANGELOG.md)** - Version history and release notes
+
+**👥 By Audience:**
+- **Users**: [User Guide](docs/guides/USER_INSTALLATION_GUIDE.md) | [Quick Reference](docs/QUICK_REFERENCE.md) | [FAQ](docs/FAQ.md)
+- **Contributors**: [Contributing](CONTRIBUTING.md) | [Scripts Guide](docs/development/SCRIPTS_GUIDE.md) | [Environment Setup](docs/development/ENVIRONMENT_SETUP.md)
+- **Administrators**: [Admin Setup](docs/admin/ADMIN_SETUP.md) | [Optimization Guide](docs/guides/OPTIMIZATION_GUIDE.md) | [Monitoring](docs/guides/SERVICE_MONITORING.md)
+- **Security Teams**: [Security Policy](SECURITY.md) | [Security Analysis](docs/security/COMPREHENSIVE_SECURITY_ANALYSIS.md) | [Security Monitoring](docs/security/SECURITY_MONITORING.md)
+
+**🔍 By Topic:**
+- **Getting Started**: [README](README.md) | [Quick Start](#-quick-start-for-users) | [Installation Guide](docs/guides/USER_INSTALLATION_GUIDE.md)
+- **Development**: [Contributing](CONTRIBUTING.md) | [Scripts](docs/development/SCRIPTS_GUIDE.md) | [Versioning](docs/development/AUTOMATED_VERSIONING.md)
+- **Operations**: [Admin Guide](docs/admin/ADMIN_SETUP.md) | [Firewall Config](docs/guides/FIREWALL_CONFIGURATION.md) | [Monitoring](docs/guides/SERVICE_MONITORING.md)
+- **Security**: [Policy](SECURITY.md) | [Best Practices](docs/security/SECURITY_PRACTICES_IMPLEMENTATION_GUIDE.md) | [Scanning](docs/security/SECURITY_MONITORING.md)
+
+**📁 Full Documentation**: See [docs/README.md](docs/README.md) for the complete documentation structure.
 
 ## 📦 Contents
 
