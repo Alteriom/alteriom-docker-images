@@ -144,7 +144,7 @@ docker run --rm \
   --cap-drop=ALL \
   --read-only \
   --tmpfs /tmp \
-  -v ${PWD}:/workspace \
+  -v ${PWD}:/workspace:rw \
   -v platformio_cache:/home/builder/.platformio \
   ghcr.io/alteriom/alteriom-docker-images/builder:1.8.6 \
   run -e esp32dev
