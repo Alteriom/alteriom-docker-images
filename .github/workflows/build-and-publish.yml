@@ -51,7 +51,7 @@ jobs:
           }
 
       - name: Upload Comprehensive Security Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: comprehensive-security-results-${{ github.run_number }}
@@ -248,7 +248,7 @@ jobs:
           safety scan --file requirements-dev.txt || echo "Security issues found in development dependencies"
 
       - name: Upload dependency scan results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: dependency-security-scan
@@ -581,7 +581,7 @@ jobs:
           ((github.event_name == 'schedule' && steps.audit.outputs.build_needed == 'true') ||
            (github.event_name == 'push' && steps.changes.outputs.docs_only != 'true') ||
            (github.event_name != 'schedule' && github.event_name != 'push'))
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: service-monitoring-results-${{ github.run_number }}
           path: service-monitoring-results/
@@ -704,7 +704,7 @@ jobs:
           ((github.event_name == 'schedule' && steps.audit.outputs.build_needed == 'true') ||
            (github.event_name == 'push' && steps.changes.outputs.docs_only != 'true') ||
            (github.event_name != 'schedule' && github.event_name != 'push'))
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: container-security-scan-${{ github.run_number }}
           path: security-scan-results/
@@ -797,7 +797,7 @@ jobs:
 
       - name: Upload Audit Report
         if: github.event_name == 'schedule'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: daily-audit-report
           path: audit-report.md
@@ -808,7 +808,7 @@ jobs:
           github.ref == 'refs/heads/main' &&
           github.event_name != 'schedule' &&
           (github.event_name != 'push' || steps.changes.outputs.docs_only != 'true')
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: security-analysis-results-${{ github.run_number }}
           path: |
