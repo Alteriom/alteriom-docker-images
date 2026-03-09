@@ -274,7 +274,7 @@ jobs:
           platforms: ${{ env.PLATFORMS }}
 
       - name: Log in to Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           # Use GitHub Container Registry (GHCR) with GitHub token for seamless authentication
           registry: ghcr.io
