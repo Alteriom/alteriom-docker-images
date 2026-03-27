@@ -35,7 +35,7 @@
     "metadata:dry-run": "alteriom-metadata dry-run --org-tag alteriom"
   },
   "devDependencies": {
-    "@alteriom/repository-metadata-manager": "^1.2.4"
+    "@alteriom/repository-metadata-manager": "^2.1.0"
   },
   "private": true,
   "type": "module",
