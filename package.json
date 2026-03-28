@@ -29,10 +29,10 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "metadata:report": "alteriom-metadata report --org-tag alteriom",
-    "metadata:validate": "alteriom-metadata validate --org-tag alteriom",
-    "metadata:apply": "alteriom-metadata apply --org-tag alteriom",
-    "metadata:dry-run": "alteriom-metadata dry-run --org-tag alteriom"
+    "metadata:report": "repo-manager check --format json",
+    "metadata:validate": "repo-manager check",
+    "metadata:apply": "repo-manager fix",
+    "metadata:dry-run": "repo-manager check --verbose"
   },
   "devDependencies": {
     "@alteriom/repository-metadata-manager": "^2.1.0"
