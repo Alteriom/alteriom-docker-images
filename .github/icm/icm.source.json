@@ -519,7 +519,7 @@
     },
     {
       "id": "shared-conventions.md",
-      "revision": 1,
+      "revision": 3,
       "kind": "fact",
       "layer": "L3",
       "state": "accepted",
@@ -533,67 +533,62 @@
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": ".env.example",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": ".github/CODEOWNERS",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": ".github/dependabot.yml",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
-        },
-        {
-          "repo": "Alteriom/alteriom-docker-images",
-          "path": ".github/pull_request_template.md",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": ".github/workflows/compliance.yml",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": ".gitignore",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": "CHANGELOG.md",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": "CONTRIBUTING.md",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": "SECURITY.md",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": "VERSION",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": "docs/development/METADATA_MANAGER.md",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": "package.json",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": "production/Dockerfile",
-          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         }
       ]
     },
