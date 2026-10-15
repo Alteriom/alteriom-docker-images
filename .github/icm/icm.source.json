@@ -519,7 +519,7 @@
     },
     {
       "id": "shared-conventions.md",
-      "revision": 3,
+      "revision": 4,
       "kind": "fact",
       "layer": "L3",
       "state": "accepted",
@@ -538,6 +538,11 @@
         {
           "repo": "Alteriom/alteriom-docker-images",
           "path": ".github/CODEOWNERS",
+          "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/PULL_REQUEST_TEMPLATE.md",
           "commit": "4eb7f0f7dcc234d37bb20ea76a77ca0473249c82"
         },
         {
