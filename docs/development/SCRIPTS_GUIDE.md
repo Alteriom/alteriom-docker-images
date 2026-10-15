@@ -210,7 +210,7 @@ The packages are properly configured as PUBLIC! 🎉
 
 ### validate-workflows.sh
 
-**Purpose**: Validate only ONE workflow exists (cost control)
+**Purpose**: Check every workflow file and that only ONE of them builds the images (cost control)
 
 **Usage**:
 ```bash
@@ -219,13 +219,13 @@ The packages are properly configured as PUBLIC! 🎉
 
 **Time**: ~5 seconds
 
-**Critical Check**: Ensures no duplicate workflows that would cause cost overruns
+**Critical Check**: Every file in `.github/workflows/` parses and declares `on:` and `jobs:` (needs python3 with PyYAML), and exactly one workflow runs the image build, so builds never run twice
 
-**Output**: "VALIDATION PASSED" or error if multiple workflows found
+**Output**: "VALIDATION PASSED", or the file that is malformed or the image-building workflows found
 
 **Exit Codes**:
-- 0 - Validation passed (one workflow)
-- 1 - Validation failed (multiple workflows or issues)
+- 0 - Validation passed (every workflow well-formed, one image-building workflow)
+- 1 - Validation failed (a malformed workflow, or zero or several image-building workflows)
 
 ### verify-admin-setup.sh
 

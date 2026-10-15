@@ -13,7 +13,7 @@ RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-DOCKER_REPO="ghcr.io/Alteriom/alteriom-docker-images"
+DOCKER_REPO="ghcr.io/alteriom/alteriom-docker-images"
 
 echo -e "${BLUE}🔍 ESP32/ESP8266 Docker Images - Quick Status Check${NC}"
 echo "=================================================="
@@ -67,7 +67,9 @@ if [ "$BUILDER_AVAILABLE" = true ] || [ "$DEV_AVAILABLE" = true ]; then
     fi
     
     if docker run --rm "$TEST_IMAGE" --version >/dev/null 2>&1; then
-        VERSION=$(docker run --rm "$TEST_IMAGE" --version 2>/dev/null | head -1)
+        # Match the version line: the entrypoint prints a banner first, and head -1
+        # would close the pipe early, which pipefail turns into a silent exit.
+        VERSION=$(docker run --rm "$TEST_IMAGE" --version 2>/dev/null | grep -m1 "PlatformIO Core" || true)
         print_status "SUCCESS" "PlatformIO service: WORKING ($VERSION)"
         SERVICE_OK=true
     else

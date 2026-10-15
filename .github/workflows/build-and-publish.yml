@@ -443,56 +443,10 @@ jobs:
           echo "📋 Audit result: ${{ steps.audit.outputs.audit_result }}"
           echo "📋 Reason: ${{ steps.audit.outputs.change_summary }}"
 
-      - name: Update Development Badge
-        if: |
-          github.ref == 'refs/heads/main' &&
-          ((github.event_name == 'push' && steps.changes.outputs.docs_only != 'true') ||
-           (github.event_name == 'schedule' && steps.audit.outputs.build_needed == 'true'))
-        run: |
-          # Read current build number
-          if [ -f "BUILD_NUMBER" ]; then
-            BUILD_NUMBER=$(cat BUILD_NUMBER | tr -d '\n\r')
-          else
-            BUILD_NUMBER=1
-          fi
-
-          # Increment build number for any development build
-          NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
-          echo "$NEW_BUILD_NUMBER" > BUILD_NUMBER
-
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ steps.audit.outputs.build_needed }}" = "true" ]; then
-            # Daily build executed - update with dev version and build number
-            DEV_VERSION="${{ env.VERSION }}-dev-build.${NEW_BUILD_NUMBER}"
-            BADGE_TEXT="Development-${{ env.VERSION }}%2B%20(build%20${NEW_BUILD_NUMBER})-orange"
-            echo "Updating development badge with version: ${{ env.VERSION }}+ (build ${NEW_BUILD_NUMBER})"
-          elif [ "${{ github.event_name }}" = "push" ]; then
-            # Production build - development badge shows next development version with + notation
-            BADGE_TEXT="Development-${{ env.VERSION }}%2B%20(build%20${NEW_BUILD_NUMBER})-orange"
-            echo "Updating development badge for production build: ${{ env.VERSION }}+ (build ${NEW_BUILD_NUMBER})"
-          else
-            # No build executed or not applicable
-            echo "No development badge update needed"
-            exit 0
-          fi
-
-          # Update README.md with new badge
-          sed -i "s|Development-.*-orange|${BADGE_TEXT}|g" README.md
-
-          # Check if changes were made
-          if git diff --quiet README.md BUILD_NUMBER; then
-            echo "No changes to README badge or build number needed"
-          else
-            echo "README badge and build number updated successfully"
-
-            # Configure git for the bot
-            git config --global user.name "github-actions[bot]"
-            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-            # Commit and push changes
-            git add README.md BUILD_NUMBER
-            git commit -m "chore: update development badge to build ${NEW_BUILD_NUMBER} [skip ci]"
-            git push
-          fi
+      # The development badge and BUILD_NUMBER are no longer committed by this job:
+      # main is protected (changes must come through a pull request), so the push
+      # failed with GH006 and skipped every step below. Bump BUILD_NUMBER and the
+      # README badge in a pull request, as VERSION is.
 
       - name: Service Health Validation
         if: |

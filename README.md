@@ -21,13 +21,12 @@ This repository contains optimized Dockerfiles and helper scripts to build and p
 
 ## Version Tracking
 
-The repository uses an automated badge system to show current version information:
+The repository uses badges to show current version information:
 
 - **Production Badge**: Shows the latest stable release version from GitHub releases
 - **Development Badge**: Shows the current development version with incremental build numbers
-  - Format: `1.6.1+ (build N)` where N is an incremental build number starting from 1
-  - Updated automatically when development images are built
-  - Build numbers increment with each development build
+  - Format: `1.6.1+ (build N)` where N is the number in `BUILD_NUMBER`
+  - Updated in a pull request together with `BUILD_NUMBER` (the workflow cannot push to the protected `main`)
   - Links directly to the GHCR development package
 
 Development images are tagged with both `:latest` and versioned tags (e.g., `:1.6.1-dev-build.N`) to provide flexibility in CI/CD pipelines.
@@ -269,7 +268,7 @@ This repository includes a GitHub Actions workflow (`.github/workflows/build-and
 **🌅 Daily Builds (Optimized):** 
 - **Schedule**: Daily at 02:00 UTC, but **only builds the development image**
 - **Development versions**: Tagged with format `1.6.1-dev-build.N` for incremental build tracking
-- **Version badge**: Automatically updated to show current development version (e.g., "1.6.1+ (build 2)")
+- **Version badge**: Shows the development version and `BUILD_NUMBER` (e.g., "1.6.1+ (build 2)"), bumped in a pull request
 - **Cost optimization**: Reduces CI/CD resource usage by ~50% while maintaining development image freshness
 - **Production unchanged**: Stable production images remain unchanged during daily builds
 
