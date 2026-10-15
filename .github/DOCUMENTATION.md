@@ -177,7 +177,7 @@ Quick reference for commonly used scripts:
 
 # Building (Admins)
 ./scripts/build-images.sh           # Build images locally
-./scripts/validate-workflows.sh     # Ensure single workflow
+./scripts/validate-workflows.sh     # Check workflows; one builds images
 ```
 
 ## 🔗 External Resources

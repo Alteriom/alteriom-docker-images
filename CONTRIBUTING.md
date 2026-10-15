@@ -173,7 +173,7 @@ docker run --rm test-dev --version
    ```
 2. **Run security scans**: Check for vulnerabilities
 3. **Update documentation**: Include relevant documentation updates
-4. **Validate workflows**: Ensure only one workflow exists
+4. **Validate workflows**: Every workflow is well-formed and only one builds the images
    ```bash
    ./scripts/validate-workflows.sh
    ```
