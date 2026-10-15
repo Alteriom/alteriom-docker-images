@@ -166,7 +166,7 @@ if [[ "${1:-}" == "--help" ]] || [[ "${1:-}" == "-h" ]]; then
     echo "  $0 builder:1.8.12 dev:1.8.12          # Verify specific versions"
     echo ""
     echo "Environment Variables:"
-    echo "  DOCKER_REPOSITORY   Docker repository prefix (default: ghcr.io/Alteriom/alteriom-docker-images)"
+    echo "  DOCKER_REPOSITORY   Docker repository prefix (default: ghcr.io/alteriom/alteriom-docker-images)"
     echo ""
     echo "Expected Versions (for Python 3.11 compatibility):"
     echo "  - PlatformIO: 6.1.15"

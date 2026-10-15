@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 # Configuration
 VERSION="${1:-}"
-DOCKER_REPOSITORY="${2:-ghcr.io/Alteriom/alteriom-docker-images}"
+DOCKER_REPOSITORY="${2:-ghcr.io/alteriom/alteriom-docker-images}"
 OUTPUT_FILE="${3:-release_notes.md}"
 
 print_status() {
