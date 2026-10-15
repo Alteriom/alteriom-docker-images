@@ -1,0 +1,1131 @@
+{
+  "workspace_root": "",
+  "schema_version": 2,
+  "access": "workspace",
+  "entrypoint": "AGENTS.md",
+  "runtimes": [
+    "claude_code",
+    "codex_cli"
+  ],
+  "projects": [
+    "alteriom-docker-images"
+  ],
+  "nodes": [
+    {
+      "id": "AGENTS.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L0",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "AGENTS.md"
+      ]
+    },
+    {
+      "id": "CLAUDE.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L0",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "CLAUDE.md"
+      ]
+    },
+    {
+      "id": "doc-.github-copilot-instructions.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/copilot-instructions.md"
+      ]
+    },
+    {
+      "id": "doc-CHANGELOG.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "CHANGELOG.md"
+      ]
+    },
+    {
+      "id": "doc-CONTRIBUTING.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "id": "doc-README.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "id": "doc-docs-development-METADATA_MANAGER.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "docs/development/METADATA_MANAGER.md"
+      ]
+    },
+    {
+      "id": "doc-docs-development-SCRIPTS_GUIDE.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "docs/development/SCRIPTS_GUIDE.md"
+      ]
+    },
+    {
+      "id": "doc-docs-fixes-SCONS_UNBOUNDLOCALERROR_FIX.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "docs/fixes/SCONS_UNBOUNDLOCALERROR_FIX.md"
+      ]
+    },
+    {
+      "id": "doc-docs-guides-PERSISTENT_VOLUMES.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "docs/guides/PERSISTENT_VOLUMES.md"
+      ]
+    },
+    {
+      "id": "doc-docs-guides-USER_INSTALLATION_GUIDE.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "docs/guides/USER_INSTALLATION_GUIDE.md"
+      ]
+    },
+    {
+      "id": "doc-tests-README.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        "tests/README.md"
+      ]
+    },
+    {
+      "id": "01-fix-CLAUDE.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L1",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/01-fix/CLAUDE.md"
+      ]
+    },
+    {
+      "id": "01-fix-CONTEXT.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L1",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/01-fix/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "01-fix-stages-01_reproduce-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/01-fix/stages/01_reproduce/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "01-fix-stages-02_fix-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/01-fix/stages/02_fix/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "01-fix-stages-03_verify-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/01-fix/stages/03_verify/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "02-image-CLAUDE.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L1",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/02-image/CLAUDE.md"
+      ]
+    },
+    {
+      "id": "02-image-CONTEXT.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L1",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/02-image/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "02-image-stages-01_scope-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/02-image/stages/01_scope/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "02-image-stages-02_change-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/02-image/stages/02_change/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "02-image-stages-03_verify-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/02-image/stages/03_verify/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "02-image-stages-04_publish-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/02-image/stages/04_publish/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "03-deps-CLAUDE.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L1",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/03-deps/CLAUDE.md"
+      ]
+    },
+    {
+      "id": "03-deps-CONTEXT.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L1",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/03-deps/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "03-deps-stages-01_review-CONTEXT.md",
+      "revision": 1,
+      "kind": "stage",
+      "layer": "L2",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/03-deps/stages/01_review/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "shared-CONTEXT.md",
+      "revision": 1,
+      "kind": "route",
+      "layer": "L1",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/_shared/CONTEXT.md"
+      ]
+    },
+    {
+      "id": "shared-architecture.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/_shared/architecture.md"
+      ],
+      "evidence": [
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "CHANGELOG.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "VERSION",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "development/Dockerfile",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "development/docker-entrypoint.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/development/SCRIPTS_GUIDE.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "package.json",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "production/Dockerfile",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "production/docker-entrypoint.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/audit-packages.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/build-images.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/status-check.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/test-esp-builds.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/verify-images.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "tests/README.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        }
+      ]
+    },
+    {
+      "id": "shared-build-and-test.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/_shared/build-and-test.md"
+      ],
+      "evidence": [
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/build-and-publish.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/compliance.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/icm-check.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/development/SCRIPTS_GUIDE.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/build-images.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/status-check.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/test-auto-clean.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/test-esp-builds.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/test-persistent-volumes.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/verify-images.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "tests/README.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        }
+      ]
+    },
+    {
+      "id": "shared-conventions.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/_shared/conventions.md"
+      ],
+      "evidence": [
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".env.example",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/CODEOWNERS",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/dependabot.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/pull_request_template.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/compliance.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".gitignore",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "CHANGELOG.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "CONTRIBUTING.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "SECURITY.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "VERSION",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/development/METADATA_MANAGER.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "package.json",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "production/Dockerfile",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        }
+      ]
+    },
+    {
+      "id": "shared-documents.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/_shared/documents.md"
+      ],
+      "evidence": [
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/DOCUMENTATION.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/copilot-instructions.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/build-and-publish.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/compliance.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "CHANGELOG.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "CONTRIBUTING.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "README.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "SECURITY.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "VERSION",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "development/Dockerfile",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/DOCUMENTATION_SUMMARY.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/FAQ.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/QUICK_REFERENCE.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/README.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/development/AUTOMATED_VERSIONING.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/development/METADATA_MANAGER.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/development/SCRIPTS_GUIDE.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/development/VERSION_CONTROL.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/fixes/SCONS_UNBOUNDLOCALERROR_FIX.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/guides/PERSISTENT_VOLUMES.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/guides/USER_INSTALLATION_GUIDE.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/index.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "package.json",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "production/Dockerfile",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "production/docker-entrypoint.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/test-esp-builds.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "tests/README.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        }
+      ]
+    },
+    {
+      "id": "shared-gotchas.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/_shared/gotchas.md"
+      ],
+      "evidence": [
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/dependabot.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/build-and-publish.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/compliance.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/icm-check.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".gitignore",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "CHANGELOG.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "LICENSE",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/fixes/SCONS_UNBOUNDLOCALERROR_FIX.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "docs/guides/PERSISTENT_VOLUMES.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "package.json",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "production/Dockerfile",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "production/docker-entrypoint.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/audit-packages.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/test-auto-clean.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/test-esp-builds.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/validate-workflows.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        }
+      ]
+    },
+    {
+      "id": "shared-publishing.md",
+      "revision": 1,
+      "kind": "fact",
+      "layer": "L3",
+      "state": "accepted",
+      "project_id": "alteriom-docker-images",
+      "verified_at": "2026-10-15",
+      "review_after": "2027-01-13",
+      "files": [
+        ".github/icm/_shared/publishing.md"
+      ],
+      "evidence": [
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": ".github/workflows/build-and-publish.yml",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "BUILD_NUMBER",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "CHANGELOG.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "README.md",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "VERSION",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/audit-packages.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        },
+        {
+          "repo": "Alteriom/alteriom-docker-images",
+          "path": "scripts/build-images.sh",
+          "commit": "3d4618bc15b17f0fe481c80791555904c69ba49b"
+        }
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "umbrella",
+      "root": "",
+      "pipelines": [
+        ".github/icm/01-fix",
+        ".github/icm/02-image",
+        ".github/icm/03-deps"
+      ],
+      "unit": "run"
+    },
+    {
+      "form": "pipeline",
+      "root": ".github/icm/01-fix",
+      "unit": "run"
+    },
+    {
+      "form": "pipeline",
+      "root": ".github/icm/02-image",
+      "unit": "run"
+    },
+    {
+      "form": "pipeline",
+      "root": ".github/icm/03-deps",
+      "unit": "run"
+    }
+  ],
+  "stages": {
+    "fix-reproduce": {
+      "order": 1,
+      "contract": ".github/icm/01-fix/stages/01_reproduce/CONTEXT.md",
+      "inputs": {
+        "working": [],
+        "reference": [
+          ".github/icm/_shared/architecture.md",
+          ".github/icm/_shared/build-and-test.md",
+          ".github/icm/_shared/gotchas.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/02-image/",
+        ".github/icm/03-deps/",
+        "docs/admin/",
+        "docs/migration/",
+        "docs/security/"
+      ],
+      "outputs": [
+        ".github/icm/01-fix/stages/01_reproduce/output/reproduction.md"
+      ],
+      "human_check": "A person runs the command, or reads the quoted log, and confirms it fails for the reported reason and not a neighbouring one.",
+      "required": [
+        "01-fix-stages-01_reproduce-CONTEXT.md"
+      ],
+      "optional": [
+        "shared-publishing.md"
+      ]
+    },
+    "fix-fix": {
+      "order": 2,
+      "contract": ".github/icm/01-fix/stages/02_fix/CONTEXT.md",
+      "inputs": {
+        "working": [
+          ".github/icm/01-fix/stages/01_reproduce/output/reproduction.md"
+        ],
+        "reference": [
+          ".github/icm/_shared/architecture.md",
+          ".github/icm/_shared/conventions.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/02-image/",
+        ".github/icm/03-deps/"
+      ],
+      "outputs": [
+        ".github/icm/01-fix/stages/02_fix/output/change.md"
+      ],
+      "human_check": "A person reads the diff beside the reproduction: it removes the cause, both images moved together where they should, and nothing a consumer relies on changed silently. Edit `change.md` if the explanation is wrong; stage 03 reads it.",
+      "required": [
+        "01-fix-stages-02_fix-CONTEXT.md"
+      ],
+      "optional": [
+        "shared-gotchas.md"
+      ]
+    },
+    "fix-verify": {
+      "order": 3,
+      "contract": ".github/icm/01-fix/stages/03_verify/CONTEXT.md",
+      "inputs": {
+        "working": [
+          ".github/icm/01-fix/stages/02_fix/output/change.md"
+        ],
+        "reference": [
+          ".github/icm/_shared/build-and-test.md",
+          ".github/icm/_shared/publishing.md",
+          ".github/icm/_shared/conventions.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/02-image/",
+        ".github/icm/03-deps/"
+      ],
+      "outputs": [
+        ".github/icm/01-fix/stages/03_verify/output/pull-request.md"
+      ],
+      "human_check": "A reviewer reads `pull-request.md` and the CI result, then merges knowing the merge pushes `builder:latest` to every consumer; afterwards the same person starts the `publish-check` route.",
+      "required": [
+        "01-fix-stages-03_verify-CONTEXT.md"
+      ]
+    },
+    "image-scope": {
+      "order": 1,
+      "contract": ".github/icm/02-image/stages/01_scope/CONTEXT.md",
+      "inputs": {
+        "working": [],
+        "reference": [
+          ".github/icm/_shared/architecture.md",
+          ".github/icm/_shared/publishing.md",
+          ".github/icm/_shared/gotchas.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/01-fix/",
+        ".github/icm/03-deps/",
+        "docs/admin/",
+        "docs/migration/",
+        "docs/security/"
+      ],
+      "outputs": [
+        ".github/icm/02-image/stages/01_scope/output/scope.md"
+      ],
+      "human_check": "A person reads `scope.md` and approves the change and the version number, or names a different one; nothing is edited before that.",
+      "required": [
+        "02-image-stages-01_scope-CONTEXT.md"
+      ]
+    },
+    "image-change": {
+      "order": 2,
+      "contract": ".github/icm/02-image/stages/02_change/CONTEXT.md",
+      "inputs": {
+        "working": [
+          ".github/icm/02-image/stages/01_scope/output/scope.md"
+        ],
+        "reference": [
+          ".github/icm/_shared/architecture.md",
+          ".github/icm/_shared/build-and-test.md",
+          ".github/icm/_shared/conventions.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/01-fix/",
+        ".github/icm/03-deps/"
+      ],
+      "outputs": [
+        ".github/icm/02-image/stages/02_change/output/change.md"
+      ],
+      "human_check": "A person reads the diff and the test output beside `scope.md`: the change is the approved one, both images moved together where they should, and the tests ran on the local images.",
+      "required": [
+        "02-image-stages-02_change-CONTEXT.md"
+      ]
+    },
+    "image-verify": {
+      "order": 3,
+      "contract": ".github/icm/02-image/stages/03_verify/CONTEXT.md",
+      "inputs": {
+        "working": [
+          ".github/icm/02-image/stages/02_change/output/change.md"
+        ],
+        "reference": [
+          ".github/icm/_shared/build-and-test.md",
+          ".github/icm/_shared/publishing.md",
+          ".github/icm/_shared/conventions.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/01-fix/",
+        ".github/icm/03-deps/"
+      ],
+      "outputs": [
+        ".github/icm/02-image/stages/03_verify/output/pull-request.md"
+      ],
+      "human_check": "A reviewer reads `pull-request.md` and the CI result and decides whether to merge, knowing the merge pushes `latest` to every consumer; nothing is published until that person merges.",
+      "required": [
+        "02-image-stages-03_verify-CONTEXT.md"
+      ]
+    },
+    "image-publish": {
+      "order": 4,
+      "contract": ".github/icm/02-image/stages/04_publish/CONTEXT.md",
+      "inputs": {
+        "working": [
+          ".github/icm/02-image/stages/03_verify/output/pull-request.md"
+        ],
+        "reference": [
+          ".github/icm/_shared/publishing.md",
+          ".github/icm/_shared/gotchas.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/01-fix/",
+        ".github/icm/03-deps/"
+      ],
+      "outputs": [
+        ".github/icm/02-image/stages/04_publish/output/publish.md"
+      ],
+      "human_check": "A person reads `publish.md`, pulls `builder:latest` once, and decides whether anything skipped must be finished by hand.",
+      "required": [
+        "02-image-stages-04_publish-CONTEXT.md"
+      ]
+    },
+    "deps-review": {
+      "order": 1,
+      "contract": ".github/icm/03-deps/stages/01_review/CONTEXT.md",
+      "inputs": {
+        "working": [],
+        "reference": [
+          ".github/icm/_shared/build-and-test.md",
+          ".github/icm/_shared/gotchas.md"
+        ]
+      },
+      "do_not_load": [
+        ".github/icm/01-fix/",
+        ".github/icm/02-image/"
+      ],
+      "outputs": [
+        ".github/icm/03-deps/stages/01_review/output/review.md"
+      ],
+      "human_check": "A person reads `review.md` and the CI result and decides to merge, hold or close the pull request.",
+      "required": [
+        "03-deps-stages-01_review-CONTEXT.md"
+      ],
+      "optional": [
+        "shared-conventions.md"
+      ]
+    }
+  }
+}
